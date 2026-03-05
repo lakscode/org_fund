@@ -1,0 +1,133 @@
+﻿hAccount,sAccountCode,sAccountName,sBegin,sMTD,newTotal,sAccountType
+3724,10000010,Cash - Property Operating 1,0,0,0,0
+3723,10000011,Cash - Property Operating 2,58247.2,93.34,58340.54,0
+3722,10000012,Cash - Property Operating 3,0,0,0,0
+3753,10000020,Cash - Corporate - CAD,150000,0,150000,0
+3719,10000085,Cash In Investments,3493014.84,-30146.86,3462867.98,0
+3754,10000090,Cash Investments - FMV,1555577.64,247204.18,1802781.82,0
+3716,10000100,Petty Cash,0,0,0,0
+3715,10000200,Fund Operating Account,5309835.14,416078.54,5725913.68,0
+3768,10000250,Fund Operating Account - USD,148429.4,0,148429.4,0
+3769,10000275,Fund Operating Account - USD FX,59060.06,-4052.12,55007.94,0
+3714,10001500,Cash - clearing - CAD,0,0,0,0
+3712,10009999,Total Cash,10774164.28,629177.08,11403341.36,2
+3710,11000010,Accounts Receivable,0,337.7,337.7,0
+3708,11000021,Accounts Receivable - Others,854525.56,-553800,300725.56,0
+3741,11000025,A/R Chargeback,162103.34,1338.28,163441.62,0
+3707,11000030,A/R - GST/HST Refund,23973.04,0,23973.04,0
+3698,11000700,Loan Receivable,100000,0,100000,0
+3697,11000701,Short Term Loan/Investments,450000,0,450000,0
+3695,11000900,Capital Receivable,0,0,0,0
+3742,11001100,Accrued Interest - Loan Receivable,244936.5,6725.72,251662.22,0
+3693,11009999,Total Accounts Receivable,1835538.44,-545398.3,1290140.14,2
+3691,12000010,Deferred Expenses,-35625,0,-35625,0
+3681,12009999,Total Deferrals and Prepayments,-35625,0,-35625,2
+3674,14509999,Total Current Assets,12574077.72,83778.78,12657856.5,2
+3660,15101100,Investment in Limited Partnerships,31742027.35,-518898.61,31223128.74,0
+3659,15109999,Total Investments in LP,31742027.35,-518898.61,31223128.74,2
+3757,15300010,Investments in Corporations,-132837.32,290852.99,158015.67,0
+3819,15300011,Investment in Private Corporation (external),-892349.42,0,-892349.42,0
+3756,15309999,Total Investments in Corporations,-1025186.74,290852.99,-734333.75,2
+3613,18500100,Investment in Market Securities,0,0,0,0
+3610,18509999,Total Other Investments,0,0,0,2
+3608,18600100,Intercompany Due To/ From Account,0,0,0,0
+3744,18600200,Due To / From Shareholder,-36728752.24,0,-36728752.24,0
+3745,18600300,Due To / From other parties,0,0,0,0
+3607,18609999,Total Other Non Current Assets,-36728752.24,0,-36728752.24,2
+3606,18999999,Total Non Current Assets,-6011911.63,-228045.62,-6239957.25,2
+3605,19999999,Total Assets,6562166.09,-144266.84,6417899.25,2
+3601,20000010,Accounts Payable,-6101.21,6101.21,0,0
+3733,20000011,Account Payable - Vendor Retention,0,0,0,0
+3600,20000015,Accounts Payable - Others,-835068.61,-155004.68,-990073.29,0
+3598,20000020,GST/HST Billed,0,-16.08,-16.08,0
+3597,20000021,GST/HST Paid,20726.98,4085.7,24812.68,0
+3594,20000035,PST Paid,0,0,0,0
+3593,20000050,Income Tax Payable,-333735,334622,887,0
+3588,20000110,Short Term Loan Payable,-2415273.2,-8666.12,-2423939.32,0
+3586,20009999,Total Accounts Payable,-3569451.04,181122.03,-3388329.01,2
+3576,20100030,Deposits - Other,-2500000,0,-2500000,0
+3574,20109999,Total Deposits,-2500000,0,-2500000,2
+3567,20200010,Accrued Payable,-109903.46,86703.46,-23200,0
+3565,20200012,Accrued Loan Interest Payable,-221039.24,-127719.32,-348758.56,0
+3556,20200041,Accrued vacation pay,0,0,0,0
+3551,20209999,Total Accruals,-330942.7,-41015.86,-371958.56,2
+3550,20999999,Total Current Liabilities,-6400393.74,140106.17,-6260287.57,2
+3543,23000021,Term Loan Payable,0,0,0,0
+3541,23000023,Participating loan payable,-1482081.72,27142.9,-1454938.82,0
+3538,23001000,Promissory Note Payable,0,0,0,0
+3537,23009999,Total Mortgage Debt,-1482081.72,27142.9,-1454938.82,2
+3528,23999999,Total Long Term Liabilities,-1482081.72,27142.9,-1454938.82,2
+3521,29999998,Total Liabilities,-7882475.46,167249.07,-7715226.39,2
+3520,29999999,Net Asset Value,-1320309.37,22982.23,-1297327.14,2
+3517,30000010,Capital Fund,0,0,0,0
+3515,30000050,Subsidiary Capital,-400,0,-400,0
+3513,30009999,Total Share Capital,-400,0,-400,2
+3511,30050010,Retained Earnings,-6219290.63,-22982.23,-6242272.86,0
+3833,30050050,Dividends - Capital,7540000,0,7540000,0
+3509,30050060,Dividends - Regular,0,0,0,0
+3508,30059999,Total Retained Earnings,1320709.37,-22982.23,1297727.14,2
+3507,35009999,Total Equity,1320309.37,-22982.23,1297327.14,2
+3506,39999999,Net Asset Less Equity (should be zero),0,0,0,2
+3467,40100005,Gain ( Loss ) from Sale of Property,0,0,0,0
+3466,40100010,Gain ( Loss ) from Sale of Marketable Securities,0,0,0,0
+3465,40109999,Total Gain (Loss )  from Sale of Assets,0,0,0,2
+3770,40150004,Income from Investee Corporations,8686.2,29147.01,37833.21,0
+3463,40150005,Income from LP,-1378412.73,35788.77,-1342623.96,0
+3462,40150006,Unrealised Gain ( Loss ) from Non-Real Estate Investments,-1159648.94,-247204.18,-1406853.12,0
+3461,40150008,Unrealized Gain (Loss) on Real Estate Properties,0,0,0,0
+3458,40150020,Provision for Write down on value of Assets,0,0,0,0
+3457,40159999,Total Income from Investments,-2529375.47,-182268.4,-2711643.87,2
+3455,40200005,Interest Income,-152393.98,-8994.12,-161388.1,0
+3735,40200006,Eligible Canadian Dividends,0,0,0,0
+3736,40200007,Capital Gains Dividends,0,0,0,0
+3737,40200008,Foreign Dividends,0,0,0,0
+3738,40209000,Other Investment Income ,0,0,0,0
+3454,40209999,Total Interest & Dividend Income,-152393.98,-8994.12,-161388.1,2
+3440,40300050,Miscellaneous Income,-982,0,-982,0
+3435,40300075,Loan Guarantee Fee,0,0,0,0
+3419,40309999,Total Other Income,-982,0,-982,2
+3412,40350015,Incentive Fee,0,0,0,0
+3410,40359999,Total Investment Management  Income,0,0,0,2
+3409,49999999,Total Income,-2682751.45,-191262.52,-2874013.97,2
+3173,60450215,NR-FX Gain/Loss,-2344.2,0,-2344.2,0
+3158,60459999,Total NR-General & Administration,-2344.2,0,-2344.2,2
+3157,69009999,Total Non Recoverable Expenses,-2344.2,0,-2344.2,2
+3156,69999999,Total Commercial Expenses,-2344.2,0,-2344.2,2
+3049,79000070,RES-Bank Charges / Interest,0,0,0,0
+3020,79000999,Total RES-General & Administration,0,0,0,2
+3019,79001999,Total Residential Expenses,0,0,0,2
+3018,79002999,Total Property Expenses,-2344.2,0,-2344.2,2
+3017,79999999,Net Property Operating Income before Interest and Amortizati,-2685095.65,-191262.52,-2876358.17,2
+3015,80000004,Loan Guarantee Fee,0,0,0,0
+3014,80000005,Mortgage Interest,0,0,0,0
+3789,80000035,Loan Interest - Participating,680884.38,0,680884.38,0
+3739,80000040,Loan Interest - Other ,0,0,0,0
+3009,80004999,Total Debt Expenses,680884.38,0,680884.38,2
+3008,80999999,Net Property Operating Income After Debt Services,-2004211.27,-191262.52,-2195473.79,2
+2992,82999999,Net Property Operating Income after Debt and Amortization,-2004211.27,-191262.52,-2195473.79,2
+2990,83000005,FUND-Accounting and Taxation Fees,33050,0,33050,0
+2989,83000010,FUND-Due Diligence Costs,0,0,0,0
+2987,83000015,FUND-Asset Management Fee,0,0,0,0
+2986,83000016,FUND-Incentive Fee,0,0,0,0
+2982,83000025,FUND-Bank Charges/Interest Expense,17960.76,2169,20129.76,0
+2981,83000030,FUND-Conferences,0,0,0,0
+2975,83000050,FUND-Legal Fees,15248.33,9429.85,24678.18,0
+2972,83000065,FUND-Office & General,0,0,0,0
+3790,83000105,FUND - Professional Fees,86703.46,-86703.46,0,0
+2963,83000120,FUND-Foreign Exchange Gain/(Loss),31536.94,4052.12,35589.06,0
+2962,83000130,FUND-Miscellaneous Expenses,0,0,0,0
+2961,83000140,FUND-Interest Expense,577288.48,239332.78,816621.26,0
+2960,83000145,FUND-Non-Deductible Penalties and Interest,0,0,0,0
+2954,83000200,FUND-Insurance,0,0,0,0
+2943,83000310,FUND-Filing Fee,0,0,0,0
+2942,83009999,Total Fund Expenses before Depreciation and Tax,761787.97,168280.29,930068.26,2
+2941,83509999,Net Fund Income before Depreciation and  IncomeTax,-1242423.3,-22982.23,-1265405.53,2
+2932,85009999,Net Income Before Income Tax,-1242423.3,-22982.23,-1265405.53,2
+2930,86000010,Income Tax,0,0,0,0
+2928,86000030,FUND - Withholding Tax,0,0,0,0
+2927,86009999,Total Income Tax,0,0,0,2
+2926,86109999,Net Income After Income Tax,-1242423.3,-22982.23,-1265405.53,2
+2925,89000010,Adjustment to Prior Year,0,0,0,0
+2922,89999999,Net Income after adjustments to Prior Year,-1242423.3,-22982.23,-1265405.53,2
+2917,99009999,Net Income,-1242423.3,-22982.23,-1265405.53,2
+2916,99999999,Total of All,-1242423.3,-22982.23,-1265405.53,2

@@ -1,0 +1,10 @@
+{
+  "APP_NAME": "Org Fund API",
+  "DEBUG": false,
+  "SECRET_KEY": "change-this-in-production",
+  "ALGORITHM": "HS256",
+  "ACCESS_TOKEN_EXPIRE_MINUTES": 60,
+  "CORS_ORIGIN": "http://localhost:5173",
+  "MONGO_URI": "mongodb+srv://writetolaks:17zivOWYPP0OuU5t@cluster0.fmrdwh8.mongodb.net/?retryWrites=true&w=majority",
+  "MONGO_DB": "org_fund"
+}

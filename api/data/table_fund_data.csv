@@ -1,0 +1,277 @@
+﻿hMy,iLevel,sCode,sName,sName2,hProperty,hPropList,hPropList2,dTotInvestment,dMinInvestment,dShares,dtInception,sNotes,sObjective,bInactive,dtInactive,dtStamp,bSold,dtSold,hAP,dManagementFee,iShareCaption,sAddr1,sAddr2,sAddr3,sAddr4,sCity,sState,sZipCode,hCountry,hEntityType,hClient,sExtReference,hEntitySubType,bOpportunity
+492,700,lt_2004,Lotus Pacific Investment Inc.,,563,0,0,0,0,0,NULL,,,0,NULL,27:03.0,0,NULL,107,0,0,Lotus Pacific Investment Inc.,,,,,,,1,0,99,2004,2,NULL
+493,600,lt_2399,Brunswick Apartments LP,,564,0,0,0,0,0,NULL,,,0,NULL,40:05.0,0,NULL,0,0,0,Brunswick Apartments LP,,,,,,,1,0,NULL,2399,NULL,NULL
+494,660,lt_2400,Brunswick Apartments GP Inc.,,565,0,0,0,0,0,NULL,,,0,NULL,40:05.0,0,NULL,0,0,0,Brunswick Apartments GP Inc.,,,,,,,1,0,NULL,2400,NULL,NULL
+495,200,lt_2398,396 East 2nd Avenue Holdings Inc.,,566,0,0,0,0,0,NULL,,,0,NULL,40:05.0,0,NULL,0,0,0,396 East 2nd Avenue Holdings Inc.,,,,,,,1,0,NULL,2398,NULL,NULL
+496,660,lt_2367,Dorchester Apartments GP Inc.,,567,0,0,0,0,0,NULL,,,0,NULL,40:05.0,0,NULL,0,0,0,Dorchester Apartments GP Inc.,,,,,,,1,0,NULL,2367,NULL,NULL
+497,600,lt_2368,Dorchester Apartments LP,,568,0,0,0,0,0,NULL,,,0,NULL,40:05.0,0,NULL,0,0,0,Dorchester Apartments LP,,,,,,,1,0,NULL,2368,NULL,NULL
+498,200,lt_2369,Dorchester Title Ltd.,,569,0,0,0,0,0,NULL,,,0,NULL,40:06.0,0,NULL,0,0,0,Dorchester Title Ltd.,,,,,,,1,0,NULL,2369,NULL,NULL
+499,660,lt_2377,Grange Apartments GP Inc.,,570,0,0,0,0,0,NULL,,,0,NULL,40:06.0,0,NULL,0,0,0,Grange Apartments GP Inc.,,,,,,,1,0,NULL,2377,NULL,NULL
+500,600,lt_2378,Grange Apartments LP,,571,0,0,0,0,0,NULL,,,0,NULL,40:06.0,0,NULL,0,0,0,Grange Apartments LP,,,,,,,1,0,NULL,2378,NULL,NULL
+501,200,lt_2376,1395 West 14th Avenue Holdings,,572,0,0,0,0,0,NULL,,,0,NULL,40:06.0,0,NULL,0,0,0,1395 West 14th Avenue Holdings,,,,,,,1,0,NULL,2376,NULL,NULL
+502,600,lt_2365,Lincoln Apartments LP,,573,0,0,0,0,0,NULL,,,0,NULL,40:06.0,0,NULL,0,0,0,Lincoln Apartments LP,,,,,,,1,0,NULL,2365,NULL,NULL
+503,660,lt_2364,Lincoln Apartments GP Inc.,,574,0,0,0,0,0,NULL,,,0,NULL,40:06.0,0,NULL,0,0,0,Lincoln Apartments GP Inc.,,,,,,,1,0,NULL,2364,NULL,NULL
+504,200,lt_2366,685135 BC Ltd.,,575,0,0,0,0,0,NULL,,,0,NULL,40:06.0,0,NULL,0,0,0,685135 BC Ltd.,,,,,,,1,0,NULL,2366,NULL,NULL
+505,600,lt_2374,Moray Firth LP,,576,0,0,0,0,0,NULL,,,0,NULL,40:06.0,0,NULL,0,0,0,Moray Firth LP,,,,,,,1,0,NULL,2374,NULL,NULL
+506,660,lt_2373,Moray Firth GP Inc.,,577,0,0,0,0,0,NULL,,,0,NULL,40:06.0,0,NULL,0,0,0,Moray Firth GP Inc.,,,,,,,1,0,NULL,2373,NULL,NULL
+507,200,lt_2372,1230 Burnaby Street Holdings Ltd.,,578,0,0,0,0,0,NULL,,,0,NULL,40:06.0,0,NULL,0,0,0,1230 Burnaby Street Holdings Ltd.,,,,,,,1,0,NULL,2372,NULL,NULL
+508,600,lt_2408,North Garden Apartments LP,,579,0,0,0,0,0,NULL,,,0,NULL,40:06.0,0,NULL,0,0,0,North Garden Apartments LP,,,,,,,1,0,NULL,2408,NULL,NULL
+509,660,lt_2407,North Garden GP Inc.,,580,0,0,0,0,0,NULL,,,0,NULL,40:06.0,0,NULL,0,0,0,North Garden GP Inc.,,,,,,,1,0,NULL,2407,NULL,NULL
+510,200,lt_2409,225 North Garden Holdings Ltd.,,581,0,0,0,0,0,NULL,,,0,NULL,40:06.0,0,NULL,0,0,0,225 North Garden Holdings Ltd.,,,,,,,1,0,NULL,2409,NULL,NULL
+511,600,lt_2405,Oxford Manor Apartments LP,,582,0,0,0,0,0,NULL,,,0,NULL,40:06.0,0,NULL,0,0,0,Oxford Manor Apartments LP,,,,,,,1,0,NULL,2405,NULL,NULL
+512,660,lt_2404,Oxford Manor GP,,583,0,0,0,0,0,NULL,,,0,NULL,40:06.0,0,NULL,0,0,0,Oxford Manor GP,,,,,,,1,0,NULL,2404,NULL,NULL
+513,200,lt_2406,2333 Oxford Holdings Ltd.,,584,0,0,0,0,0,NULL,,,0,NULL,40:06.0,0,NULL,0,0,0,2333 Oxford Holdings Ltd.,,,,,,,1,0,NULL,2406,NULL,NULL
+514,660,lt_2370,Solway Firth GP Inc.,,585,0,0,0,0,0,NULL,,,0,NULL,40:06.0,0,NULL,0,0,0,Solway Firth GP Inc.,,,,,,,1,0,NULL,2370,NULL,NULL
+515,600,lt_2371,Solway Firth LP,,586,0,0,0,0,0,NULL,,,0,NULL,40:06.0,0,NULL,0,0,0,Solway Firth LP,,,,,,,1,0,NULL,2371,NULL,NULL
+516,660,lt_2361,Vallejo Court GP Inc.,,587,0,0,0,0,0,NULL,,,0,NULL,40:06.0,0,NULL,0,0,0,Vallejo Court GP Inc.,,,,,,,1,0,NULL,2361,NULL,NULL
+517,600,lt_2362,Vallejo Court LP,,588,0,0,0,0,0,NULL,,,0,NULL,40:07.0,0,NULL,0,0,0,Vallejo Court LP,,,,,,,1,0,NULL,2362,NULL,NULL
+518,200,lt_2363,Vallejo Court Ltd.,,589,0,0,0,0,0,NULL,,,0,NULL,40:07.0,0,NULL,0,0,0,Vallejo Court Ltd.,,,,,,,1,0,NULL,2363,NULL,NULL
+519,690,lt_2006,Lotus Pacific Services Inc.,,590,0,0,0,0,0,NULL,,,0,NULL,41:38.0,0,NULL,108,0,0,Lotus Pacific Services Inc.,Suite 950 - 475 West Georgia Street,,,Vancouver,BC,V68 4M9,1,0,99,2006,NULL,NULL
+520,680,lt_2352,Lotus Crux Acquisition GP,,591,0,0,0,0,0,NULL,,,0,NULL,15:58.0,0,NULL,0,0,0,Lotus Crux Acquisition GP,,,,,,,1,0,0,2352,2,NULL
+521,675,lt_2353,Lotus Crux Acquisition LP,,592,0,0,0,0,0,NULL,,,0,NULL,28:52.0,0,NULL,111,0,0,Lotus Crux Acquisition LP,950-475 West Georgia Street,,,Vancouver,BC,V6B 4M9,1,0,0,2353,2,NULL
+522,600,lt_2385,Lotus Crux Standens LP,,593,0,0,0,0,0,00:00.0,Notes,Objective,0,NULL,45:08.0,0,NULL,125,0,0,Lotus Crux Standens LP,,,,,,,1,0,0,2385,2,NULL
+523,600,lt_2391,LC Venture I Kanata LP,,594,0,0,0,0,0,NULL,,,0,NULL,40:07.0,0,NULL,0,0,0,LC Venture I Kanata LP,,,,,,,1,0,NULL,2391,NULL,NULL
+524,600,lt_2396,Lotus Crux Thornton LP,,595,0,0,0,0,0,NULL,,,0,NULL,40:07.0,0,NULL,0,0,0,Lotus Crux Thornton LP,,,,,,,1,0,0,2396,NULL,NULL
+525,680,lt_2386,Lotus Crux Standens GP Inc.,,596,0,0,0,0,0,NULL,,,0,NULL,51:41.0,0,NULL,126,0,0,Lotus Crux Standens GP Inc.,,,,,,,1,0,0,2386,NULL,NULL
+526,200,lt_2384,Burns LC Ltd.,,597,0,0,0,0,0,NULL,,,0,NULL,29:21.0,0,NULL,124,0,0,Burns LC Ltd.,,,,,,,1,0,NULL,2384,NULL,NULL
+527,200,lt_2389,50 FNP Ltd.,,598,0,0,0,0,0,NULL,,,0,NULL,40:07.0,0,NULL,0,0,0,50 FNP Ltd.,,,,,,,1,0,NULL,2389,NULL,NULL
+528,680,lt_2397,Lotus Crux Thornton GP Inc.,,599,0,0,0,0,0,NULL,,,0,NULL,40:07.0,0,NULL,0,0,0,Lotus Crux Thornton GP Inc.,,,,,,,1,0,0,2397,NULL,NULL
+529,690,lt_2380,Lotus Pacific (1750 JBM) Investments Inc.,,600,0,0,0,0,0,NULL,,,0,NULL,38:16.0,0,NULL,120,0,0,Lotus Pacific (1750 JBM) Investments Inc.,,,,,,,1,0,0,2380,NULL,NULL
+530,680,lt_2383,5757 CSF GP Inc.,,601,0,0,0,0,0,NULL,,,0,NULL,40:07.0,0,NULL,0,0,0,5757 CSF GP Inc.,,,,,,,1,0,NULL,2383,NULL,NULL
+531,600,lt_2382,5757 CSF LP,,602,0,0,0,0,0,NULL,,,0,NULL,40:07.0,0,NULL,0,0,0,5757 CSF LP,,,,,,,1,0,NULL,2382,NULL,NULL
+532,200,lt_2381,5757 CSF Inc.,,603,0,0,0,0,0,NULL,,,0,NULL,40:07.0,0,NULL,0,0,0,5757 CSF Inc.,,,,,,,1,0,NULL,2381,NULL,NULL
+533,675,lt_2387,LW CUF GP Inc.,,604,0,0,0,0,0,NULL,,,0,NULL,40:07.0,0,NULL,0,0,0,LW CUF GP Inc.,,,,,,,1,0,NULL,2387,NULL,NULL
+534,600,lt_2388,LW CUF LP,,605,0,0,0,0,0,NULL,,,0,NULL,40:08.0,0,NULL,0,0,0,LW CUF LP,,,,,,,1,0,NULL,2388,NULL,NULL
+535,600,lt_2401,LCW Ventures Grandland LP,,606,0,0,0,0,0,NULL,,,0,NULL,59:19.0,0,NULL,138,0,0,LCW Ventures Grandland LP,,,,,,,1,0,NULL,2401,NULL,NULL
+536,200,lt_2403,Lotus Omicron East Broadway Development Inc.,,607,0,0,0,0,0,NULL,,,0,NULL,51:14.0,0,NULL,0,0,0,,,,,,,,1,0,0,2403,NULL,NULL
+537,400,lt_5010,East Broadway Joint Venture,,608,0,0,0,0,0,NULL,,,0,NULL,40:08.0,0,NULL,0,0,0,East Broadway Joint Venture,,,,,,,1,0,NULL,5010,NULL,NULL
+538,600,lt_2393,LCW Ventures LP,,609,0,0,0,0,0,NULL,,,0,NULL,40:08.0,0,NULL,0,0,0,LCW Ventures LP,,,,,,,1,0,NULL,2393,NULL,NULL
+539,200,lt_2392,Marine Bewicke Project Ltd.,,610,0,0,0,0,0,NULL,,,0,NULL,40:08.0,0,NULL,0,0,0,Marine Bewicke Project Ltd.,,,,,,,1,0,0,2392,NULL,NULL
+540,400,lt_5009,Marine Bewicke Joint Venture,,611,0,0,0,0,0,NULL,,,0,NULL,40:08.0,0,NULL,0,0,0,Marine Bewicke Joint Venture,,,,,,,1,0,0,5009,NULL,NULL
+541,680,lt_2360,Legacy Apartment Portfolio GP Inc.,,612,0,0,0,0,0,NULL,,,0,NULL,40:08.0,0,NULL,0,0,0,Legacy Apartment Portfolio GP Inc.,,,,,,,1,0,NULL,2360,NULL,NULL
+542,675,lt_2359,Legacy Apartment Portfolio LP,,613,0,0,0,0,0,NULL,,,0,NULL,40:08.0,0,NULL,0,0,0,Legacy Apartment Portfolio LP,,,,,,,1,0,NULL,2359,NULL,NULL
+543,200,lt_2375,1270 Burnaby Street Holdings Ltd.,,614,0,0,0,0,0,NULL,,,0,NULL,40:08.0,0,NULL,0,0,0,1270 Burnaby Street Holdings Ltd.,,,,,,,1,0,NULL,2375,NULL,NULL
+544,680,lt_2402,LCW Ventures Grandland GP Inc.,,615,0,0,0,0,0,NULL,,,0,NULL,55:31.0,0,NULL,139,0,0,LCW Ventures Grandland GP Inc.,,,,,,,1,0,NULL,2402,NULL,NULL
+545,680,lt_2394,LCW Ventures GP Inc.,,616,0,0,0,0,0,NULL,,,0,NULL,40:08.0,0,NULL,0,0,0,LCW Ventures GP Inc.,,,,,,,1,0,NULL,2394,NULL,NULL
+546,900,lt_2999,519347 BC Ltd.,,617,0,0,0,0,0,NULL,,,0,NULL,40:08.0,0,NULL,0,0,0,519347 BC Ltd.,,,,,,,1,0,NULL,2999,NULL,NULL
+547,900,lt_2997,670871 BC Ltd.,,618,0,0,0,0,0,NULL,,,0,NULL,40:08.0,0,NULL,0,0,0,670871 BC Ltd.,,,,,,,1,0,NULL,2997,NULL,NULL
+548,660,lt_2390,LC Venture I Kanata GP,,619,0,0,0,0,0,NULL,,,0,NULL,40:08.0,0,NULL,0,0,0,LC Venture I Kanata GP,,,,,,,1,0,NULL,2390,NULL,NULL
+549,690,lt_2702,Westpac Pro Limited Partnership,,620,0,0,0,0,0,NULL,,,0,NULL,58:20.0,0,NULL,162,0,0,Suite 700,5090 Explorer Drive,,,Mississauga,BC,L4W 4T9,1,0,60,2702,NULL,NULL
+550,690,lt_2704,1937912 Alberta Ltd,,621,0,0,0,0,0,NULL,,,0,NULL,40:29.0,0,NULL,2463,0,0,1937912 Alberta Ltd,"200, 17220 Stony Plain Road",,,Edmonton,AB,T5S 1K6,1,0,63,2704,2,NULL
+551,690,lt_2701,Crux Capital Corporation,,622,0,0,0,0,0,NULL,,,0,NULL,51:42.0,0,NULL,0,0,0,Crux Capital Corporation,TD Canada Trust Tower,"161 Bay Street, 27th Floor",,Toronto,ON,,1,0,62,2701,NULL,NULL
+552,675,lt_2703,Fiera Properties CORE Fund LP,,623,0,0,0,0,0,NULL,,,0,NULL,40:09.0,0,NULL,0,0,0,Fiera Properties CORE Fund LP,,,,,,,1,0,NULL,2703,NULL,NULL
+553,675,lt_2705,0760205 BC Ltd,,624,0,0,0,0,0,NULL,,,0,NULL,51:39.0,0,NULL,2412,0,0,0760205 BC Ltd,950-475 West Georgia St.,,,Vancouver,BC,V6B 4M9,1,0,14,2705,NULL,NULL
+554,690,lt_2746,Insurance Corporation of BC,,625,0,0,0,0,0,NULL,,,0,NULL,40:57.0,0,NULL,2462,0,0,Insurance Corporation of BC,,,,,,,1,0,NULL,2746,NULL,NULL
+555,690,lt_2748,Harbour Equity JV IV LP,,626,0,0,0,0,0,NULL,,,0,NULL,51:42.0,0,NULL,0,0,0,Harbour Equity JV IV LP,,,,,,,1,0,65,2748,NULL,NULL
+556,675,lt_2749,1333230 Ontario Inc.,,627,0,0,0,0,0,NULL,,,0,NULL,59:56.0,0,NULL,163,0,0,1333230 Ontario Inc.,910 Central Parkway West,,,Mississauga,ON,L5C 2V5,1,0,16,2749,2,NULL
+557,675,lt_2750,1617557 Alberta Ltd.,,628,0,0,0,0,0,NULL,,,0,NULL,22:22.0,0,NULL,164,0,0,1617557 Alberta Ltd.,976 Ogilvie Blvd.,,,Edmonton,AB,T6R 1J9,1,0,17,2750,2,NULL
+558,675,lt_2751,Electra Management Ltd.,,629,0,0,0,0,0,NULL,,,0,NULL,21:46.0,0,NULL,165,0,0,Electra Management Ltd.,30 Cormack Cres. N.W.,,,Edmonton,AB,T6R 2E7,1,0,28,2751,2,NULL
+559,675,lt_2754,Avraham Holdings Inc.,,630,0,0,0,0,0,NULL,,,0,NULL,06:19.0,0,NULL,2416,0,0,Avraham Holdings Inc.,3302-38 Metropole Private,,,Ottawa,ON,K1Z 1E9,1,0,19,2754,2,NULL
+560,675,lt_2756,Peripatetic Investments Inc.,,631,0,0,0,0,0,NULL,,,0,NULL,00:15.0,0,NULL,166,0,0,Robert Disbrow,700-200 Burrard St,,,Vancouver,BC,V6C 3L6,1,0,45,2756,2,NULL
+561,675,lt_2757,Chhaya Parikh,,632,0,0,0,0,0,NULL,,,0,NULL,53:43.0,0,NULL,3785,0,0,Chhaya Parikh,15 Silver Spruce Drive,,,Scarborough,ON,M1W 1V6,1,0,97,2757,NULL,NULL
+562,675,lt_2758,Davis JP Trust,,633,0,0,0,0,0,NULL,,,0,NULL,29:12.0,0,NULL,2422,0,0,Davis JP Trust,5889 Cartier St,,,Vancouver,BC,V6M 3A6,1,0,25,2758,5,NULL
+563,675,lt_2760,Douglas Knight,,634,0,0,0,0,0,NULL,,,0,NULL,40:09.0,0,NULL,0,0,0,Douglas Knight,5661 Cypress St,,,Vancouver,BC,V6M 3R5,1,0,NULL,2760,NULL,NULL
+564,675,lt_2761,EGGO Management Inc.,,635,0,0,0,0,0,NULL,,,0,NULL,33:11.0,0,NULL,167,0,0,EGGO Management Inc.,9 Bayview Forest Lane,,,Thornhill,ON,L3T 7S4,1,0,27,2761,2,NULL
+565,675,lt_2762,Farooq Rasul,,636,0,0,0,0,0,NULL,,,0,NULL,40:09.0,0,NULL,0,0,0,Farooq Rasul,2709 St. George Street,,,Port Moody,BC,V3H 2H1,1,0,NULL,2762,NULL,NULL
+566,675,lt_2763,Forum Investment And Development Corporation,,637,0,0,0,0,0,NULL,,,0,NULL,02:07.0,0,NULL,168,0,0,Forum Investment And Development Corporation,"Suite 2810, 181 Bay Street","East Podium, 2nd Floor",,Toronto,ON,M5J 2T3,1,0,29,2763,2,NULL
+567,675,lt_2764,Henry Silberman,,638,0,0,0,0,0,NULL,,,0,NULL,05:22.0,0,NULL,169,0,0,Henry Silberman,388 Spinnaker Way,,,Concord,ON,L4K 4W1,1,0,54,2764,1,NULL
+568,675,lt_2765,Intercontinental Capital Corporation,,639,0,0,0,0,0,NULL,,,0,NULL,21:05.0,0,NULL,2425,0,0,Intercontinental Capital Corporation,1826 West 61st Avenue,,,Vancouver,BC,V6P 2C4,1,0,31,2765,2,NULL
+569,675,lt_2766,JCMA Holdings Inc.,,640,0,0,0,0,0,NULL,,,0,NULL,24:57.0,0,NULL,170,0,0,JCMA Holdings Inc.,71 Eastwood Crescent,,,Markham,ON,L3P 6A1,1,0,32,2766,2,NULL
+570,675,lt_2767,Maven Capital Inc.,,641,0,0,0,0,0,NULL,,,0,NULL,56:57.0,0,NULL,2426,0,0,Maven Capital,2210-120 Adelaide St. West,,,Toronto,ON,M5H 1T1,1,0,33,2767,2,NULL
+571,675,lt_2768,John Stark,,642,0,0,0,0,0,NULL,,,0,NULL,51:40.0,0,NULL,171,0,0,John Stark,1003 - 2445 West 3rd Avenue,,,Vancouver,BC,V6K 4K6,1,0,34,2768,NULL,NULL
+572,675,lt_2769,K Group Holdings Inc.,,643,0,0,0,0,0,NULL,,,0,NULL,51:41.0,0,NULL,172,0,0,K Group Holdings Inc.,1801 - 1139 West Cordova Street,,,Vancouver,BC,V6C 0A2,1,0,55,2769,NULL,NULL
+573,675,lt_2770,Kalla Holdings Ltd.,,644,0,0,0,0,0,NULL,,,0,NULL,13:02.0,0,NULL,2427,0,0,Kalla Holdings Ltd.,#110-1118 Homer Street,,,Vancouver,BC,V6B 6L5,1,0,35,2770,2,NULL
+574,675,lt_2771,Kima Grieve,,645,0,0,0,0,0,NULL,,,0,NULL,19:02.0,0,NULL,173,0,0,Kima Grieve,8412 Golden Bear Place,,,Whistler,BC,V0N 1B8,1,0,56,2771,NULL,NULL
+575,675,lt_2773,Little Fort Advisors,,646,0,0,0,0,0,NULL,,,0,NULL,40:10.0,0,NULL,0,0,0,Little Fort Advisors,101-2484 Haywood Ave,,,West Vancouver,BC,V7V 1Y1,1,0,37,2773,NULL,NULL
+576,675,lt_2774,Marna Disbrow,,647,0,0,0,0,0,NULL,,,0,NULL,23:00.0,0,NULL,174,0,0,Marna Disbrow,700 - 200 Burrard St.,,,Vancouver,BC,V6C 3L6,1,0,39,2774,1,NULL
+577,675,lt_2775,Morningsprings Investments Inc.,,648,0,0,0,0,0,NULL,,,0,NULL,13:06.0,0,NULL,175,0,0,Morningsprings Investments Inc.,1251 Marine Drive,,,West Vancouver,BC,V7T 1B4,1,0,43,2775,6,NULL
+578,675,lt_2776,Oneduck Holdings Ltd,,649,0,0,0,0,0,NULL,,,0,NULL,25:46.0,0,NULL,5067,0,0,Oneduck Holdngs Ltd,9307 Emerald Drive,,,Whistler,BC,V8E0G5,1,0,70,2776,2,NULL
+579,675,lt_2777,Peter Lee,,650,0,0,0,0,0,NULL,,,0,NULL,51:41.0,0,NULL,176,0,0,Peter Lee,4778 Southlawn Drive,,,Burnaby,BC,V5C 3S6,1,0,58,2777,NULL,NULL
+580,675,lt_2778,Sara Relling,,651,0,0,0,0,0,NULL,,,0,NULL,51:41.0,0,NULL,2435,0,0,Sara Relling,3010 Rosebery Ave,,,West Vancouver,BC,V7V 3A9,1,0,48,2778,1,NULL
+581,675,lt_2779,Satish Rai,,652,0,0,0,0,0,NULL,,,0,NULL,40:10.0,0,NULL,0,0,0,Satish Rai,63 Brimwood Ct,,,Pickering,ON,L1V 6L1,1,0,88,2779,NULL,NULL
+582,675,lt_2780,SLMC Holdings Ltd.,,653,0,0,0,0,0,NULL,,,0,NULL,15:56.0,0,NULL,2436,0,0,SLMC Holdings Ltd.,1100-1050 West Pender,,,Vancouver,BC,V6E 3S7,1,0,49,2780,2,NULL
+583,900,lt_2781,Smita Chandaria,,654,0,0,0,0,0,NULL,,,0,NULL,52:54.0,0,NULL,2437,0,0,Smita Chandaria,52 The Bridle Path,,,Toronto,ON,M3B 2B1,1,0,50,2781,1,NULL
+584,675,lt_2783,Stratos Investment Limited,,655,0,0,0,0,0,NULL,,,0,NULL,31:53.0,0,NULL,177,0,0,Stratos Investment Limited,220 Duncan Mill Road,Suite 505,,Toronto,ON,M3B 3J5,1,0,116,2783,2,NULL
+585,675,lt_2784,Tecla Joubran,,656,0,0,0,0,0,NULL,,,0,NULL,40:10.0,0,NULL,0,0,0,Tecla Joubran,6 Accolade Court,,,Brampton,ON,L6X 2X4,1,0,NULL,2784,NULL,NULL
+586,675,lt_2785,Thomas Relling,,657,0,0,0,0,0,NULL,,,0,NULL,24:17.0,0,NULL,178,0,0,Thomas Relling,700 - 200 Burrard St.,,,Vancouver,BC,V6C 3L6,1,0,66,2785,NULL,NULL
+587,675,lt_2786,P.C. Lecky Capital Corp.,,658,0,0,0,0,0,NULL,,,0,NULL,40:11.0,0,NULL,0,0,0,P.C. Lecky Capital Corp.,6788 Marine Crescent,,,Vancouver,BC,V6P 5X3,1,0,NULL,2786,NULL,NULL
+588,675,lt_2787,Vanier Holdings Inc,,659,0,0,0,0,0,NULL,,,0,NULL,00:03.0,0,NULL,3781,0,0,Vanier Holdings Inc,"#310-3596 West 28th Avenue,",,,Vancouver,BC,V6S 2G5,1,0,73,2787,NULL,NULL
+589,200,lt_2416o,Penelope Apartments Ltd. - Old,,660,0,0,0,0,0,NULL,,,0,NULL,52:47.0,0,NULL,0,0,0,Penelope Apartments Ltd.,,,,,,,1,0,NULL,2416,NULL,NULL
+590,600,lt_2415,Penelope Apartments LP,,661,0,0,0,0,0,NULL,,,0,NULL,40:11.0,0,NULL,0,0,0,Penelope Apartments LP,,,,,,,1,0,NULL,2415,NULL,NULL
+591,660,lt_2414,Penelope Apartments GP Inc.,,662,0,0,0,0,0,NULL,,,0,NULL,40:11.0,0,NULL,0,0,0,Penelope Apartments GP Inc.,,,,,,,1,0,NULL,2414,NULL,NULL
+592,600,lt_2411,LCC Venture (Nexii) LP,,663,0,0,0,0,0,00:00.0,,,0,NULL,40:11.0,0,NULL,0,0,0,LCC Venture (Nexii) LP,950-475 West Georgia Street,,,Vancouver,BC,V6B 4M9,1,0,NULL,2411,NULL,NULL
+593,690,lt_2745,Eng-Com Holdings Ltd,,664,0,0,0,0,0,NULL,,,0,NULL,20:30.0,0,NULL,0,0,0,Eng-Com Holdings Ltd.,920 West 21st Avenue,,,Vancouver,BC,V5Z 1Z1,1,0,64,2745,NULL,NULL
+594,675,lt_2743,Brave Ocean Management Ltd.,,665,0,0,0,0,0,NULL,,,0,NULL,40:11.0,0,NULL,0,0,0,Brave Ocean Management Ltd.,,,,,,,1,0,NULL,2743,NULL,NULL
+595,600,lt_2417,LW Capital Opportunities I Partnership,,666,0,0,0,0,0,00:00.0,,,0,NULL,40:11.0,0,NULL,0,0,0,LW Capital Opportunities I Partnership,950-475 West Georgia Street,,,Vancouver,BC,V6B 4M9,1,0,NULL,2417,NULL,NULL
+596,600,lt_2419,Lotus Crux ESB Limited Partnership,,667,0,0,0,0,0,00:00.0,Portfolio of ten small bay industrial properties in SE and NW Edmonton.,"Financed as two pools with a combination of low-cost, longer debt and higher leverage, shorter debt.",0,NULL,25:45.0,0,NULL,149,0,0,475 West Georgia Street,Unit 950,,,Vancouver,BC,V6B 3A3,1,0,0,2419,NULL,NULL
+597,600,lt_2706,Omi Ventures LP,,668,0,0,0,0,0,NULL,,,0,NULL,00:08.0,0,NULL,184,0,0,Omi Ventures LP,,,,,,,1,0,NULL,2706,NULL,NULL
+598,690,lt_2008,Lotus Pacific Acquisitions Inc.,,669,0,0,0,0,0,NULL,,,0,NULL,40:11.0,0,NULL,0,0,0,Lotus Pacific Acquisitions Inc.,,,,,,,1,0,0,2008,NULL,NULL
+599,600,lt_2707,Marine Bewicke Limited Partnership,,670,0,0,0,0,0,NULL,,,0,NULL,40:11.0,0,NULL,0,0,0,Marine Bewicke Limited Partnership,,,,,,,1,0,0,2707,NULL,NULL
+600,680,lt_2418,Lotus Crux ESB GP Inc.,,671,0,0,0,0,0,00:00.0,,,0,NULL,51:40.0,0,NULL,148,0,0,Lotus Crux ESB GP Inc.,950-475 West Georgia Street,,,Vancouver,BC,V6B 4M9,1,0,0,2418,NULL,NULL
+601,200,lt_2420,LC ESB Ltd.,,672,0,0,0,0,0,00:00.0,,,0,NULL,40:11.0,0,NULL,0,0,0,LC ESB Ltd.,,,,,,,1,0,NULL,2420,NULL,NULL
+602,675,lt_2708,Bennett Canada Holdings Ltd.,,673,0,0,0,0,0,00:00.0,,,0,NULL,05:30.0,0,NULL,2417,0,0,Bennett Canada Holdings Ltd.,610 Woodland Acres Crescent,,,Maple,ON,L6A 1G2,1,0,54,2708,2,NULL
+603,675,lt_2709,Minett Capital Inc.,,674,0,0,0,0,0,00:00.0,,,0,NULL,02:37.0,0,NULL,2415,0,0,804-2345 Yonge Street,,,,Toronto,ON,M4P 2E5,1,0,81,2709,2,NULL
+604,675,lt_2710,Eddie Joubran,,675,0,0,0,0,0,00:00.0,,,0,NULL,06:43.0,0,NULL,2423,0,0,Eddie Joubran,910 Central Parkway West,,,Mississauga,ON,L5C 2V5,1,0,26,2710,1,NULL
+605,675,lt_2711,Chesterpark Holdings Ltd.,,676,0,0,0,0,0,00:00.0,,,0,NULL,51:39.0,0,NULL,2421,0,0,Chesterpark Holdings Ltd.,538 Glengrove Avenue,,,Toronto,ON,M6B 2H4,1,0,24,2711,NULL,NULL
+606,675,lt_2712,Matthew Brown,,677,0,0,0,0,0,00:00.0,,,0,NULL,58:17.0,0,NULL,2430,0,0,Matthew Brown,34B Long Crescent,,,Toronto,ON,M4E 1N6,1,0,40,2712,1,NULL
+607,675,lt_2713,Nico Zentil,,678,0,0,0,0,0,00:00.0,,,0,NULL,08:56.0,0,NULL,2431,0,0,Nico Zentil,"333 Preston Street,1 Tower",,,Ottawa,ON,K1S 5N4,1,0,42,2713,1,NULL
+608,675,lt_2714,Samer Joubran,,679,0,0,0,0,0,00:00.0,,,0,NULL,53:51.0,0,NULL,2434,0,0,Samer Joubran,910 Central Parkway West,,,Mississauga,ON,L5C 2V5,1,0,16,2714,1,NULL
+609,675,lt_2715,Henry Joubran,,680,0,0,0,0,0,00:00.0,,,0,NULL,26:17.0,0,NULL,2424,0,0,Henry Joubran,910 Central Parkway West,,,Mississauga,ON,L5C 2V5,1,0,30,2715,1,NULL
+610,675,lt_2716,Pulin Chandaria,,681,0,0,0,0,0,00:00.0,,,0,NULL,57:09.0,0,NULL,2432,0,0,Pulin Chandaria,2 Lansing Square. Suite 401,,,North York,ON,M2J 4P8,1,0,44,2716,1,NULL
+611,675,lt_2717,The Dunloe Group Inc.,,682,0,0,0,0,0,00:00.0,,,0,NULL,51:41.0,0,NULL,2438,0,0,The Dunloe Group Inc.,8 Burton Road,,,Toronto,ON,M5P 1T7,1,0,51,2717,NULL,NULL
+612,675,lt_2718,Robert Disbrow,,683,0,0,0,0,0,00:00.0,,,0,NULL,51:41.0,0,NULL,2433,0,0,Robert Disbrow,700-200 Burrard Street,,,Vancouver,BC,V6C 3L6,1,0,45,2718,1,NULL
+613,675,lt_2719,Marna Disbrow,,684,0,0,0,0,0,00:00.0,,,0,NULL,51:40.0,0,NULL,2429,0,0,Marna Disbrow,700-200 Burrard Street,,,Vancouver,BC,V6C 3L6,1,0,39,2719,NULL,NULL
+614,675,lt_2720,Aldat 2000 Holdings Ltd.,,685,0,0,0,0,0,NULL,,,0,NULL,51:39.0,0,NULL,2414,0,0,Aldat 2000 Holdings Ltd.,5661 Cypress Street,,,Vancouver,BC,V6M 3R5,1,0,18,2720,2,NULL
+615,675,lt_2721,William Anthony Grieve,,686,0,0,0,0,0,00:00.0,,,0,NULL,07:01.0,0,NULL,2440,0,0,William Anthony Grieve,8412 Golden Bear Place,,,Whistler,BC,V8E 1J7,1,0,53,2721,1,NULL
+616,675,lt_2722,Vandana Varshney,,687,0,0,0,0,0,00:00.0,,,0,NULL,22:32.0,0,NULL,2439,0,0,Vandana Varshney,1995 Whyte Ave,,,Vancouver,BC,V6J 1B4,1,0,52,2722,1,NULL
+617,675,lt_2723,Bolter Holdings Ltd.,,688,0,0,0,0,0,00:00.0,,,0,NULL,45:20.0,0,NULL,2418,0,0,Bolter Holdings Inc.,3388 West 1st Avenue,,,Vancouver,BC,V6R 1G4,1,0,21,2723,2,NULL
+618,675,lt_2724,Burrard Podiatry Limited,,689,0,0,0,0,0,00:00.0,,,0,NULL,08:10.0,0,NULL,2420,0,0,Burrard Podiatry Limited,1735 Burrard Street,,,Vancouver,BC,V6J 3G6,1,0,23,2724,2,NULL
+619,675,lt_2725,1226981 LTD,,690,0,0,0,0,0,00:00.0,,,0,NULL,15:04.0,0,NULL,2413,0,0,1226981 LTD,1388 Hames Crescent,,,Coquitlam,BC,V3E 3H1,1,0,15,2725,2,NULL
+620,675,lt_2726,KKBL No. 514 Ventures Ltd,,691,0,0,0,0,0,00:00.0,,,0,NULL,51:40.0,0,NULL,2428,0,0,KKBL No. 514 Ventures Ltd,"200 Granville Street, 19th Floor",,,Vancouver,BC,V6C 2R6,1,0,36,2726,2,NULL
+621,675,lt_2788,Brigitte Relling,,692,0,0,0,0,0,00:00.0,,,0,NULL,23:39.0,0,NULL,2419,0,0,Brigitte Relling,3010 Rosebery Avenue,,,West Vancouver,BC,V7V 3A9,1,0,22,2788,1,NULL
+622,100,lt_3999,Lotus Crux ESB Corporate Entity,,693,0,0,0,0,0,NULL,,,0,NULL,40:12.0,0,NULL,0,0,0,Lotus Crux ESB Corporate Entity,,,,,,,1,0,0,3999,NULL,NULL
+623,690,lt_2789,Westpac Ventures LP,,694,0,0,0,0,0,NULL,,,0,NULL,58:46.0,0,NULL,3397,0,0,Suite 700,5090 Explorer Drive,,,Mississauga,ON,L4W 4T9,1,0,60,2789,NULL,NULL
+624,680,lt_2422,LW Ventures  Wildcat GP Inc.,,695,0,0,0,0,0,NULL,,,0,NULL,40:12.0,0,NULL,0,0,0,LW Ventures  Wildcat GP Inc.,950-475 West Georgia Street,,,Vancouver,BC,V6B 4M9,1,0,NULL,2422,NULL,NULL
+625,600,lt_2421,LW Ventures Wildcat LP,,696,0,0,0,0,0,00:00.0,TestNotes,Development Joint Venture with,0,NULL,43:36.0,0,NULL,0,0,0,LW Ventures Wildcat LP,950-475 West Georgia Street,,,Vancouver,BC,V6B 4M9,1,0,NULL,2421,NULL,NULL
+626,600,lt_2424,LC Venture 1 Dundas LP,,697,0,0,0,0,0,NULL,,,0,NULL,40:13.0,0,NULL,0,0,0,LC Venture 1 Dundas LP,"199 Bay Street, Suite 5300",,,Toronto,ON,M5L 1B9,1,0,NULL,2424,NULL,NULL
+627,680,lt_2423,LC Venture 1 Dundas GP Inc.,,698,0,0,0,0,0,NULL,,,0,NULL,40:13.0,0,NULL,0,0,0,LC Venture 1 Dundas GP Inc.,950-475 West Georgia Street,,,Vancouver,BC,V6B 4M9,1,0,NULL,2423,NULL,NULL
+628,400,lt_2425,1 Head Street Investments LP,,699,0,0,0,0,0,00:00.0,,,0,NULL,40:13.0,0,NULL,0,0,0,1 Head Street Investments LP,"115 King Street East, 3rd Floor, Suite 39",,,Hamilton,ON,L8N 1A9,1,0,NULL,2425,NULL,NULL
+629,675,lt_2790,1 Head Holdings Inc.,,700,0,0,0,0,0,NULL,,,0,NULL,40:13.0,0,NULL,0,0,0,1 Head Holdings Inc.,"115 King Street East, 3rd Floor, Suite 39",,,Hamilton,ON,L8N 1A9,1,0,NULL,2790,NULL,NULL
+630,600,lt_2426,LCC Venture II (Nexii) LP,,701,0,0,0,0,0,00:00.0,,,0,NULL,40:13.0,0,NULL,0,0,0,LCC Venture II (Nexii) LP,950-475 West Georgia Street,,,Vancouver,BC,V6B 4M9,1,0,NULL,2426,NULL,NULL
+631,675,lt_2792,Christian & Jocelyn Milau,,702,0,0,0,0,0,NULL,,,0,NULL,40:13.0,0,NULL,0,0,0,Christian & Jocelyn Milau,4612 12th Avenue,,,West Vancouver,BC,V6R 2R6,1,0,NULL,2792,NULL,NULL
+632,675,lt_2793,Eira Thomas,,703,0,0,0,0,0,NULL,,,0,NULL,40:13.0,0,NULL,0,0,0,Eira Thomas,2879 Bellevue Avenue,,,West Vancouver,BC,V7V 1E7,1,0,NULL,2793,NULL,NULL
+633,675,lt_2794,FEI-Brent Investment Ltd. #1,,704,0,0,0,0,0,NULL,,,0,NULL,59:56.0,0,NULL,2603,0,0,FEI-Brent Investment Ltd. #1,c/o Haywood Securities Inc.,700 - 200 Burrard Street,,Vancouver,BC,V6C 3L6,1,0,45,2794,2,NULL
+634,675,lt_2795,FEI-Brent Investment Inc. #2,,705,0,0,0,0,0,NULL,,,0,NULL,00:05.0,0,NULL,2605,0,0,FEI-Brent Investment Inc. #2,c/o Haywood Securities Inc.,700 - 200 Burrard Street,,Vancouver,BC,V6C 3L6,1,0,45,2795,2,NULL
+635,675,lt_2796,Heronbrook Foundation,,706,0,0,0,0,0,NULL,,,0,NULL,40:13.0,0,NULL,0,0,0,Heronbrook Foundation,3326 236th Street,,,Langley,BC,V2Z 2H9,1,0,NULL,2796,NULL,NULL
+636,675,lt_2797,Julie Turcotte,,707,0,0,0,0,0,NULL,,,0,NULL,40:13.0,0,NULL,0,0,0,Julie Turcotte,35 Hyaden Street Unit 3102,,,Toronto,ON,M4Y 3C3,1,0,NULL,2797,NULL,NULL
+637,675,lt_2798,Linden Capital Inc.,,708,0,0,0,0,0,NULL,,,0,NULL,40:13.0,0,NULL,0,0,0,Linden Capital Inc.,3553 Point Grey Road,,,Vancouver,BC,V6R 1A7,1,0,NULL,2798,NULL,NULL
+638,675,lt_2799,Maria Hodge,,709,0,0,0,0,0,NULL,,,0,NULL,40:13.0,0,NULL,0,0,0,Maria Hodge,28 Wolfwillow Ridge,,,Calgary,AB,T3Z 2Z4,1,0,NULL,2799,NULL,NULL
+639,675,lt_2800,O'Dea Investment Trust,,710,0,0,0,0,0,NULL,,,0,NULL,40:13.0,0,NULL,0,0,0,O'Dea Investment Trust,1671 Coldwell Road,,,North Vancouver,BC,V7G 2N8,1,0,NULL,2800,NULL,NULL
+640,675,lt_2801,Relling Family Foundation,,711,0,0,0,0,0,NULL,,,0,NULL,40:13.0,0,NULL,0,0,0,Relling Family Foundation,700 - 200 Burrard Street,,,Vancouver,BC,V6C 3L6,1,0,NULL,2801,NULL,NULL
+641,675,lt_2802,Richard Bradshaw,,712,0,0,0,0,0,NULL,,,0,NULL,40:13.0,0,NULL,0,0,0,Richard Bradshaw,4676 NW Marine Drive,,,Vancouver,BC,V6R 1B9,1,0,NULL,2802,NULL,NULL
+642,675,lt_2803,Stephen Kerr,,713,0,0,0,0,0,NULL,,,0,NULL,40:13.0,0,NULL,0,0,0,Stephen Kerr,940 Melbourne Avenue,,,North Vancouver,BC,V7R 1N7,1,0,NULL,2803,NULL,NULL
+643,675,lt_2804,Radsport Holdings,,714,0,0,0,0,0,NULL,,,0,NULL,49:17.0,0,NULL,0,0,0,Thomas Relling,3010 Rosebery Avenue,,,West Vancouver,BC,V7V 3A9,1,0,66,2804,NULL,NULL
+644,675,lt_2805,Todd MacDonald,,715,0,0,0,0,0,NULL,,,0,NULL,40:14.0,0,NULL,0,0,0,Todd MacDonald,1408 Ocean Beah Esplanade,,,Gibsons,BC,V0N 1V3,1,0,NULL,2805,NULL,NULL
+645,675,lt_2806,Wayne Drier,,716,0,0,0,0,0,NULL,,,0,NULL,40:14.0,0,NULL,0,0,0,Wayne Drier,3461 7th Avenue West,,,Vancouver,BC,V6R 1W2,1,0,NULL,2806,NULL,NULL
+646,675,lt_2791,No. 176 Sailview Ventures Ltd.,,717,0,0,0,0,0,NULL,,,0,NULL,40:14.0,0,NULL,0,0,0,No. 176 Sailview Ventures Ltd.,Suite 4101 - 1077 West Cordova Street,,,Vancouver,BC,V6C 2C6,1,0,NULL,2791,NULL,NULL
+647,675,lt_2759,available for new investor,,718,0,0,0,0,0,NULL,,,0,NULL,40:14.0,0,NULL,0,0,0,available for new investor,,,,,AB,,1,0,NULL,2759,NULL,NULL
+648,680,lt_2427,LCC MR Venture I GP Inc.,,719,0,0,0,0,0,00:00.0,,,0,NULL,40:14.0,0,NULL,0,0,0,LCC MR Venture I GP Inc.,950-475 West Georgia Street,,,Vancouver,BC,V6B 4M9,1,0,NULL,2427,NULL,NULL
+649,600,lt_2428,LCC MR Venture I LP,,720,0,0,0,0,0,00:00.0,,,0,NULL,40:14.0,0,NULL,0,0,0,LCC MR Venture I LP,950-475 West Georgia Street,,,Vancouver,BC,V6B 4M9,1,0,NULL,2428,NULL,NULL
+650,400,lt_2429,Sanctuary on Broadway LP,,721,0,0,0,0,0,00:00.0,,,0,NULL,40:14.0,0,NULL,0,0,0,Sanctuary on Broadway LP,"Suite 200, 1801 Welch Street",,,North Vancouver,BC,V7P 1B7,1,0,NULL,2429,NULL,NULL
+651,600,lt_2430,LCC MR Venture II LP,,722,0,0,0,0,0,NULL,,,0,NULL,40:14.0,0,NULL,0,0,0,LCC MR Venture II LP,950-475 West Georgia St.,,,Vancouver,BC,V6B 4M9,1,0,NULL,2430,NULL,NULL
+652,680,lt_2431,LCC MR GP Inc.,,723,0,0,0,0,0,NULL,,,0,NULL,40:14.0,0,NULL,0,0,0,LCC MR GP Inc.,950-475 West Georgia St.,,,Vancouver,BC,V6B 4M9,1,0,NULL,2431,NULL,NULL
+653,400,lt_2432,1317863 Limited Partnership (Louise Court),,724,0,0,0,0,0,NULL,,,0,NULL,24:06.0,0,NULL,0,0,0,1317863 Limited Partnership,950-475 West Georgia Street,,,Vancouver,BC,V6B 4M9,1,0,0,2432,NULL,NULL
+654,200,lt_2433,Louise Court Holdings Ltd. ,,731,0,0,0,0,0,NULL,,,0,NULL,51:44.0,0,NULL,0,0,0,,,,NULL,,,,1,0,NULL,,NULL,NULL
+655,690,lt_2820,Payslate Inc.,,750,0,0,0,0,0,NULL,,,0,NULL,11:00.0,0,NULL,0,0,0,,,,NULL,,,,1,0,NULL,,NULL,NULL
+656,690,lt_2822,Lotus Pacific Development Inc.,,751,0,0,0,0,0,NULL,,,0,NULL,11:39.0,0,NULL,0,0,0,,,,NULL,,,,1,0,0,,NULL,NULL
+657,400,lt_2435,1333196 Limited Partnership,,752,0,0,0,0,0,NULL,,,0,NULL,00:44.0,0,NULL,0,0,0,,,,NULL,,,,1,0,NULL,,NULL,NULL
+658,660,lt_2436,1333196 BC Ltd.,,753,0,0,0,0,0,NULL,,,0,NULL,55:29.0,0,NULL,0,0,0,,,,NULL,,,,1,0,NULL,,NULL,NULL
+659,200,lt_2437,MacGyver Manor Holdings Ltd,,754,0,0,0,0,0,NULL,,,0,NULL,22:56.0,0,NULL,2759,0,0,,,,NULL,,,,1,0,NULL,,NULL,NULL
+660,675,lt_2819,1333677 BC Limited Partnership,,756,0,0,0,0,0,NULL,,,0,NULL,10:44.0,0,NULL,0,0,0,,,,NULL,,,,1,0,138,,NULL,NULL
+661,200,l_5011cn,Allandale Lot C Holding Ltd.,,760,0,0,0,0,0,NULL,,,0,NULL,56:13.0,0,NULL,0,0,0,,,,NULL,,,,1,0,NULL,,NULL,NULL
+662,200,l_5011an,Allandale Lot A Holding Ltd.,,761,0,0,0,0,0,NULL,,,0,NULL,56:56.0,0,NULL,0,0,0,,,,NULL,,,,1,0,NULL,,NULL,NULL
+663,400,l_5011cp,Allandale Ventures (Lot C) LP,,762,0,0,0,0,0,NULL,,,0,NULL,57:50.0,0,NULL,0,0,0,,,,NULL,,,,1,0,NULL,,NULL,NULL
+664,400,l_5011ap,Allandale Ventures (Lot A) LP,,763,0,0,0,0,0,NULL,,,0,NULL,58:17.0,0,NULL,0,0,0,,,,NULL,,,,1,0,NULL,,NULL,NULL
+665,660,l_5011gp,Allandale Ventures GP Ltd.,,764,0,0,0,0,0,NULL,,,0,NULL,07:04.0,0,NULL,0,0,0,,,,NULL,,,,1,0,NULL,,NULL,NULL
+666,660,l_5011cg,Allandale Ventures (Lot C) GP,,765,0,0,0,0,0,NULL,,,0,NULL,06:38.0,0,NULL,0,0,0,,,,NULL,,,,1,0,NULL,,NULL,NULL
+667,600,lt_2828,Allandale Business Park LP,,768,0,0,0,0,0,NULL,,,0,NULL,13:59.0,0,NULL,0,0,0,,,,NULL,,,,1,0,NULL,,NULL,NULL
+668,600,lt_2442,Lotus-Crux Northrail Limited Partnership,,769,0,0,0,0,0,00:00.0,,,0,NULL,43:29.0,0,NULL,0,0,0,,,,NULL,,,,1,0,0,,NULL,NULL
+670,900,le_regen,Regent Street Commercial Corporation,,774,0,0,0,0,0,NULL,,,0,NULL,45:03.0,0,NULL,2619,0,0,68 Forest Hill Road,,,NULL,Toronto,ON,M4V 2L5,1,0,76,,2,NULL
+671,900,lt_2824,New Horizons Car & Truck Rentals Ltd.,,775,0,0,0,0,0,NULL,,,0,NULL,12:15.0,0,NULL,2628,0,0,"2 Chedington Place, Suite 5D ",,,NULL,Toronto,ON,M4N 3R5 ,1,0,77,,2,NULL
+672,900,lt_2827,The Surkis & Eisen Family Trust,,776,0,0,0,0,0,NULL,,,0,NULL,13:33.0,0,NULL,2604,0,0,,,,NULL,,,,1,0,41,,5,NULL
+673,675,lt_2826,Carolyn Curran Knight,,777,0,0,0,0,0,NULL,,,0,NULL,12:29.0,0,NULL,2610,0,0,5661 CYPRESS ST,,,NULL,VANCOUVER,BC,V6M 3R5,1,0,79,,1,NULL
+674,675,lt_2821,Michael Sadhra,,778,0,0,0,0,0,NULL,,,0,NULL,44:58.0,0,NULL,2609,0,0,10571 Odlin Road,,,NULL,RICHMOND,BC,V6X 1E3,1,0,80,,1,NULL
+675,900,lt_2817,Avraham Holdings Inc,,779,0,0,0,0,0,NULL,,,0,NULL,52:10.0,0,NULL,2416,0,0,"38 Avenue Road, Suite 715",,,NULL,Toronto,ON,M5R 2G2,1,0,19,,2,NULL
+676,900,lt_2816,Mondella Ventures Ltd.,,780,0,0,0,0,0,NULL,,,0,NULL,08:13.0,0,NULL,2613,0,0,,,,NULL,,,,1,0,74,,2,NULL
+677,900,lt_2818,Westbridge Mortgage Services Ltd,,781,0,0,0,0,0,NULL,,,0,NULL,10:36.0,0,NULL,0,0,0,1118 Homer Street,Suite 110,,NULL,Vancouver,BC,V6B 2G2,1,0,35,,2,NULL
+678,900,lt_2825,Faizal Esmail,,782,0,0,0,0,0,NULL,,,0,NULL,15:04.0,0,NULL,2614,0,0,,,,NULL,,,,1,0,72,,1,NULL
+680,900,lt_2823,Katherine Lee,,784,0,0,0,0,0,NULL,,,0,NULL,11:51.0,0,NULL,2616,0,0,,,,NULL,,,,1,0,67,,1,NULL
+681,900,lt_2815,Scott Grieve,,785,0,0,0,0,0,NULL,,,0,NULL,08:03.0,0,NULL,2617,0,0,,,,NULL,,,,1,0,70,,1,NULL
+682,900,lt_2814,Vantage Point Advisory Inc.,,786,0,0,0,0,0,00:00.0,,,0,NULL,07:55.0,0,NULL,2618,0,0,73 Hutchison Avenue,,,NULL,Ottawa,ON,K1Y 4A4,1,0,42,,2,NULL
+683,900,lt_2813,Thomas Vanderham,,787,0,0,0,0,0,NULL,,,0,NULL,43:12.0,0,NULL,0,0,0,,,,NULL,,,,1,NULL,82,,1,NULL
+684,900,lt_2812,Atlas Athletics Inc,,788,0,0,0,0,0,NULL,,,0,NULL,07:28.0,0,NULL,2622,0,0,,,,NULL,,,,1,0,82,,2,NULL
+685,900,lt_2811,Gravity Marketing Inc,,789,0,0,0,0,0,NULL,,,0,NULL,25:03.0,0,NULL,2624,0,0,915 Evergreen Place,,,NULL,North Vancouver,BC,V7R 1R5,1,0,71,,2,NULL
+686,900,lt_2810,2632141 Ontario Ltd.,,790,0,0,0,0,0,NULL,,,0,NULL,05:59.0,0,NULL,2676,0,0,,,,NULL,,,,1,0,40,,2,NULL
+688,900,lt_2809,Aquarius Investment Corporation,,792,0,0,0,0,0,NULL,,,0,NULL,08:43.0,0,NULL,2629,0,0,,"#310-3596 West 28th Avenue,",,NULL,Vancouver,BC,V6S 2G5,1,0,73,,2,NULL
+689,900,lt_2808,Dr Lauren Fineman Inc,,793,0,0,0,0,0,NULL,,,0,NULL,05:37.0,0,NULL,2649,0,0,1199 Seymour Street,Suite 3202,,NULL,Vancouver,BC,V6B 1K3,1,0,68,,2,NULL
+690,900,lt_2807,Wroxeter Capital Inc.,,794,0,0,0,0,0,00:00.0,,,0,NULL,05:28.0,0,NULL,2658,0,0,68 Forest Hill Road,,,NULL,Toronto,ON,M4V 2L5,1,0,76,,2,NULL
+691,600,lt_2445,1415 East Broadway LP,,795,0,0,0,0,0,00:00.0,,,0,NULL,58:14.0,0,NULL,0,0,0,950-475 West Georgia St.,,,NULL,Vancouver,BC,V6B 4M9,1,0,NULL,,NULL,NULL
+692,680,lt_2446,1415 East Broadway GP,,796,0,0,0,0,0,NULL,,,0,NULL,40:13.0,0,NULL,0,0,0,950-475 West Georgia St.,,,NULL,Vancouver,BC,V6B 4M9,1,0,NULL,,NULL,NULL
+693,200,lt_2416n,Penelope Apartments Ltd.,,798,0,0,0,0,0,NULL,,,0,NULL,55:23.0,0,NULL,0,0,0,Penelope Apartments Ltd.,,,NULL,,,,1,0,NULL,,NULL,NULL
+694,200,lt_2444,Northrail Holdings Ltd.,,800,0,0,0,0,0,NULL,,,0,NULL,12:41.0,0,NULL,0,0,0,10571 Odlin Rd,,,NULL,Richmond,BC,V6X 1E3,1,0,NULL,,NULL,NULL
+695,680,lt_2443,Lotus-Crux Northrail GP Inc.,,801,0,0,0,0,0,NULL,,,0,NULL,14:45.0,0,NULL,0,0,0,,,,NULL,,,,1,0,0,,NULL,NULL
+696,675,lt_2727,1316853 Limited Partnership,,804,0,0,0,0,0,NULL,,,0,NULL,09:01.0,0,NULL,0,0,0,"5th Floor, 1508 West Broadway",,,NULL,Vancouver ,BC,V6J 1W8,1,0,138,2727,3,NULL
+697,600,lt_2447,LCC MR Venture (VACO) Limited Partnership,,826,0,0,0,0,0,00:00.0,,,0,NULL,19:09.0,0,NULL,0,0,0,LCC MR Venture (VACO) Limited Partnership,950-475 West Georgia Street,,NULL,Vancouver,BC,V6B4M9,1,0,NULL,,NULL,NULL
+698,680,lt_2448,LCC MR Venture (VACO) GP Inc.,,827,0,0,0,0,0,00:00.0,,,0,NULL,41:53.0,0,NULL,0,0,0,LCC MR Venture (VACO) GP Inc.,950-475 West Georgia Street,,NULL,Vancouver,BC,V6B 4M9,1,0,NULL,2447,NULL,NULL
+700,200,lt_2499,Hunter Street Title Ltd.,,831,0,0,0,0,0,NULL,,,0,NULL,04:44.0,0,NULL,0,0,0,Hunter Street Title Ltd,,,NULL,,,,1,0,NULL,,NULL,NULL
+701,400,lt_2450,Hunter Street Venture LP,,832,0,0,0,0,0,NULL,,,0,NULL,06:38.0,0,NULL,0,0,0,Hunter Street Venture LP,,,NULL,,,,1,0,NULL,,NULL,NULL
+702,660,lt_2451,Hunter Street GP Inc.,,833,0,0,0,0,0,NULL,,,0,NULL,08:08.0,0,NULL,0,0,0,Hunter Street GP Inc.,,,NULL,,,,1,0,NULL,,NULL,NULL
+703,600,lt_2453,LW Ventures Hunter LP,,834,0,0,0,0,0,NULL,,,0,NULL,09:28.0,0,NULL,0,0,0,LW Ventures Hunter LP,,,NULL,,,,1,0,NULL,,NULL,NULL
+704,680,lt_2452,LW Ventures Hunter GP Inc.,,835,0,0,0,0,0,NULL,,,0,NULL,11:26.0,0,NULL,0,0,0,LW Ventures Hunter GP Inc.,,,NULL,,,,1,0,NULL,,NULL,NULL
+705,200,lt_2454,1001 Corporate Drive Ltd.,,839,0,0,0,0,0,NULL,,,0,NULL,25:31.0,0,NULL,0,0,0,,,,NULL,,,,1,0,NULL,,NULL,NULL
+706,400,lt_2455,1001 Corporate Drive LP,,840,0,0,0,0,0,00:00.0,,,0,NULL,03:40.0,0,NULL,0,0,0,,,,NULL,,,,1,0,0,,NULL,NULL
+707,660,lt_2456,1001 Corporate Drive GP,,841,0,0,0,0,0,NULL,,,0,NULL,30:02.0,0,NULL,0,0,0,,,,NULL,,,,1,0,NULL,,NULL,NULL
+708,600,lt_2457,Lotus Crux Corporate Drive LP,,842,0,0,0,0,0,00:00.0,"1001 Corporate Drive is a single-tenant industrial sale-leaseback property located in Burlington, Ontario. The Property offers investors the rare opportunity to acquire a 100% freehold interest in a 241,766 sf manufacturing, warehouse and distribution facility located on 11.9 acres on the 403 Highway on the southwest side of the Greater Toronto Area with a long-term lease in place.","This purchase price is significantly below replacement cost at $55.0M ($227 psf), $4.6M per acre and an attractive going-in cap rate of 6.4%, growing annually.",0,NULL,04:15.0,0,NULL,3316,0,0,,,,NULL,,,,1,0,0,,NULL,NULL
+709,680,lt_2458,Lotus Crux Corporate Drive GP Inc.,,843,0,0,0,0,0,NULL,,,0,NULL,35:12.0,0,NULL,0,0,0,,,,NULL,,,,1,0,0,,NULL,NULL
+710,675,lt_cdr43,9076-4028 Quebec Inc,,844,0,0,0,0,0,NULL,,,0,NULL,50:55.0,0,NULL,3396,0,0,,,,NULL,,,,1,0,106,,NULL,NULL
+711,675,lt_cdr34,3457745 Canada Inc.,,845,0,0,0,0,0,NULL,,,0,NULL,02:08.0,0,NULL,3318,0,0,,,,NULL,,,,1,0,103,,2,NULL
+712,675,lt_leo,The Leonard T. Assaly Family Foundation,,846,0,0,0,0,0,NULL,,,0,NULL,55:46.0,0,NULL,3319,0,0,,,,NULL,,,,1,0,104,,NULL,NULL
+713,675,lt_david,The David Family Foundation,,847,0,0,0,0,0,NULL,,,0,NULL,35:28.0,0,NULL,3320,0,0,,,,NULL,,,,1,0,105,,NULL,NULL
+714,900,lt_littl,Little Fort Advisors Inc.,,848,0,0,0,0,0,NULL,,,0,NULL,15:49.0,0,NULL,3323,0,0,,,,NULL,,,,1,0,37,,NULL,NULL
+715,900,lt_engco,Eng-Com Holdings Ltd.,,849,0,0,0,0,0,NULL,,,0,NULL,45:27.0,0,NULL,3324,0,0,,,,NULL,,,,1,0,64,,NULL,NULL
+716,900,lt_qfhol,QF Holdings Ltd.,,850,0,0,0,0,0,NULL,,,0,NULL,47:29.0,0,NULL,3325,0,0,,,,NULL,,,,1,0,95,,NULL,NULL
+717,900,lt_oxali,Oxalis Holdings Ltd.,,851,0,0,0,0,0,NULL,,,0,NULL,50:51.0,0,NULL,3326,0,0,5809 Montgomery St,,,NULL,Vancouver,BC,V5M 2X3,1,0,96,,NULL,NULL
+728,900,lt_emell,Emellon Corp.,,862,0,0,0,0,0,NULL,,,0,NULL,30:24.0,0,NULL,3327,0,0,"133 Richmond Street West, Suite 403",,,,Toronto,ON,M5H 2L3,1,0,86,,NULL,NULL
+729,900,lt_kunt,Kuntesh Chandaria,,863,0,0,0,0,0,NULL,,,0,NULL,08:04.0,0,NULL,3328,0,0,,,,,,,,1,0,87,,NULL,NULL
+730,900,lt_satis,Satish Rai,,864,0,0,0,0,0,NULL,,,0,NULL,08:04.0,0,NULL,3329,0,0,,,,,,,,1,0,88,,NULL,NULL
+731,900,lt_ira,Ira Jelinek Professional Real Estate Corp.,,865,0,0,0,0,0,NULL,,,0,NULL,08:04.0,0,NULL,3330,0,0,,,,,,,,1,0,89,,NULL,NULL
+732,900,lt_gund,Gundy Co ITF HG2 Inc.,,866,0,0,0,0,0,NULL,,,0,NULL,51:48.0,0,NULL,3331,0,0,"298 Markham Street, Suite 200",,,,Toronto,ON,M5W 2X6,1,0,90,,NULL,NULL
+733,900,lt_innis,Innisbrook Management Corporation,,867,0,0,0,0,0,NULL,,,0,NULL,08:04.0,0,NULL,3332,0,0,,,,,,,,1,0,91,,NULL,NULL
+734,900,lt_9081,9081-1506 Quebec Inc,,868,0,0,0,0,0,NULL,,,0,NULL,08:05.0,0,NULL,3333,0,0,,,,,,,,1,0,92,,NULL,NULL
+735,900,lt_maure,Maureen Oliver,,869,0,0,0,0,0,NULL,,,0,NULL,08:05.0,0,NULL,3334,0,0,,,,,,,,1,0,76,,NULL,NULL
+736,900,lt_jenc,JENC Investments Inc.,,870,0,0,0,0,0,NULL,,,0,NULL,12:16.0,0,NULL,3335,0,0,1401 Pinecliff Rd,,,,Oakville,ON,L6M3Z2,1,0,93,,NULL,NULL
+737,900,lt_guil,Guilben Group Ltd.,,871,0,0,0,0,0,NULL,,,0,NULL,46:20.0,0,NULL,3336,0,0,,,,,,,,1,0,94,,NULL,NULL
+738,900,lt_samj,Samir Joubran,,872,0,0,0,0,0,NULL,,,0,NULL,33:10.0,0,NULL,3339,0,0,45 Newstead Crescent,,,NULL,Brampton,ON,L6V 2A8,1,0,85,,NULL,NULL
+739,690,lt_omeas,LCW Ventures Grandland LP as operator for the East Broadway,,892,0,0,0,0,0,NULL,,,0,NULL,16:03.0,0,NULL,0,0,0,950-475 West Georgia Street ,,,NULL,Vancouver,BC,V6B 4M9,1,0,NULL,,NULL,NULL
+740,690,lt_marin,Marine & Bewicke Project Ltd,,893,0,0,0,0,0,NULL,,,0,NULL,59:41.0,0,NULL,0,0,0,950-475 West Georgia Street ,,,NULL,Vancouver,BC,V6B 4M9,1,0,NULL,,NULL,NULL
+741,690,lt_hunte,Hunter Street Venture LP,,894,0,0,0,0,0,NULL,,,0,NULL,59:56.0,0,NULL,0,0,0,950-475 West Georgia Street ,,,NULL,Vancouver,BC,V6B 4M9,1,0,NULL,,NULL,NULL
+743,900,ytest,Yardi Test Entity,,900,0,0,0,0,0,NULL,,,0,NULL,14:40.0,0,NULL,3870,0,0,,,,NULL,,,,1,0,101,,1,NULL
+744,700,u0000002,Yardi Test,NULL,901,0,0,0,0,0,NULL,NULL,NULL,0,NULL,03:14.0,0,NULL,0,0,0,NULL,NULL,NULL,NULL,NULL,NULL,NULL,1,0,NULL,NULL,NULL,NULL
+745,900,po000021,Innisbrook Management Corporation,,902,0,0,0,0,0,NULL,NULL,NULL,0,NULL,43:09.0,0,NULL,0,0,0,NULL,NULL,NULL,NULL,NULL,NULL,NULL,1,NULL,102,NULL,1,NULL
+746,900,po000022,Nitin Tarsarya,NULL,903,0,0,0,0,0,NULL,NULL,NULL,0,NULL,57:32.0,0,NULL,3910,0,0,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,0,NULL,1,NULL
+747,200,lt_2459,395 Patillo Road Title Ltd,,911,0,0,0,0,0,00:00.0,,,0,NULL,05:53.0,0,NULL,0,0,0,199 Bay Street,Suite 5300,,NULL,Toronto,ON,M5L 1B9,1,0,NULL,,NULL,NULL
+748,400,lt_2461,LCC Patillo LP,,912,0,0,0,0,0,00:00.0,,,0,NULL,44:42.0,0,NULL,4890,0,0,950 - 475 West Georgia Street,,,NULL,Vancouver,BC,V6B 4M9,1,0,NULL,,NULL,NULL
+749,660,lt_2460,LCC Patillo GP Inc.,,913,0,0,0,0,0,00:00.0,,,0,NULL,09:56.0,0,NULL,0,0,0,950 - 475 West Georgia Street,,,NULL,Vancouver,BC,V6B 4M9,1,0,NULL,,NULL,NULL
+750,600,lt_2463,LCC 395 Patillo LP,,914,0,0,0,0,0,00:00.0,,,0,NULL,27:45.0,0,NULL,4891,0,0,950 - 475 West Georgia Street,,,NULL,Vancouver,BC,V6B 4M9,1,0,NULL,,NULL,NULL
+751,680,lt_2462,LCC 395 Patillo GP Inc.,,915,0,0,0,0,0,00:00.0,,,0,NULL,10:12.0,0,NULL,0,0,0,950 - 475 West Georgia Street,,,NULL,Vancouver,BC,V6B 4M9,1,0,NULL,,NULL,NULL
+752,600,lt_2829,Dayhu (395 Patillo) LP,,917,0,0,0,0,0,NULL,,,0,NULL,12:45.0,0,NULL,4911,0,0,,,,NULL,,,,1,0,111,,NULL,NULL
+753,900,lt_2830,1143109 BC Ltd.,,918,0,0,0,0,0,NULL,,,0,NULL,01:51.0,0,NULL,4907,0,0,,,,NULL,,,,1,0,110,,NULL,NULL
+754,600,lt_2465,LCC Windsor LP,,921,0,0,0,0,0,NULL,,,0,NULL,21:39.0,0,NULL,4901,0,0,,,,NULL,,,,1,0,NULL,,NULL,NULL
+755,680,lt_2464,LCC Windsor GP Inc.,,922,0,0,0,0,0,NULL,,,0,NULL,08:18.0,0,NULL,0,0,0,,,,NULL,,,,1,0,NULL,,NULL,NULL
+756,900,lt_2831,Gurdev Sadhra,,923,0,0,0,0,0,NULL,,,0,NULL,29:01.0,0,NULL,5258,0,0,4320 Uplands Dr,,,NULL,Nanaimo,BC,V9T5L8,1,0,110,,NULL,NULL
+757,200,lt_2466,100 Corporation Drive Title Ltd.,,933,0,0,0,0,0,NULL,,,0,NULL,29:37.0,0,NULL,0,0,0,,,,NULL,,,,1,0,NULL,,NULL,NULL
+758,400,lt_2468,LCC Precidio Project LP,,934,0,0,0,0,0,NULL,,,0,NULL,34:12.0,0,NULL,0,0,0,,,,NULL,,,,1,0,NULL,,NULL,NULL
+759,660,lt_2467,LCC Precidio Project GP Inc.,,935,0,0,0,0,0,NULL,,,0,NULL,34:46.0,0,NULL,0,0,0,,,,NULL,,,,1,0,NULL,,NULL,NULL
+760,600,lt_2472,LCC Brampton LP,,936,0,0,0,0,0,NULL,,,0,NULL,35:54.0,0,NULL,0,0,0,,,,NULL,,,,1,0,NULL,,NULL,NULL
+761,680,lt_2471,LCC Brampton GP Inc.,,937,0,0,0,0,0,NULL,,,0,NULL,33:25.0,0,NULL,0,0,0,,,,NULL,,,,1,0,NULL,,NULL,NULL
+762,600,lt_2470,LCC Precidio Venture LP,,938,0,0,0,0,0,NULL,,,0,NULL,39:10.0,0,NULL,0,0,0,,,,NULL,,,,1,0,NULL,,NULL,NULL
+763,680,lt_2469,LCC Precidio Venture GP Inc.,,939,0,0,0,0,0,NULL,,,0,NULL,39:37.0,0,NULL,0,0,0,,,,NULL,,,,1,0,NULL,,NULL,NULL
+764,900,po000024,Mejnuun Inc.,,940,0,0,0,0,0,NULL,NULL,NULL,0,NULL,11:04.0,0,NULL,5091,0,0,910 Central Parkway West,,NULL,NULL,Mississauga,ON,L5C 2V5,1,0,16,NULL,2,NULL
+765,900,lt_phigr,Phi Group Holdings Inc.,,941,0,0,0,0,0,NULL,,,0,NULL,13:24.0,0,NULL,5092,0,0,,,,NULL,,,,1,NULL,117,,2,NULL
+766,900,po000026,1274165 BC Ltd.,NULL,942,0,0,0,0,0,NULL,NULL,NULL,0,NULL,36:36.0,0,NULL,5093,0,0,10571 Odlin Road,,NULL,NULL,Richmond,BC,V6X 1E3,1,0,80,NULL,0,NULL
+768,400,lt_2475,LCC Retail Portfolio I LP,,953,0,0,0,0,0,00:00.0,,,0,NULL,05:32.0,0,NULL,0,0,0,950-475 West Georgia Street,,,NULL,Vancouver,BC, V6B 4M9,1,0,NULL,,NULL,NULL
+769,660,lt_2476,LW Retail Ventures GP Inc,,954,0,0,0,0,0,00:00.0,,,0,NULL,59:26.0,0,NULL,0,0,0,950-475 West Georgia Street,,,NULL,Vancouver,BC,V6B 4M9,1,0,NULL,,NULL,NULL
+770,650,lt_2479,LPI Retail Venture I LP,,959,0,0,0,0,0,00:00.0,,,0,NULL,59:55.0,0,NULL,5249,0,0,,,,NULL,,,,1,0,NULL,,NULL,NULL
+771,675,0,0,,960,0,0,0,0,0,NULL,,,0,NULL,57:37.0,0,NULL,0,0,0,,,,NULL,,BC,,1,0,0,,0,NULL
+772,675,lt_2728,1049126 B.C. Ltd.,,961,0,0,0,0,0,00:00.0,,,0,NULL,08:03.0,0,NULL,5250,0,0,1100-1067 W Cordova St.,,,NULL,Vancouver,BC,V6C 1C7,1,0,36,,2,NULL
+773,675,lt_2729,1093186 B.C. Ltd.,,962,0,0,0,0,0,00:00.0,,,0,NULL,36:30.0,0,NULL,5251,0,0,3881 West 27th Avenue,,,NULL,Vancouver,BC,V6S 1R4,1,0,153,,2,NULL
+774,675,lt_2730,Cannon Properties Ltd.,,963,0,0,0,0,0,NULL,,,0,NULL,32:45.0,0,NULL,5253,0,0,1-2499 West 37th Avenue,,,NULL,Vancouver,BC,V6M 1P4,1,0,153,,NULL,NULL
+775,675,lt_2731,Charlotte Meredith Kalla,,964,0,0,0,0,0,NULL,,,0,NULL,31:22.0,0,NULL,5254,0,0,3388 West 1st Avenue,,,NULL,Vancouver,BC,V6R 1G4,1,0,156,,NULL,NULL
+776,675,lt_2732,Kayvman Ventures Ltd.,,965,0,0,0,0,0,NULL,,,0,NULL,20:11.0,0,NULL,5255,0,0,3102-1011 West Cordova Street,,,NULL,Vancouver,BC,V6C 0B2,1,0,154,,NULL,NULL
+777,675,lt_2733,KC Kids Holdings Inc.,,966,0,0,0,0,0,NULL,,,0,NULL,11:13.0,0,NULL,5256,0,0,3106 West 24th Avenue,,,NULL,Vancouver,BC,V6L 1R6,1,0,155,,NULL,NULL
+778,675,lt_2734,Patrick Lecky,,967,0,0,0,0,0,NULL,,,0,NULL,21:32.0,0,NULL,5257,0,0,1995 Whyte Ave,,,NULL,Vancouver,BC,V6J 1B4,1,0,157,,NULL,NULL
+779,675,lt_2832,Jagir Sadhra,,968,0,0,0,0,0,NULL,,,0,NULL,53:48.0,0,NULL,5259,0,0,4320 Uplands Dr,,,NULL,Nanaimo,BC,V9T5L8,1,0,158,,NULL,NULL
+780,675,lt_2833,Stockton & Bush Holdings Inc.,,969,0,0,0,0,0,NULL,,,0,NULL,31:08.0,0,NULL,5260,0,0,,,,NULL,,,,1,0,32,,NULL,NULL
+781,600,lt_2477,LW Retail Venture I LP,,970,0,0,0,0,0,00:00.0,,,0,NULL,31:31.0,0,NULL,5263,0,0,,,,NULL,,,,1,0,NULL,,NULL,NULL
+782,200,lt_2473,2473 Eastern Ontario Retail Portfolio Title Ltd,,972,0,0,0,0,0,NULL,,,0,NULL,42:24.0,0,NULL,0,0,0,2473 Eastern Ontario Retail Portfolio Title Ltd,,,NULL,,,,1,0,NULL,,NULL,NULL
+783,600,lt_2834,Dayhu (Eastern Grocer Portfolio) Limited Partnership,,973,0,0,0,0,0,NULL,,,0,NULL,46:14.0,0,NULL,5272,0,0,,,,NULL,,,,1,0,NULL,,NULL,NULL

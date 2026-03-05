@@ -1,0 +1,3 @@
+sqlalchemy==2.0.25
+pyjwt==2.8.0
+passlib[bcrypt]==1.7.4
