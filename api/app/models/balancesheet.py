@@ -57,6 +57,7 @@ def _get_fund(fund_id):
 def _get_balance_sheet(fund_id):
     """Get all balance_sheet linked to this fund."""
     balance_sheet = balance_sheet_col.find_one({"fundId": fund_id})
+    print("balance_sheet ", balance_sheet)
     #fund = funds_col.find_one({"fundId": fund_id})
     return balance_sheet
 
@@ -105,7 +106,7 @@ def get_balance_sheet(fund_id):
         return None
 
     logger.info("Fund %s found ", fund_id)
-
+    logger.info("Getting balance sheet for fund %s", fund_id)
     _balance_sheet = _get_balance_sheet(fund_id)
     _data = []
     if "data" in _balance_sheet:
