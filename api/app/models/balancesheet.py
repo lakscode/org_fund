@@ -138,6 +138,8 @@ def get_balance_sheet(fund_id):
     net_income_after_tax =  get_value(_data, "86109999") 
     total_equity = get_value(_data, "35009999") 
     ytd_return = net_income_after_tax / total_equity
+
+    budget_vs_actual = get_value(_data, "83009999") 
     result = {
         "fundId": fund_id,
         "fundCode": fund.get("fundCode", ""),

@@ -2,13 +2,12 @@ import { NavLink } from "react-router-dom";
 import { useAuth } from "../context/AuthContext";
 
 export default function Sidebar() {
-  const { currentOrg } = useAuth();
-
+  const { user, currentOrg } = useAuth();
+  console.log("user", user)
   return (
     <aside className="sidebar">
       <div className="sidebar-logo">
-        <span className="sidebar-logo-icon">=</span>
-        <span className="sidebar-logo-text">REstackAI</span>
+        <img src="/images/logo.png" alt="Logo" className="sidebar-logo-img" /> REstackAI
       </div>
 
       <div className="sidebar-fund-info">

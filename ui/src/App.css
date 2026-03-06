@@ -68,16 +68,10 @@ body {
   padding: 1.25rem 1.25rem 1rem;
 }
 
-.sidebar-logo-icon {
-  font-size: 1.4rem;
-  color: #4fc3f7;
-  font-weight: 700;
-}
-
-.sidebar-logo-text {
-  font-size: 1.15rem;
-  font-weight: 700;
-  letter-spacing: -0.3px;
+.sidebar-logo-img {
+  max-height: 32px;
+  width: auto;
+  object-fit: contain;
 }
 
 .sidebar-fund-info {
