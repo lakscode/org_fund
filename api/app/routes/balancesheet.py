@@ -11,17 +11,18 @@ def get(fund_id, current_user):
         fund = find_fund_by_id(fund_id)
         if not fund:
             logger.info("Fund not found: %s", fund_id)
-            return 404, {"detail": "Fund not found"}
+            return 200, {"detail": "Fund not found", "noData": True}
         if fund["orgId"] not in current_user.get("org_ids", []):
             logger.info("Access denied: user %s not in org %s", current_user["id"], fund["orgId"])
-            return 403, {"detail": "Not a member of this organization"}
+            return 200, {"detail": "Not a member of this organization", "noData": True}
 
         result = get_balance_sheet(fund_id)
         if not result:
-            return 404, {"detail": "No balance sheet data found"}
+            logger.info("No balance sheet data for fund %s", fund_id)
+            return 200, {"detail": "No balance sheet data found", "noData": True}
 
         logger.info("Balance sheet returned for fund %s", fund_id)
         return 200, result
     except Exception as e:
-        logger.error("Failed to get balance sheet for fund %s: %s", fund_id, e)
-        return 500, {"detail": "Internal server error"}
+        logger.error("Failed to get balance sheet for fund %s: %s", fund_id, e, exc_info=True)
+        return 200, {"detail": str(e), "noData": True}

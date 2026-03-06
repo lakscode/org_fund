@@ -90,11 +90,10 @@ def _aggregate_accounts(property_legacy_ids, account_ids, book=0):
     return {"totalBegin": 0.0, "totalMtd": 0.0, "totalBudget": 0.0, "totalBeginBudget": 0.0}
 
 def get_value(_data, _id):
-    result = next((item for item in _data if item["sAccountCode"] == _id), "")
-    output =""
-    if "newTotal" in result:
-        output = result["newTotal"]
-    return output
+    result = next((item for item in _data if item["sAccountCode"] == _id), None)
+    if result and "newTotal" in result:
+        return result["newTotal"]
+    return 0
 
 def get_balance_sheet(fund_id):
     """Calculate all balance sheet / dashboard metrics for a fund."""
@@ -109,37 +108,45 @@ def get_balance_sheet(fund_id):
     logger.info("Getting balance sheet for fund %s", fund_id)
     _balance_sheet = _get_balance_sheet(fund_id)
     _data = []
-    if "data" in _balance_sheet:
+    if _balance_sheet and "data" in _balance_sheet:
         _data = _balance_sheet["data"]
 
-    # --- Calculations ---
-    noi, expense_ratio, total_cash, dscr, revenue = 0, 0, 0, 0, 0
-    fund_exp_actual, fund_exp_budget, budget_vs_actual= 0, 0, 0
+    if not _data:
+        logger.info("No balance sheet data for fund %s", fund_id)
+        return {
+            "fundId": fund_id,
+            "fundCode": fund.get("fundCode", ""),
+            "fundName": fund.get("fundName", ""),
+            "aum": 0, "eum": 0, "noi": 0, "revenue": 0,
+            "expenseRatio": 0, "cash": 0, "dscr": 0,
+            "budget_vs_actual": 0,
+            "budgetVsActual_details": {"actual": 0, "budget": 0, "variance": 0},
+            "ytdReturn": 0, "noData": True,
+        }
 
+    # --- Calculations ---
     aum = get_value(_data, "19999999")
     total_investment_lp = get_value(_data, "15109999")
     total_investment_corp = get_value(_data, "15309999")
     eum = total_investment_lp - total_investment_corp
-  
+
     noi = get_value(_data, "79999999")
     revenue = get_value(_data, "49999999")
-    
-    total_exprense = get_value(_data, "83009999") 
-    expense_ratio = get_value(_data, "79999999") # Expense Ratio = Total Expenses ÷ Total Revenue 
-    expense_ratio = total_exprense/ revenue
 
-    total_cash= get_value(_data, "10009999") 
+    total_expense = get_value(_data, "83009999")
+    expense_ratio = total_expense / revenue if revenue else 0
 
-    total_debt_service =  get_value(_data, "80004999") 
-    dscr = noi /total_debt_service # DSCR = NOI ÷ Total Debt Service 
-    fund_exp_actual = 0  
+    total_cash = get_value(_data, "10009999")
 
-    ytd_return = 0 #YTD Return = Net Income (YTD) ÷ Total Equity 
-    net_income_after_tax =  get_value(_data, "86109999") 
-    total_equity = get_value(_data, "35009999") 
-    ytd_return = net_income_after_tax / total_equity
-    _actual= get_value(_data, "83009999") 
-    _budget= get_value(_data, "83009999") 
+    total_debt_service = get_value(_data, "80004999")
+    dscr = noi / total_debt_service if total_debt_service else 0
+
+    net_income_after_tax = get_value(_data, "86109999")
+    total_equity = get_value(_data, "35009999")
+    ytd_return = net_income_after_tax / total_equity if total_equity else 0
+
+    _actual = get_value(_data, "83009999")
+    _budget = get_value(_data, "83009999")
     budget_vs_actual = get_value(_data, "83009999") 
     result = {
         "fundId": fund_id,
