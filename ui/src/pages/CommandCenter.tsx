@@ -103,14 +103,11 @@ export default function CommandCenter() {
   }, [currentOrg]);
 
   const fetchBalanceSheet = () => {
-     var fundid = selectedFundId
-      fundid = "69a97849cad17ccef75cb4ab"
-
-    if (!fundid || !selectedFundId) return;
+    if (!selectedFundId) return;
     setLoading(true);
     setError("");
     api
-      .get(`/funds/${fundid}/balancesheet`)
+      .get(`/funds/${selectedFundId}/balancesheet`)
       .then((res) => setData(res.data))
       .catch(() => {
         setData(null);
@@ -133,6 +130,17 @@ export default function CommandCenter() {
       <div className="cc-title-row">
         <h2>Command Center</h2>
         <span className="cc-live-badge">LIVE</span>
+        <select
+          className="cc-fund-select"
+          value={selectedFundId}
+          onChange={(e) => setSelectedFundId(e.target.value)}
+        >
+          {funds.map((f) => (
+            <option key={f.id} value={f.id}>
+              {f.fundCode} - {f.fundName}
+            </option>
+          ))}
+        </select>
       </div>
       <p className="cc-subtitle">
         Executive portfolio-wide visibility
