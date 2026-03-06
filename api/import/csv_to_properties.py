@@ -1,5 +1,5 @@
 import csv
-from datetime import datetime
+from datetime import datetime, UTC
 from pymongo import MongoClient
 
 
@@ -13,7 +13,7 @@ class PropertyCSVImporter:
 
     def build_property_document(self, row):
 
-        now = datetime.utcnow()
+        now = datetime.now(UTC)
 
         property_doc = {
             "orgId": self.org_id,

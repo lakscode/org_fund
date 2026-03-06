@@ -1,5 +1,5 @@
 import csv
-from datetime import datetime
+from datetime import datetime, UTC
 from pymongo import MongoClient
 
 
@@ -14,7 +14,7 @@ class FundCSVImporter:
 
     def build_document(self, row):
 
-        now = datetime.utcnow()
+        now = datetime.now(UTC)
 
         _doc = {
             "orgId": self.org_id,
@@ -37,7 +37,7 @@ class FundCSVImporter:
     
     def build_fund_property(self, row):
 
-        now = datetime.utcnow()
+        now = datetime.now(UTC)
 
         _doc = {
             "orgId": self.org_id,
