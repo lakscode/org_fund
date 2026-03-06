@@ -30,10 +30,8 @@ export default function Header() {
   return (
     <header className="header">
       <div className="header-left">
-        <h1>Org Fund</h1>
-      </div>
-      <div className="header-right">
         <select
+          className="header-org-select"
           value={currentOrg?.id ?? ""}
           onChange={(e) => {
             const org = user.orgs.find((o) => o.id === e.target.value);
@@ -46,6 +44,18 @@ export default function Header() {
             </option>
           ))}
         </select>
+      </div>
+      <div className="header-right">
+        <button className="header-icon-btn" title="Notifications">
+          &#128276;
+        </button>
+        <button className="header-icon-btn" title="Settings">
+          &#9776;
+        </button>
+        <div className="header-user-info">
+          <span className="header-user-name">{user.name}</span>
+          <span className="header-user-role">Portfolio Manager</span>
+        </div>
         <div className="avatar-wrapper" ref={menuRef}>
           <button
             className="avatar"
