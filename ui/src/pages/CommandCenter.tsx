@@ -99,6 +99,7 @@ export default function CommandCenter() {
   const [error, setError] = useState("");
   const [activeTab, setActiveTab] = useState("Daily Brief");
   const [assetPage, setAssetPage] = useState(0);
+  const [rankPage, setRankPage] = useState(0);
   const ASSETS_PER_PAGE = 5;
 
   useEffect(() => {
@@ -368,6 +369,57 @@ export default function CommandCenter() {
                   </div>
                   <p className="cc-action-title">Capital Call Notice #42 Distribution</p>
                 </div>
+              </div>
+
+              {/* Asset Performance Ranking */}
+              <div className="cc-assets-panel cc-ranking-panel">
+                <h3>Asset Performance Ranking</h3>
+                <table className="cc-assets-table">
+                  <thead>
+                    <tr>
+                      <th>Asset Name</th>
+                      <th>NOI</th>
+                      <th>Variance</th>
+                      <th>Occupancy</th>
+                      <th>Expense Ratio</th>
+                      <th>DSCR</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {(() => {
+                      const filtered = properties
+                        .filter((p) => p.noiActual !== 0 || p.noiBudget !== 0)
+                        .sort((a, b) => b.noiActual - a.noiActual);
+                      const paged = filtered.slice(rankPage * ASSETS_PER_PAGE, (rankPage + 1) * ASSETS_PER_PAGE);
+                      return paged.length === 0 ? (
+                        <tr><td colSpan={6}>No data available.</td></tr>
+                      ) : paged.map((p) => (
+                        <tr key={p.id}>
+                          <td>{p.propertyName}</td>
+                          <td>{fmtCompact(p.noiActual)}</td>
+                          <td style={{ color: p.noiVariance >= 0 ? "#4caf50" : "#ef5350" }}>
+                            {fmtCompact(p.noiVariance)}
+                          </td>
+                          <td>—</td>
+                          <td>—</td>
+                          <td>—</td>
+                        </tr>
+                      ));
+                    })()}
+                  </tbody>
+                </table>
+                {(() => {
+                  const total = properties.filter((p) => p.noiActual !== 0 || p.noiBudget !== 0).length;
+                  const totalPages = Math.ceil(total / ASSETS_PER_PAGE);
+                  if (totalPages <= 1) return null;
+                  return (
+                    <div className="cc-pagination">
+                      <button disabled={rankPage === 0} onClick={() => setRankPage(rankPage - 1)}>&laquo;</button>
+                      <span>{rankPage + 1} / {totalPages}</span>
+                      <button disabled={rankPage >= totalPages - 1} onClick={() => setRankPage(rankPage + 1)}>&raquo;</button>
+                    </div>
+                  );
+                })()}
               </div>
             </div>
           )}
