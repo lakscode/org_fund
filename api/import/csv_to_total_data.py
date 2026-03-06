@@ -18,7 +18,7 @@ class CSVSelectedRows:
     def process_csv(self, file_path, selected_rows, fundId, orgId, sCode):
 
         columns = [
-            "\ufeffhAccount",
+            "hAccount",
             "sAccountCode",
             "sAccountName",
             "sBegin",
@@ -37,7 +37,7 @@ class CSVSelectedRows:
 
         selected_rows = set(selected_rows)
 
-        with open(file_path, newline='', encoding="utf-8") as f:
+        with open(file_path, newline='', encoding="utf-8-sig") as f:
 
             reader = csv.DictReader(f)
 

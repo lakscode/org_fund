@@ -1,6 +1,7 @@
 from app.models import (
     create_property, find_property_by_id, list_properties_by_org,
     list_properties_by_fund, update_property, delete_property,
+    get_noi_vs_budget_by_org,
 )
 from app.logger import get_logger
 
@@ -20,6 +21,12 @@ def list_properties(org_id, current_user, query_params=None):
             property_type=params.get("propertyType"),
             market=params.get("market"),
         )
+        noi_map = get_noi_vs_budget_by_org(org_id)
+        for p in props:
+            noi = noi_map.get(p.get("propertyCode"), {})
+            p["noiActual"] = noi.get("noiActual", 0)
+            p["noiBudget"] = noi.get("noiBudget", 0)
+            p["noiVariance"] = noi.get("noiVariance", 0)
         logger.info("Found %d properties for org %s", len(props), org_id)
         return 200, props
     except Exception as e:

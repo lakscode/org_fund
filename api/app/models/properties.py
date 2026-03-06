@@ -2,7 +2,7 @@ from datetime import datetime, timezone
 
 from bson import ObjectId
 from bson.errors import InvalidId
-from app.database import properties_col
+from app.database import properties_col, totals_col
 from app.logger import get_logger
 
 logger = get_logger("models.properties")
@@ -153,3 +153,60 @@ def find_property_by_external_id(org_id, system, external_id):
     else:
         logger.info("No property found for externalId system=%s, id=%s", system, external_id)
     return serialize_property(doc)
+
+
+# GL account IDs for NOI calculation
+_REVENUE_ACCOUNTS = [2961, 2963, 2975, 2982, 2990]
+_OPEX_ACCOUNTS = [3173, 3440, 3455, 3462, 3463]
+
+
+def get_noi_vs_budget_by_org(org_id):
+    """Calculate NOI actual vs budget for every property in an org."""
+    logger.info("Calculating NOI vs Budget for org %s", org_id)
+
+    props = list(properties_col.find({"orgId": org_id}, {"_id": 1, "propertyCode": 1}))
+    prop_codes = [p["propertyCode"] for p in props]
+    if not prop_codes:
+        return {}
+
+    all_accounts = _REVENUE_ACCOUNTS + _OPEX_ACCOUNTS
+    pipeline = [
+        {"$match": {
+            "propertyLegacyId": {"$in": prop_codes},
+            "accountId": {"$in": all_accounts},
+            "book": 0,
+        }},
+        {"$group": {
+            "_id": "$propertyLegacyId",
+            "rev_actual": {"$sum": {"$cond": [
+                {"$in": ["$accountId", _REVENUE_ACCOUNTS]},
+                {"$add": ["$begin", "$mtd"]}, 0
+            ]}},
+            "rev_budget": {"$sum": {"$cond": [
+                {"$in": ["$accountId", _REVENUE_ACCOUNTS]},
+                {"$add": ["$beginBudget", "$budget"]}, 0
+            ]}},
+            "opex_actual": {"$sum": {"$cond": [
+                {"$in": ["$accountId", _OPEX_ACCOUNTS]},
+                {"$add": ["$begin", "$mtd"]}, 0
+            ]}},
+            "opex_budget": {"$sum": {"$cond": [
+                {"$in": ["$accountId", _OPEX_ACCOUNTS]},
+                {"$add": ["$beginBudget", "$budget"]}, 0
+            ]}},
+        }},
+    ]
+
+    results = list(totals_col.aggregate(pipeline))
+    noi_map = {}
+    for r in results:
+        noi_actual = r["rev_actual"] - r["opex_actual"]
+        noi_budget = r["rev_budget"] - r["opex_budget"]
+        noi_map[r["_id"]] = {
+            "noiActual": round(noi_actual, 2),
+            "noiBudget": round(noi_budget, 2),
+            "noiVariance": round(noi_actual - noi_budget, 2),
+        }
+
+    logger.info("NOI vs Budget calculated for %d properties in org %s", len(noi_map), org_id)
+    return noi_map

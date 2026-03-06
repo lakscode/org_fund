@@ -15,12 +15,22 @@ interface BalanceSheetData {
   cash: number;
   dscr: number;
   budget_vs_actual: number;
+  noi_vs_budget: number;
   budgetVsActual_details: {
     actual: number;
     budget: number;
     variance: number;
   };
   ytdReturn: number;
+}
+
+interface Property {
+  id: string;
+  propertyName: string;
+  market: string;
+  noiActual: number;
+  noiBudget: number;
+  noiVariance: number;
 }
 
 function fmtCompact(value: number): string {
@@ -84,6 +94,7 @@ export default function CommandCenter() {
   const [funds, setFunds] = useState<Fund[]>([]);
   const [selectedFundId, setSelectedFundId] = useState("");
   const [data, setData] = useState<BalanceSheetData | null>(null);
+  const [properties, setProperties] = useState<Property[]>([]);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
   const [activeTab, setActiveTab] = useState("Daily Brief");
@@ -100,6 +111,11 @@ export default function CommandCenter() {
           }
         })
         .catch(() => setFunds([]));
+
+      api
+        .get(`/orgs/${currentOrg.id}/properties`)
+        .then((res) => setProperties(res.data))
+        .catch(() => setProperties([]));
     }
   }, [currentOrg]);
 
@@ -286,35 +302,31 @@ export default function CommandCenter() {
                 <table className="cc-assets-table">
                   <thead>
                     <tr>
-                      <th>ASSET NAME</th>
-                      <th>YTD YIELD</th>
-                      <th>OCCUPANCY</th>
-                      <th>WALE</th>
-                      <th>RISK SCORE</th>
+                      <th>Asset Name</th>
+                      <th>Market</th>
+                      <th>NOI vs Budget</th>
+                      <th>NOI Trend</th>
+                      <th>Lease Risk</th>
                     </tr>
                   </thead>
                   <tbody>
-                    <tr>
-                      <td>Oakwood Corporate Plaza</td>
-                      <td className="cc-yield-green">11.2%</td>
-                      <td>98.5%</td>
-                      <td>4.2 yrs</td>
-                      <td><span className="cc-risk-badge cc-risk-low">Low</span></td>
-                    </tr>
-                    <tr>
-                      <td>The Meridian Industrial Park</td>
-                      <td className="cc-yield-green">9.8%</td>
-                      <td>94.0%</td>
-                      <td>6.5 yrs</td>
-                      <td><span className="cc-risk-badge cc-risk-low">Low</span></td>
-                    </tr>
-                    <tr>
-                      <td>Summit Retail Collective</td>
-                      <td>6.1%</td>
-                      <td>82.3%</td>
-                      <td>2.1 yrs</td>
-                      <td><span className="cc-risk-badge cc-risk-high">High</span></td>
-                    </tr>
+                    {properties.length === 0 && (
+                      <tr><td colSpan={3}>No properties found.</td></tr>
+                    )}
+                    {properties
+                      .filter((p) => p.noiActual !== 0 || p.noiBudget !== 0)
+                      .sort((a, b) => b.noiActual - a.noiActual)
+                      .map((p) => (
+                      <tr key={p.id}>
+                        <td>{p.propertyName}</td>
+                        <td>{p.market || "—"}</td>
+                        {/* commented for now need to cross verify the calculation */}
+                        {/* <td>{fmtCompact(p.noiActual)}</td> */}
+                        <td>-</td>
+                        <td>-</td>
+                        <td>-</td>
+                      </tr>
+                    ))}
                   </tbody>
                 </table>
               </div>

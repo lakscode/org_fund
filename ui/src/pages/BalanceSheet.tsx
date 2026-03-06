@@ -82,7 +82,7 @@ export default function BalanceSheet() {
       setLoading(true);
       setError("");
       api
-        .get(`/funds/69a97849cad17ccef75cb4ab/balancesheet`)
+        .get(`/funds/${selectedFundId}/balancesheet`)
         .then((res) => setData(res.data))
         .catch(() => {
           setData(null);
