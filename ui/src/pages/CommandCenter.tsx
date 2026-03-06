@@ -325,7 +325,7 @@ export default function CommandCenter() {
                           <td>{p.propertyName}</td>
                           <td>{p.market || "—"}</td>
                           {/* commented for now need to cross verify the calculation */}
-                          {/* <td>{fmtCompact(p.noiActual)}</td> */}
+                          <td>{fmtCompact(p.noiActual)}</td>
                           <td>-</td>
                           <td>-</td>
                           <td>-</td>
@@ -400,9 +400,9 @@ export default function CommandCenter() {
                           <td style={{ color: p.noiVariance >= 0 ? "#4caf50" : "#ef5350" }}>
                             {fmtCompact(p.noiVariance)}
                           </td>
-                          <td>—</td>
-                          <td>—</td>
-                          <td>—</td>
+                          <td>-</td>
+                          <td>-</td>
+                          <td>-</td>
                         </tr>
                       ));
                     })()}
