@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Architecture Diagram - Org Fund</title>
+  <script src="https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.min.js"></script>
+  <style>
+    body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; background: #f5f6f8; margin: 0; padding: 2rem; }
+    h1 { color: #1a1a2e; margin-bottom: 0.5rem; }
+    p.sub { color: #888; margin-bottom: 2rem; }
+    .diagram { background: #fff; border-radius: 12px; padding: 2rem; box-shadow: 0 1px 6px rgba(0,0,0,0.08); margin-bottom: 2rem; }
+    .diagram h2 { color: #1a1a2e; font-size: 1.1rem; margin-bottom: 1rem; }
+  </style>
+</head>
+<body>
+  <h1>Architecture Diagram</h1>
+  <p class="sub">REstackAI &middot; Real Estate Fund Management Platform</p>
+
+  <!-- High-Level Architecture -->
+  <div class="diagram">
+    <h2>System Architecture</h2>
+    <div class="mermaid">
+graph TB
+    subgraph Client["Frontend (React + TypeScript)"]
+        UI["Vite Dev Server<br/>localhost:5173"]
+        subgraph Pages
+            CC["Command Center"]
+            FP["Funds Page"]
+            PP["Properties Page"]
+            BS["Balance Sheet"]
+            MP["Members Page"]
+            PR["Profile Page"]
+            DB["Dashboard"]
+        end
+        subgraph Components
+            SB["Sidebar (Dark)"]
+            HD["Header"]
+            AC["Auth Context"]
+        end
+        AX["Axios API Client<br/>with JWT Interceptor"]
+    end
+
+    subgraph Server["Backend (Python stdlib http.server)"]
+        MN["main.py<br/>HTTPServer :8000"]
+        subgraph Router
+            RT["router.py<br/>Regex URL Matching"]
+        end
+        subgraph Routes
+            AR["auth routes"]
+            OR["org routes"]
+            FR["fund routes"]
+            PRR["property routes"]
+            FPR["fund-property routes"]
+            BSR["balance sheet routes"]
+        end
+        subgraph Models
+            UM["users model"]
+            OM["organizations model"]
+            FM["funds model"]
+            PM["properties model"]
+            FPM["fund_properties model"]
+            BSM["balance sheet model"]
+        end
+        subgraph Auth
+            JWT["PyJWT<br/>Token Auth"]
+            PW["Passlib<br/>Password Hashing"]
+        end
+        subgraph Config
+            CF["config.py<br/>JSON env configs"]
+            LG["logger.py<br/>File + Console"]
+        end
+    end
+
+    subgraph Database["MongoDB"]
+        MDB[(MongoDB Server)]
+        subgraph Collections
+            UC[users]
+            OC[organizations]
+            FC[funds]
+            PC[properties]
+            FPC[fund_properties]
+            TC[tenants]
+            UNC[units]
+            SC[sqft]
+            TOC[totals]
+            BSC[balance_sheet]
+            FTC[fund_transactions]
+        end
+    end
+
+    subgraph Seed["Data Pipeline"]
+        SD["seed.py<br/>CSV Import + User Seeding"]
+        CSV["CSV Files<br/>funds, properties, tenants,<br/>units, sqft, totals, transactions"]
+    end
+
+    UI --> AX
+    AX -->|"HTTP REST<br/>Bearer JWT"| MN
+    MN --> RT
+    RT --> AR & OR & FR & PRR & FPR & BSR
+    AR --> UM & JWT & PW
+    OR --> OM
+    FR --> FM
+    PRR --> PM
+    FPR --> FPM
+    BSR --> BSM
+    UM & OM & FM & PM & FPM & BSM -->|PyMongo| MDB
+    MDB --> Collections
+    SD -->|PyMongo| MDB
+    CSV --> SD
+    CF --> MN
+    LG --> MN
+
+    style Client fill:#e3f2fd,stroke:#1976d2,color:#000
+    style Server fill:#fff3e0,stroke:#f57c00,color:#000
+    style Database fill:#e8f5e9,stroke:#388e3c,color:#000
+    style Seed fill:#fce4ec,stroke:#c62828,color:#000
+    </div>
+  </div>
+
+  <!-- Request Flow -->
+  <div class="diagram">
+    <h2>Request Flow</h2>
+    <div class="mermaid">
+sequenceDiagram
+    participant B as Browser (React)
+    participant A as Axios Interceptor
+    participant S as HTTP Server :8000
+    participant R as Router (regex)
+    participant RT as Route Handler
+    participant M as Model
+    participant DB as MongoDB
+
+    B->>A: API call (e.g. GET /api/funds/:id/balancesheet)
+    A->>A: Attach Bearer token from localStorage
+    A->>S: HTTP Request + Authorization header
+    S->>S: CORS headers
+    S->>R: Parse path + method
+    R->>R: Match regex pattern
+    R->>R: _auth_or_401() - validate JWT
+    R->>RT: Call route handler(params, user)
+    RT->>M: Call model function
+    M->>DB: PyMongo query
+    DB-->>M: Documents
+    M-->>RT: Processed data
+    RT-->>R: (status_code, response_dict)
+    R-->>S: MongoEncoder JSON serialize
+    S-->>A: HTTP Response
+    A->>A: Check status (401 → logout)
+    A-->>B: Response data
+    </div>
+  </div>
+
+  <!-- Auth Flow -->
+  <div class="diagram">
+    <h2>Authentication Flow</h2>
+    <div class="mermaid">
+sequenceDiagram
+    participant U as User
+    participant UI as React App
+    participant API as Backend :8000
+    participant DB as MongoDB
+
+    U->>UI: Enter email + password
+    UI->>API: POST /api/auth/login
+    API->>DB: Find user by email
+    DB-->>API: User document
+    API->>API: Verify password (Passlib bcrypt)
+    API->>API: Create JWT token (PyJWT)
+    API-->>UI: {access_token}
+    UI->>UI: Store token in localStorage
+    UI->>API: GET /api/auth/me (Bearer token)
+    API->>API: Decode JWT → user_id
+    API->>DB: Find user + orgs + roles
+    DB-->>API: User + org data
+    API-->>UI: {id, name, email, orgs[{id, name, role}]}
+    UI->>UI: Set AuthContext (user, currentOrg)
+    UI->>UI: Render Layout with role-based sidebar
+    </div>
+  </div>
+
+  <!-- Multi-Tenancy -->
+  <div class="diagram">
+    <h2>Multi-Tenancy Model</h2>
+    <div class="mermaid">
+graph LR
+    subgraph User["User: John Smith"]
+        U["john@lotuspac.com"]
+    end
+
+    subgraph Orgs["Organizations"]
+        O1["Lotus Pacific<br/>role: portfolio_manager"]
+        O2["Maple Investments<br/>role: analyst"]
+    end
+
+    subgraph O1Data["Lotus Pacific Data"]
+        F1["Fund A"]
+        F2["Fund B"]
+        P1["Property 1"]
+        P2["Property 2"]
+    end
+
+    subgraph O2Data["Maple Investments Data"]
+        F3["Fund C"]
+        P3["Property 3"]
+    end
+
+    U -->|org_roles| O1
+    U -->|org_roles| O2
+    O1 -->|orgId filter| O1Data
+    O2 -->|orgId filter| O2Data
+
+    style User fill:#e3f2fd,stroke:#1976d2,color:#000
+    style Orgs fill:#fff3e0,stroke:#f57c00,color:#000
+    style O1Data fill:#e8f5e9,stroke:#388e3c,color:#000
+    style O2Data fill:#e8f5e9,stroke:#388e3c,color:#000
+    </div>
+  </div>
+
+  <!-- File Structure -->
+  <div class="diagram">
+    <h2>Project Structure</h2>
+    <div class="mermaid">
+graph LR
+    subgraph Root["Claude_org_fund/"]
+        subgraph API["api/"]
+            MN2["main.py — HTTP Server entry"]
+            SD2["seed.py — CSV import + seeding"]
+            subgraph App["app/"]
+                CFG["config.py + config.*.json"]
+                AUTH["auth.py — JWT + bcrypt"]
+                DBA["database.py — PyMongo"]
+                LOG["logger.py"]
+                subgraph Mdl["models/"]
+                    M1["users.py"]
+                    M2["organizations.py"]
+                    M3["funds.py"]
+                    M4["properties.py"]
+                    M5["fund_properties.py"]
+                    M6["balancesheet.py"]
+                end
+                subgraph Rts["routes/"]
+                    R1["auth.py"]
+                    R2["orgs.py"]
+                    R3["funds.py"]
+                    R4["properties.py"]
+                    R5["fund_properties.py"]
+                    R6["balancesheet.py"]
+                    R7["router.py"]
+                end
+            end
+            subgraph Data["data/"]
+                CSV2["*.csv seed files"]
+            end
+        end
+        subgraph FE["ui/"]
+            subgraph Src["src/"]
+                APP["App.tsx + App.css"]
+                API2["api.ts — Axios"]
+                TYP["types.ts"]
+                subgraph Ctx["context/"]
+                    CTX["AuthContext.tsx"]
+                end
+                subgraph Cmp["components/"]
+                    C1["Layout.tsx"]
+                    C2["Header.tsx"]
+                    C3["Sidebar.tsx"]
+                    C4["ProtectedRoute.tsx"]
+                end
+                subgraph Pgs["pages/"]
+                    P01["CommandCenter.tsx"]
+                    P02["Dashboard.tsx"]
+                    P03["Funds.tsx"]
+                    P04["Properties.tsx"]
+                    P05["BalanceSheet.tsx"]
+                    P06["Members.tsx"]
+                    P07["Profile.tsx"]
+                    P08["Login.tsx"]
+                    P09["Register.tsx"]
+                end
+            end
+        end
+    end
+
+    style API fill:#fff3e0,stroke:#f57c00,color:#000
+    style FE fill:#e3f2fd,stroke:#1976d2,color:#000
+    </div>
+  </div>
+
+  <script>mermaid.initialize({ startOnLoad: true, theme: 'default', flowchart: { useMaxWidth: true } });</script>
+</body>
+</html>

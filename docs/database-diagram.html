@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Database Diagram - Org Fund</title>
+  <script src="https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.min.js"></script>
+  <style>
+    body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; background: #f5f6f8; margin: 0; padding: 2rem; }
+    h1 { color: #1a1a2e; margin-bottom: 0.5rem; }
+    p.sub { color: #888; margin-bottom: 2rem; }
+    .mermaid { background: #fff; border-radius: 12px; padding: 2rem; box-shadow: 0 1px 6px rgba(0,0,0,0.08); }
+  </style>
+</head>
+<body>
+  <h1>Database Diagram</h1>
+  <p class="sub">MongoDB Collections &middot; Org Fund Platform</p>
+
+  <div class="mermaid">
+erDiagram
+    users {
+        ObjectId _id PK
+        string email UK
+        string name
+        string hashed_password
+        array org_ids "string[]"
+        array org_roles "org_id + role[]"
+    }
+
+    organizations {
+        ObjectId _id PK
+        string name UK
+        string status
+        datetime createdAt
+        datetime updatedAt
+    }
+
+    funds {
+        ObjectId _id PK
+        string orgId FK
+        array externalIds
+        string fundCode UK
+        string fundName
+        string fundType
+        int vintageYear
+        string baseCurrency
+        string status
+        array managers
+        object settings
+        string _legacyPropertyId
+        datetime createdAt
+        datetime updatedAt
+    }
+
+    properties {
+        ObjectId _id PK
+        string orgId FK
+        array externalIds
+        string propertyCode UK
+        string propertyName
+        object address
+        string market
+        string propertyType
+        string status
+        date acquisitionDate
+        array fundIds "string[]"
+        object ownership
+        object metadata
+        string _legacyId
+        datetime createdAt
+        datetime updatedAt
+    }
+
+    fund_properties {
+        ObjectId _id PK
+        string orgId FK
+        string fundId FK
+        string propertyId FK
+        date startDate
+        date endDate
+        float ownershipPct
+        string role
+    }
+
+    tenants {
+        ObjectId _id PK
+        string orgId FK
+        string propertyId FK
+        string unitCode
+        string tenantName
+        string status
+        float sqft
+    }
+
+    units {
+        ObjectId _id PK
+        string orgId FK
+        string propertyId FK
+        string unitCode
+        string unitType
+        float sqft
+        string status
+    }
+
+    sqft {
+        ObjectId _id PK
+        string propertyId FK
+        string type
+        float totalSqft
+        float occupiedSqft
+    }
+
+    totals {
+        ObjectId _id PK
+        string propertyLegacyId
+        int accountId
+        int book
+        string month
+        float begin
+        float mtd
+        float budget
+        float beginBudget
+    }
+
+    balance_sheet {
+        ObjectId _id PK
+        string fundId FK
+        array data "sAccountCode + newTotal[]"
+    }
+
+    fund_transactions {
+        ObjectId _id PK
+        string orgId FK
+        string investorId
+        string investmentId
+        string category
+        float amount
+        date transactionDate
+    }
+
+    users }o--o{ organizations : "org_ids / org_roles"
+    organizations ||--o{ funds : "orgId"
+    organizations ||--o{ properties : "orgId"
+    organizations ||--o{ fund_properties : "orgId"
+    organizations ||--o{ tenants : "orgId"
+    organizations ||--o{ units : "orgId"
+    organizations ||--o{ fund_transactions : "orgId"
+    funds ||--o{ fund_properties : "fundId"
+    funds ||--o{ balance_sheet : "fundId"
+    properties ||--o{ fund_properties : "propertyId"
+    properties ||--o{ tenants : "propertyId"
+    properties ||--o{ units : "propertyId"
+    properties ||--o{ sqft : "propertyId"
+    properties ||--o{ totals : "propertyLegacyId"
+  </div>
+
+  <script>mermaid.initialize({ startOnLoad: true, theme: 'default' });</script>
+</body>
+</html>

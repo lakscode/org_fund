@@ -1,0 +1,628 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Software Requirements Specification - REstackAI</title>
+  <style>
+    :root {
+      --primary: #1a1a2e;
+      --accent: #4361ee;
+      --border: #e0e0e0;
+      --bg: #f5f6f8;
+      --card: #fff;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; background: var(--bg); color: #333; line-height: 1.7; }
+
+    /* Sidebar TOC */
+    .toc {
+      position: fixed; top: 0; left: 0; width: 260px; height: 100vh;
+      background: var(--primary); color: #ccc; padding: 1.5rem 1rem;
+      overflow-y: auto; z-index: 10;
+    }
+    .toc h2 { color: #fff; font-size: 0.95rem; margin-bottom: 1rem; letter-spacing: 0.5px; }
+    .toc a { display: block; color: #aab; text-decoration: none; padding: 0.3rem 0.5rem; font-size: 0.82rem; border-radius: 4px; transition: background 0.15s; }
+    .toc a:hover, .toc a.active { background: rgba(255,255,255,0.08); color: #fff; }
+    .toc .sub { padding-left: 1rem; font-size: 0.78rem; }
+
+    /* Main content */
+    .main { margin-left: 260px; padding: 2rem 3rem 4rem; max-width: 960px; }
+    h1 { color: var(--primary); font-size: 1.8rem; margin-bottom: 0.25rem; }
+    .subtitle { color: #888; margin-bottom: 2rem; font-size: 0.95rem; }
+    h2 { color: var(--primary); font-size: 1.3rem; margin: 2.5rem 0 1rem; padding-bottom: 0.4rem; border-bottom: 2px solid var(--accent); }
+    h3 { color: #444; font-size: 1.05rem; margin: 1.5rem 0 0.5rem; }
+    h4 { color: #555; font-size: 0.95rem; margin: 1rem 0 0.4rem; }
+    p, li { font-size: 0.9rem; }
+    p { margin-bottom: 0.8rem; }
+    ul, ol { margin: 0.5rem 0 1rem 1.5rem; }
+    li { margin-bottom: 0.3rem; }
+
+    table { width: 100%; border-collapse: collapse; margin: 1rem 0 1.5rem; font-size: 0.85rem; }
+    th, td { border: 1px solid var(--border); padding: 0.5rem 0.75rem; text-align: left; }
+    th { background: #f0f2f5; font-weight: 600; color: var(--primary); }
+    tr:nth-child(even) { background: #fafbfc; }
+
+    code { background: #f0f2f5; padding: 0.15rem 0.4rem; border-radius: 3px; font-size: 0.82rem; color: #d63384; }
+    pre { background: #1e1e2e; color: #cdd6f4; padding: 1rem; border-radius: 8px; overflow-x: auto; margin: 0.5rem 0 1rem; font-size: 0.8rem; line-height: 1.5; }
+    .badge { display: inline-block; padding: 0.15rem 0.5rem; border-radius: 10px; font-size: 0.72rem; font-weight: 600; }
+    .badge-req { background: #e3f2fd; color: #1976d2; }
+    .badge-high { background: #fce4ec; color: #c62828; }
+    .badge-med { background: #fff3e0; color: #e65100; }
+    .badge-low { background: #e8f5e9; color: #2e7d32; }
+
+    .meta-table { max-width: 400px; }
+    .meta-table td:first-child { font-weight: 600; width: 140px; }
+
+    .card { background: var(--card); border-radius: 8px; padding: 1.25rem; box-shadow: 0 1px 4px rgba(0,0,0,0.06); margin-bottom: 1rem; }
+
+    @media (max-width: 900px) {
+      .toc { display: none; }
+      .main { margin-left: 0; padding: 1.5rem; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- Table of Contents Sidebar -->
+<nav class="toc">
+  <h2>SRS &mdash; REstackAI</h2>
+  <a href="#sec1">1. Introduction</a>
+  <a href="#sec1-1" class="sub">1.1 Purpose</a>
+  <a href="#sec1-2" class="sub">1.2 Scope</a>
+  <a href="#sec1-3" class="sub">1.3 Definitions</a>
+  <a href="#sec1-4" class="sub">1.4 Document Conventions</a>
+  <a href="#sec2">2. Overall Description</a>
+  <a href="#sec2-1" class="sub">2.1 Product Perspective</a>
+  <a href="#sec2-2" class="sub">2.2 User Classes &amp; Roles</a>
+  <a href="#sec2-3" class="sub">2.3 Operating Environment</a>
+  <a href="#sec2-4" class="sub">2.4 Constraints</a>
+  <a href="#sec3">3. Functional Requirements</a>
+  <a href="#sec3-1" class="sub">3.1 Authentication</a>
+  <a href="#sec3-2" class="sub">3.2 Organization Mgmt</a>
+  <a href="#sec3-3" class="sub">3.3 Fund Management</a>
+  <a href="#sec3-4" class="sub">3.4 Property / Asset Mgmt</a>
+  <a href="#sec3-5" class="sub">3.5 Balance Sheet</a>
+  <a href="#sec3-6" class="sub">3.6 Command Center</a>
+  <a href="#sec3-7" class="sub">3.7 Members</a>
+  <a href="#sec3-8" class="sub">3.8 Fund-Property Links</a>
+  <a href="#sec4">4. API Specification</a>
+  <a href="#sec5">5. Data Model</a>
+  <a href="#sec6">6. UI Requirements</a>
+  <a href="#sec7">7. Non-Functional Requirements</a>
+  <a href="#sec8">8. Security Requirements</a>
+  <a href="#sec9">9. Data Pipeline &amp; Seeding</a>
+  <a href="#sec10">10. Appendices</a>
+</nav>
+
+<!-- Main Content -->
+<div class="main">
+
+<h1>Software Requirements Specification</h1>
+<p class="subtitle">REstackAI &mdash; Real Estate Fund Management Platform &middot; Version 1.0</p>
+
+<table class="meta-table">
+  <tr><td>Document Version</td><td>1.0</td></tr>
+  <tr><td>Date</td><td>2026-03-06</td></tr>
+  <tr><td>Status</td><td>Draft</td></tr>
+  <tr><td>Project</td><td>REstackAI / Org Fund</td></tr>
+  <tr><td>Repository</td><td>Claude_org_fund</td></tr>
+</table>
+
+<!-- ================================================================ -->
+<h2 id="sec1">1. Introduction</h2>
+
+<h3 id="sec1-1">1.1 Purpose</h3>
+<p>This Software Requirements Specification (SRS) defines the functional and non-functional requirements for <strong>REstackAI</strong>, a multi-tenant real estate fund management platform. It serves as the primary reference for development, testing, and stakeholder alignment.</p>
+
+<h3 id="sec1-2">1.2 Scope</h3>
+<p>REstackAI enables real estate investment organizations to manage funds, properties, tenants, financial reporting (balance sheets, income statements), and team members through a web-based application. The platform supports multi-tenancy &mdash; multiple organizations operate on the same infrastructure with strict data isolation via <code>orgId</code> filtering.</p>
+<p>Key capabilities:</p>
+<ul>
+  <li>Multi-organization user management with role-based access control</li>
+  <li>Fund lifecycle management (creation, metrics, balance sheets)</li>
+  <li>Property / asset tracking with tenant and unit data</li>
+  <li>Financial dashboard (Command Center) with KPI metrics</li>
+  <li>CSV-based data import pipeline for legacy system migration</li>
+  <li>JWT-based authentication with bcrypt password hashing</li>
+</ul>
+
+<h3 id="sec1-3">1.3 Definitions &amp; Acronyms</h3>
+<table>
+  <tr><th>Term</th><th>Definition</th></tr>
+  <tr><td>AUM</td><td>Assets Under Management &mdash; total value of assets in a fund</td></tr>
+  <tr><td>EUM</td><td>Equity Under Management &mdash; LP investments minus corporate investments</td></tr>
+  <tr><td>NOI</td><td>Net Operating Income &mdash; revenue minus operating expenses</td></tr>
+  <tr><td>DSCR</td><td>Debt Service Coverage Ratio &mdash; NOI divided by debt service expenses</td></tr>
+  <tr><td>YTD Return</td><td>Year-to-Date Return &mdash; net income after tax divided by total equity</td></tr>
+  <tr><td>JWT</td><td>JSON Web Token &mdash; stateless authentication mechanism</td></tr>
+  <tr><td>GL</td><td>General Ledger &mdash; chart of accounts in legacy accounting system</td></tr>
+  <tr><td>Multi-Tenancy</td><td>Architecture where a single instance serves multiple organizations with data isolation</td></tr>
+  <tr><td>orgId</td><td>Organization identifier used to filter and isolate data per tenant</td></tr>
+</table>
+
+<h3 id="sec1-4">1.4 Document Conventions</h3>
+<p>Requirements are identified by a prefix and sequential number:</p>
+<ul>
+  <li><strong>FR-xxx</strong> &mdash; Functional Requirement</li>
+  <li><strong>NFR-xxx</strong> &mdash; Non-Functional Requirement</li>
+  <li><strong>SR-xxx</strong> &mdash; Security Requirement</li>
+</ul>
+<p>Priority levels: <span class="badge badge-high">High</span> <span class="badge badge-med">Medium</span> <span class="badge badge-low">Low</span></p>
+
+<!-- ================================================================ -->
+<h2 id="sec2">2. Overall Description</h2>
+
+<h3 id="sec2-1">2.1 Product Perspective</h3>
+<p>REstackAI is a standalone web application composed of:</p>
+<ul>
+  <li><strong>Frontend:</strong> React + TypeScript single-page application served via Vite (port 5173)</li>
+  <li><strong>Backend:</strong> Python standard library <code>http.server</code> with custom regex-based routing (port 8000)</li>
+  <li><strong>Database:</strong> MongoDB with PyMongo driver</li>
+  <li><strong>Data Pipeline:</strong> Python CSV import script for seeding from legacy systems</li>
+</ul>
+<div class="card">
+  <strong>Architecture Summary:</strong> Browser &rarr; Axios (JWT interceptor) &rarr; HTTP Server :8000 &rarr; Regex Router &rarr; Route Handlers &rarr; Models &rarr; MongoDB
+</div>
+
+<h3 id="sec2-2">2.2 User Classes &amp; Roles</h3>
+<p>Users belong to one or more organizations, each with a specific role. Roles are stored in the <code>org_roles</code> array on the user document.</p>
+<table>
+  <tr><th>Role</th><th>Key</th><th>Permissions</th></tr>
+  <tr>
+    <td><strong>Administrator</strong></td>
+    <td><code>admin</code></td>
+    <td>Full access: manage members, funds, properties, settings, and organization configuration</td>
+  </tr>
+  <tr>
+    <td><strong>Portfolio Manager</strong></td>
+    <td><code>portfolio_manager</code></td>
+    <td>Create/edit funds and properties, view all financial data, manage fund-property linkages</td>
+  </tr>
+  <tr>
+    <td><strong>Analyst</strong></td>
+    <td><code>analyst</code></td>
+    <td>View funds, properties, balance sheets, and dashboards; read-only access to financial data</td>
+  </tr>
+  <tr>
+    <td><strong>Member</strong></td>
+    <td><code>member</code></td>
+    <td>Basic read access to assigned organization data</td>
+  </tr>
+</table>
+
+<h3 id="sec2-3">2.3 Operating Environment</h3>
+<table>
+  <tr><th>Component</th><th>Technology</th><th>Version</th></tr>
+  <tr><td>Backend Runtime</td><td>Python</td><td>3.10+</td></tr>
+  <tr><td>HTTP Server</td><td>Python stdlib <code>http.server</code></td><td>Built-in</td></tr>
+  <tr><td>Database</td><td>MongoDB</td><td>6.0+</td></tr>
+  <tr><td>Database Driver</td><td>PyMongo</td><td>4.x</td></tr>
+  <tr><td>Authentication</td><td>PyJWT + Passlib (bcrypt)</td><td>Latest</td></tr>
+  <tr><td>Frontend Framework</td><td>React + TypeScript</td><td>18.x</td></tr>
+  <tr><td>Build Tool</td><td>Vite</td><td>5.x</td></tr>
+  <tr><td>HTTP Client</td><td>Axios</td><td>1.x</td></tr>
+  <tr><td>Browser Support</td><td>Chrome, Firefox, Safari, Edge</td><td>Latest 2 versions</td></tr>
+</table>
+
+<h3 id="sec2-4">2.4 Constraints</h3>
+<ul>
+  <li>Backend must use Python standard library <code>http.server</code> only &mdash; no FastAPI, Flask, Django, or ASGI frameworks</li>
+  <li>No ORM &mdash; direct PyMongo queries for all database operations</li>
+  <li>Server started with <code>python main.py</code> (no uvicorn or external process managers)</li>
+  <li>MongoDB is the sole data store &mdash; no SQL databases</li>
+  <li>All API responses serialized via custom <code>MongoEncoder</code> for ObjectId/datetime handling</li>
+</ul>
+
+<!-- ================================================================ -->
+<h2 id="sec3">3. Functional Requirements</h2>
+
+<!-- 3.1 Auth -->
+<h3 id="sec3-1">3.1 Authentication &amp; Authorization</h3>
+<table>
+  <tr><th>ID</th><th>Requirement</th><th>Priority</th></tr>
+  <tr><td>FR-101</td><td>Users shall register with email, name, and password. Passwords are hashed with bcrypt before storage.</td><td><span class="badge badge-high">High</span></td></tr>
+  <tr><td>FR-102</td><td>Users shall log in with email and password. On success, the server returns a JWT access token.</td><td><span class="badge badge-high">High</span></td></tr>
+  <tr><td>FR-103</td><td>JWT tokens shall be included in the <code>Authorization: Bearer &lt;token&gt;</code> header for all protected API routes.</td><td><span class="badge badge-high">High</span></td></tr>
+  <tr><td>FR-104</td><td>The <code>GET /api/auth/me</code> endpoint shall return the current user's profile including organizations and roles.</td><td><span class="badge badge-high">High</span></td></tr>
+  <tr><td>FR-105</td><td>The Axios interceptor shall automatically attach the JWT token from localStorage to all API requests.</td><td><span class="badge badge-high">High</span></td></tr>
+  <tr><td>FR-106</td><td>On receiving a 401 response (except for <code>/auth/</code> endpoints), the client shall clear the token and redirect to the login page.</td><td><span class="badge badge-high">High</span></td></tr>
+  <tr><td>FR-107</td><td>The AuthContext shall store the current user, selected organization, and provide login/logout/register functions.</td><td><span class="badge badge-high">High</span></td></tr>
+  <tr><td>FR-108</td><td>Users may belong to multiple organizations. Each membership includes a role (<code>admin</code>, <code>portfolio_manager</code>, <code>analyst</code>, <code>member</code>).</td><td><span class="badge badge-high">High</span></td></tr>
+</table>
+
+<h4>Authentication Flow</h4>
+<ol>
+  <li>User submits email + password to <code>POST /api/auth/login</code></li>
+  <li>Server looks up user by email, verifies password hash (Passlib bcrypt)</li>
+  <li>Server generates JWT token (PyJWT) with user_id claim</li>
+  <li>Client stores token in localStorage</li>
+  <li>Client calls <code>GET /api/auth/me</code> with Bearer token</li>
+  <li>Server decodes JWT, fetches user + organizations + roles</li>
+  <li>Client sets AuthContext state (user, currentOrg with role)</li>
+</ol>
+
+<!-- 3.2 Orgs -->
+<h3 id="sec3-2">3.2 Organization Management</h3>
+<table>
+  <tr><th>ID</th><th>Requirement</th><th>Priority</th></tr>
+  <tr><td>FR-201</td><td>Organizations shall have a unique name, status (active/inactive), and timestamps.</td><td><span class="badge badge-high">High</span></td></tr>
+  <tr><td>FR-202</td><td>Users shall be able to switch between their organizations via a dropdown in the header.</td><td><span class="badge badge-high">High</span></td></tr>
+  <tr><td>FR-203</td><td>All data queries shall be filtered by the user's current <code>orgId</code> to enforce multi-tenancy isolation.</td><td><span class="badge badge-high">High</span></td></tr>
+  <tr><td>FR-204</td><td>The user's role within the selected organization shall be displayed in the sidebar and header.</td><td><span class="badge badge-med">Medium</span></td></tr>
+  <tr><td>FR-205</td><td>Admins shall be able to create new organizations.</td><td><span class="badge badge-med">Medium</span></td></tr>
+</table>
+
+<!-- 3.3 Funds -->
+<h3 id="sec3-3">3.3 Fund Management</h3>
+<table>
+  <tr><th>ID</th><th>Requirement</th><th>Priority</th></tr>
+  <tr><td>FR-301</td><td>Funds shall belong to a single organization (identified by <code>orgId</code>).</td><td><span class="badge badge-high">High</span></td></tr>
+  <tr><td>FR-302</td><td>Each fund shall have: fundCode (unique per org), fundName, fundType, vintageYear, baseCurrency, status, and managers array.</td><td><span class="badge badge-high">High</span></td></tr>
+  <tr><td>FR-303</td><td>The system shall support listing all funds for the current organization.</td><td><span class="badge badge-high">High</span></td></tr>
+  <tr><td>FR-304</td><td>The system shall support creating, reading, updating, and deleting funds.</td><td><span class="badge badge-high">High</span></td></tr>
+  <tr><td>FR-305</td><td>Fund details shall include linked properties via the fund_properties junction collection.</td><td><span class="badge badge-med">Medium</span></td></tr>
+  <tr><td>FR-306</td><td>Funds shall support external ID mappings (<code>externalIds</code>) for integration with legacy systems.</td><td><span class="badge badge-low">Low</span></td></tr>
+</table>
+
+<!-- 3.4 Properties -->
+<h3 id="sec3-4">3.4 Property / Asset Management</h3>
+<table>
+  <tr><th>ID</th><th>Requirement</th><th>Priority</th></tr>
+  <tr><td>FR-401</td><td>Properties shall belong to a single organization and may be linked to multiple funds.</td><td><span class="badge badge-high">High</span></td></tr>
+  <tr><td>FR-402</td><td>Each property shall have: propertyCode, propertyName, address (object), market, propertyType, status, acquisitionDate, ownership, and metadata.</td><td><span class="badge badge-high">High</span></td></tr>
+  <tr><td>FR-403</td><td>The system shall support listing all properties for the current organization with optional fund filtering.</td><td><span class="badge badge-high">High</span></td></tr>
+  <tr><td>FR-404</td><td>Properties shall support tenant records (name, unit, status, sqft).</td><td><span class="badge badge-med">Medium</span></td></tr>
+  <tr><td>FR-405</td><td>Properties shall support unit records (unitCode, unitType, sqft, status).</td><td><span class="badge badge-med">Medium</span></td></tr>
+  <tr><td>FR-406</td><td>Square footage summary records shall track total and occupied sqft per property.</td><td><span class="badge badge-med">Medium</span></td></tr>
+</table>
+
+<!-- 3.5 Balance Sheet -->
+<h3 id="sec3-5">3.5 Balance Sheet &amp; Financial Metrics</h3>
+<table>
+  <tr><th>ID</th><th>Requirement</th><th>Priority</th></tr>
+  <tr><td>FR-501</td><td>The system shall calculate and return balance sheet metrics for a given fund via <code>GET /api/funds/:fundId/balancesheet</code>.</td><td><span class="badge badge-high">High</span></td></tr>
+  <tr><td>FR-502</td><td>Metrics shall include: AUM, EUM, NOI, Revenue, Expense Ratio, Cash, DSCR, Budget vs Actual, and YTD Return.</td><td><span class="badge badge-high">High</span></td></tr>
+  <tr><td>FR-503</td><td>Metrics shall be derived from the <code>balance_sheet</code> collection using <code>sAccountCode</code> lookups.</td><td><span class="badge badge-high">High</span></td></tr>
+  <tr><td>FR-504</td><td>If no balance sheet data exists for a fund, the API shall return HTTP 200 with <code>noData: true</code> and zeroed metrics &mdash; never 500.</td><td><span class="badge badge-high">High</span></td></tr>
+  <tr><td>FR-505</td><td>Division operations (expense ratio, DSCR, YTD return) shall handle zero denominators gracefully, returning 0.</td><td><span class="badge badge-high">High</span></td></tr>
+  <tr><td>FR-506</td><td>The balance sheet page shall display a fund selector dropdown and metric cards for each KPI.</td><td><span class="badge badge-med">Medium</span></td></tr>
+</table>
+
+<h4>Account Code Mappings</h4>
+<table>
+  <tr><th>Metric</th><th>Account Code</th><th>Description</th></tr>
+  <tr><td>AUM</td><td><code>19999999</code></td><td>Total assets</td></tr>
+  <tr><td>LP Investments</td><td><code>15109999</code></td><td>Total LP investment value</td></tr>
+  <tr><td>Corp Investments</td><td><code>15309999</code></td><td>Total corporate investment value</td></tr>
+  <tr><td>NOI</td><td><code>79999999</code></td><td>Net Operating Income</td></tr>
+  <tr><td>Revenue</td><td><code>49999999</code></td><td>Total revenue</td></tr>
+  <tr><td>Total Expenses</td><td><code>83009999</code></td><td>Total fund expenses</td></tr>
+  <tr><td>Cash</td><td><code>10009999</code></td><td>Total cash position</td></tr>
+  <tr><td>Debt Service</td><td><code>80004999</code></td><td>Total debt service expenses</td></tr>
+  <tr><td>Net Income After Tax</td><td><code>86109999</code></td><td>Bottom-line net income</td></tr>
+  <tr><td>Total Equity</td><td><code>35009999</code></td><td>Total equity position</td></tr>
+</table>
+
+<h4>Calculation Formulas</h4>
+<pre>
+EUM = LP Investments (15109999) - Corp Investments (15309999)
+Expense Ratio = Total Expenses (83009999) / Revenue (49999999)
+DSCR = NOI (79999999) / Debt Service (80004999)
+YTD Return = Net Income After Tax (86109999) / Total Equity (35009999)
+</pre>
+
+<!-- 3.6 Command Center -->
+<h3 id="sec3-6">3.6 Command Center (Dashboard)</h3>
+<table>
+  <tr><th>ID</th><th>Requirement</th><th>Priority</th></tr>
+  <tr><td>FR-601</td><td>The Command Center shall be the primary landing page after login, displaying a financial overview of the selected fund.</td><td><span class="badge badge-high">High</span></td></tr>
+  <tr><td>FR-602</td><td>A fund selector dropdown shall allow switching between funds within the current organization.</td><td><span class="badge badge-high">High</span></td></tr>
+  <tr><td>FR-603</td><td>Top row shall display 6 metric cards: AUM, Portfolio NOI, Occupancy, Revenue, Expense Ratio, Cash Position.</td><td><span class="badge badge-high">High</span></td></tr>
+  <tr><td>FR-604</td><td>Bottom row shall display 5 metric cards: EUM, DSCR, Budget vs Actual, YTD Return, At-Risk Assets.</td><td><span class="badge badge-high">High</span></td></tr>
+  <tr><td>FR-605</td><td>Each metric card shall show: title, icon, formatted value, subtitle with colored status indicator, and source tag.</td><td><span class="badge badge-med">Medium</span></td></tr>
+  <tr><td>FR-606</td><td>The dashboard shall include tabbed sections: Daily Brief, Performance Summary, Liquidity &amp; Cash, Risk &amp; Valuation, Month-End Control, Data Health.</td><td><span class="badge badge-med">Medium</span></td></tr>
+  <tr><td>FR-607</td><td>The Daily Brief tab shall display an assets table and an action queue panel.</td><td><span class="badge badge-med">Medium</span></td></tr>
+  <tr><td>FR-608</td><td>Metrics shall display "--" when no data is available rather than showing errors.</td><td><span class="badge badge-high">High</span></td></tr>
+</table>
+
+<!-- 3.7 Members -->
+<h3 id="sec3-7">3.7 Member Management</h3>
+<table>
+  <tr><th>ID</th><th>Requirement</th><th>Priority</th></tr>
+  <tr><td>FR-701</td><td>The Members page shall list all users belonging to the current organization with their roles.</td><td><span class="badge badge-high">High</span></td></tr>
+  <tr><td>FR-702</td><td>Admins shall be able to invite new members to the organization by email.</td><td><span class="badge badge-med">Medium</span></td></tr>
+  <tr><td>FR-703</td><td>Admins shall be able to change member roles within the organization.</td><td><span class="badge badge-med">Medium</span></td></tr>
+  <tr><td>FR-704</td><td>Users shall be added to an organization with a default role of <code>member</code> unless specified otherwise.</td><td><span class="badge badge-med">Medium</span></td></tr>
+  <tr><td>FR-705</td><td>The system shall maintain backward compatibility with legacy <code>org_ids</code> array by migrating to <code>org_roles</code> format on read.</td><td><span class="badge badge-low">Low</span></td></tr>
+</table>
+
+<!-- 3.8 Fund-Property -->
+<h3 id="sec3-8">3.8 Fund-Property Linkages</h3>
+<table>
+  <tr><th>ID</th><th>Requirement</th><th>Priority</th></tr>
+  <tr><td>FR-801</td><td>A many-to-many relationship between funds and properties shall be maintained via the <code>fund_properties</code> junction collection.</td><td><span class="badge badge-high">High</span></td></tr>
+  <tr><td>FR-802</td><td>Each link shall record: orgId, fundId, propertyId, startDate, endDate, ownershipPct, and role.</td><td><span class="badge badge-med">Medium</span></td></tr>
+  <tr><td>FR-803</td><td>The system shall support listing all properties for a given fund and all funds for a given property.</td><td><span class="badge badge-med">Medium</span></td></tr>
+</table>
+
+<!-- ================================================================ -->
+<h2 id="sec4">4. API Specification</h2>
+
+<p>All endpoints are prefixed with <code>/api</code>. Protected routes require a valid JWT in the <code>Authorization</code> header.</p>
+
+<h3>4.1 Authentication Endpoints</h3>
+<table>
+  <tr><th>Method</th><th>Endpoint</th><th>Auth</th><th>Description</th></tr>
+  <tr><td>POST</td><td><code>/api/auth/register</code></td><td>No</td><td>Register a new user (email, name, password)</td></tr>
+  <tr><td>POST</td><td><code>/api/auth/login</code></td><td>No</td><td>Login and receive JWT access token</td></tr>
+  <tr><td>GET</td><td><code>/api/auth/me</code></td><td>Yes</td><td>Get current user profile with orgs and roles</td></tr>
+</table>
+
+<h3>4.2 Organization Endpoints</h3>
+<table>
+  <tr><th>Method</th><th>Endpoint</th><th>Auth</th><th>Description</th></tr>
+  <tr><td>GET</td><td><code>/api/orgs</code></td><td>Yes</td><td>List user's organizations</td></tr>
+  <tr><td>POST</td><td><code>/api/orgs</code></td><td>Yes</td><td>Create a new organization</td></tr>
+  <tr><td>GET</td><td><code>/api/orgs/:orgId</code></td><td>Yes</td><td>Get organization details</td></tr>
+  <tr><td>GET</td><td><code>/api/orgs/:orgId/members</code></td><td>Yes</td><td>List organization members with roles</td></tr>
+  <tr><td>POST</td><td><code>/api/orgs/:orgId/members</code></td><td>Yes</td><td>Add a member to the organization</td></tr>
+</table>
+
+<h3>4.3 Fund Endpoints</h3>
+<table>
+  <tr><th>Method</th><th>Endpoint</th><th>Auth</th><th>Description</th></tr>
+  <tr><td>GET</td><td><code>/api/funds?orgId=</code></td><td>Yes</td><td>List funds for an organization</td></tr>
+  <tr><td>POST</td><td><code>/api/funds</code></td><td>Yes</td><td>Create a new fund</td></tr>
+  <tr><td>GET</td><td><code>/api/funds/:fundId</code></td><td>Yes</td><td>Get fund details</td></tr>
+  <tr><td>PUT</td><td><code>/api/funds/:fundId</code></td><td>Yes</td><td>Update a fund</td></tr>
+  <tr><td>DELETE</td><td><code>/api/funds/:fundId</code></td><td>Yes</td><td>Delete a fund</td></tr>
+  <tr><td>GET</td><td><code>/api/funds/:fundId/balancesheet</code></td><td>Yes</td><td>Get balance sheet metrics for a fund</td></tr>
+</table>
+
+<h3>4.4 Property Endpoints</h3>
+<table>
+  <tr><th>Method</th><th>Endpoint</th><th>Auth</th><th>Description</th></tr>
+  <tr><td>GET</td><td><code>/api/properties?orgId=</code></td><td>Yes</td><td>List properties for an organization</td></tr>
+  <tr><td>POST</td><td><code>/api/properties</code></td><td>Yes</td><td>Create a new property</td></tr>
+  <tr><td>GET</td><td><code>/api/properties/:propertyId</code></td><td>Yes</td><td>Get property details</td></tr>
+  <tr><td>PUT</td><td><code>/api/properties/:propertyId</code></td><td>Yes</td><td>Update a property</td></tr>
+  <tr><td>DELETE</td><td><code>/api/properties/:propertyId</code></td><td>Yes</td><td>Delete a property</td></tr>
+</table>
+
+<h3>4.5 Fund-Property Endpoints</h3>
+<table>
+  <tr><th>Method</th><th>Endpoint</th><th>Auth</th><th>Description</th></tr>
+  <tr><td>GET</td><td><code>/api/fund-properties?fundId=</code></td><td>Yes</td><td>List properties linked to a fund</td></tr>
+  <tr><td>POST</td><td><code>/api/fund-properties</code></td><td>Yes</td><td>Link a property to a fund</td></tr>
+  <tr><td>DELETE</td><td><code>/api/fund-properties/:id</code></td><td>Yes</td><td>Remove a fund-property link</td></tr>
+</table>
+
+<h3>4.6 Response Format</h3>
+<p>All API responses are JSON-encoded using <code>MongoEncoder</code> which handles:</p>
+<ul>
+  <li><code>ObjectId</code> &rarr; string</li>
+  <li><code>datetime</code> &rarr; ISO 8601 string</li>
+</ul>
+<p>Error/empty responses follow a consistent pattern:</p>
+<pre>
+// Success
+{ "fundId": "...", "aum": 1234.56, ... }
+
+// No data (HTTP 200)
+{ "detail": "No balance sheet data found", "noData": true }
+
+// Validation error (HTTP 400)
+{ "detail": "Missing required field: email" }
+</pre>
+
+<!-- ================================================================ -->
+<h2 id="sec5">5. Data Model</h2>
+
+<p>MongoDB collections with their fields. All collections use <code>ObjectId</code> as <code>_id</code>. Multi-tenant collections include <code>orgId</code> (string) for data isolation.</p>
+
+<h3>5.1 Collections Overview</h3>
+<table>
+  <tr><th>Collection</th><th>Description</th><th>Multi-Tenant</th></tr>
+  <tr><td><code>users</code></td><td>User accounts with org memberships and roles</td><td>N/A (cross-org)</td></tr>
+  <tr><td><code>organizations</code></td><td>Organization / tenant records</td><td>N/A (top-level)</td></tr>
+  <tr><td><code>funds</code></td><td>Investment funds</td><td>Yes (<code>orgId</code>)</td></tr>
+  <tr><td><code>properties</code></td><td>Real estate assets</td><td>Yes (<code>orgId</code>)</td></tr>
+  <tr><td><code>fund_properties</code></td><td>Fund-property many-to-many junction</td><td>Yes (<code>orgId</code>)</td></tr>
+  <tr><td><code>tenants</code></td><td>Tenant leases per property</td><td>Yes (<code>orgId</code>)</td></tr>
+  <tr><td><code>units</code></td><td>Physical units per property</td><td>Yes (<code>orgId</code>)</td></tr>
+  <tr><td><code>sqft</code></td><td>Square footage summaries per property</td><td>No (<code>propertyId</code>)</td></tr>
+  <tr><td><code>totals</code></td><td>GL account totals per property per month</td><td>No (<code>propertyLegacyId</code>)</td></tr>
+  <tr><td><code>balance_sheet</code></td><td>Pre-aggregated balance sheet data per fund</td><td>No (<code>fundId</code>)</td></tr>
+  <tr><td><code>fund_transactions</code></td><td>Investor transaction records</td><td>Yes (<code>orgId</code>)</td></tr>
+</table>
+
+<h3>5.2 Key Indexes</h3>
+<table>
+  <tr><th>Collection</th><th>Index</th><th>Type</th></tr>
+  <tr><td>users</td><td><code>email</code></td><td>Unique</td></tr>
+  <tr><td>organizations</td><td><code>name</code></td><td>Unique</td></tr>
+  <tr><td>funds</td><td><code>(orgId, fundCode)</code></td><td>Compound Unique</td></tr>
+  <tr><td>properties</td><td><code>(orgId, propertyCode)</code></td><td>Compound Unique</td></tr>
+  <tr><td>fund_properties</td><td><code>(fundId, propertyId)</code></td><td>Compound</td></tr>
+</table>
+
+<h3>5.3 Relationships</h3>
+<ul>
+  <li><code>users</code> &harr; <code>organizations</code> &mdash; Many-to-many via <code>org_ids</code> / <code>org_roles</code> arrays on user</li>
+  <li><code>organizations</code> &rarr; <code>funds</code> &mdash; One-to-many via <code>orgId</code></li>
+  <li><code>organizations</code> &rarr; <code>properties</code> &mdash; One-to-many via <code>orgId</code></li>
+  <li><code>funds</code> &harr; <code>properties</code> &mdash; Many-to-many via <code>fund_properties</code> junction</li>
+  <li><code>properties</code> &rarr; <code>tenants</code>, <code>units</code>, <code>sqft</code> &mdash; One-to-many via <code>propertyId</code></li>
+  <li><code>funds</code> &rarr; <code>balance_sheet</code> &mdash; One-to-many via <code>fundId</code></li>
+</ul>
+
+<!-- ================================================================ -->
+<h2 id="sec6">6. UI Requirements</h2>
+
+<h3>6.1 Layout</h3>
+<table>
+  <tr><th>ID</th><th>Requirement</th><th>Priority</th></tr>
+  <tr><td>FR-UI-01</td><td>The application shall use a fixed dark sidebar (left, #1a1a2e) + white header (top) + content area layout.</td><td><span class="badge badge-high">High</span></td></tr>
+  <tr><td>FR-UI-02</td><td>The sidebar shall display: logo, organization name, user role, navigation links, and an admin section.</td><td><span class="badge badge-high">High</span></td></tr>
+  <tr><td>FR-UI-03</td><td>The header shall display: organization selector dropdown, notification/settings icons, user name, role badge, and avatar with dropdown menu.</td><td><span class="badge badge-high">High</span></td></tr>
+  <tr><td>FR-UI-04</td><td>Protected routes shall redirect unauthenticated users to the login page.</td><td><span class="badge badge-high">High</span></td></tr>
+</table>
+
+<h3>6.2 Pages</h3>
+<table>
+  <tr><th>Page</th><th>Route</th><th>Description</th></tr>
+  <tr><td>Login</td><td><code>/login</code></td><td>Email/password form, redirects to Command Center on success</td></tr>
+  <tr><td>Register</td><td><code>/register</code></td><td>Registration form with email, name, password</td></tr>
+  <tr><td>Command Center</td><td><code>/command-center</code></td><td>Primary dashboard with KPI metrics, tabs, daily brief</td></tr>
+  <tr><td>Dashboard</td><td><code>/</code></td><td>Default landing page (redirects to Command Center)</td></tr>
+  <tr><td>Funds</td><td><code>/funds</code></td><td>Fund listing and management</td></tr>
+  <tr><td>Properties</td><td><code>/properties</code></td><td>Property listing and management</td></tr>
+  <tr><td>Balance Sheet</td><td><code>/balance-sheet</code></td><td>Detailed balance sheet view with fund selector</td></tr>
+  <tr><td>Members</td><td><code>/members</code></td><td>Organization member listing with roles</td></tr>
+  <tr><td>Profile</td><td><code>/profile</code></td><td>User profile and settings</td></tr>
+</table>
+
+<h3>6.3 Navigation</h3>
+<p>Sidebar navigation items:</p>
+<ol>
+  <li>Command Center (primary)</li>
+  <li>Funds</li>
+  <li>Assets (Properties)</li>
+  <li>Balance Sheet</li>
+  <li>Members</li>
+  <li>Settings (Admin section)</li>
+</ol>
+
+<!-- ================================================================ -->
+<h2 id="sec7">7. Non-Functional Requirements</h2>
+
+<table>
+  <tr><th>ID</th><th>Category</th><th>Requirement</th><th>Priority</th></tr>
+  <tr><td>NFR-01</td><td>Performance</td><td>API responses shall complete within 500ms for standard CRUD operations.</td><td><span class="badge badge-high">High</span></td></tr>
+  <tr><td>NFR-02</td><td>Performance</td><td>Balance sheet aggregation shall complete within 2 seconds.</td><td><span class="badge badge-med">Medium</span></td></tr>
+  <tr><td>NFR-03</td><td>Scalability</td><td>The data model shall support multiple organizations with thousands of funds and properties per org.</td><td><span class="badge badge-med">Medium</span></td></tr>
+  <tr><td>NFR-04</td><td>Reliability</td><td>API errors shall return structured JSON responses with <code>detail</code> field, never raw stack traces.</td><td><span class="badge badge-high">High</span></td></tr>
+  <tr><td>NFR-05</td><td>Reliability</td><td>Financial calculation endpoints shall return 200 with <code>noData: true</code> instead of 500 on missing data.</td><td><span class="badge badge-high">High</span></td></tr>
+  <tr><td>NFR-06</td><td>Logging</td><td>All backend operations shall be logged with timestamp, level, module name, file:line, and message.</td><td><span class="badge badge-med">Medium</span></td></tr>
+  <tr><td>NFR-07</td><td>Logging</td><td>Log format: <code>%(asctime)s [%(levelname)s] %(name)s (%(filename)s:%(lineno)d): %(message)s</code></td><td><span class="badge badge-low">Low</span></td></tr>
+  <tr><td>NFR-08</td><td>Compatibility</td><td>Frontend shall support the latest 2 versions of Chrome, Firefox, Safari, and Edge.</td><td><span class="badge badge-med">Medium</span></td></tr>
+  <tr><td>NFR-09</td><td>Maintainability</td><td>Backend shall use no external web framework &mdash; stdlib <code>http.server</code> only.</td><td><span class="badge badge-high">High</span></td></tr>
+  <tr><td>NFR-10</td><td>Usability</td><td>The UI shall gracefully handle loading states and display "--" for unavailable metrics.</td><td><span class="badge badge-med">Medium</span></td></tr>
+</table>
+
+<!-- ================================================================ -->
+<h2 id="sec8">8. Security Requirements</h2>
+
+<table>
+  <tr><th>ID</th><th>Requirement</th><th>Priority</th></tr>
+  <tr><td>SR-01</td><td>Passwords shall be hashed using bcrypt (via Passlib) before storage. Plain-text passwords shall never be stored or logged.</td><td><span class="badge badge-high">High</span></td></tr>
+  <tr><td>SR-02</td><td>Authentication shall use JWT tokens with configurable expiration. Tokens shall be validated on every protected API request.</td><td><span class="badge badge-high">High</span></td></tr>
+  <tr><td>SR-03</td><td>All data access shall be filtered by the authenticated user's organization memberships. Users shall not access data from organizations they don't belong to.</td><td><span class="badge badge-high">High</span></td></tr>
+  <tr><td>SR-04</td><td>CORS headers shall be configured to allow only the frontend origin (localhost:5173 in development).</td><td><span class="badge badge-high">High</span></td></tr>
+  <tr><td>SR-05</td><td>The balance sheet endpoint shall verify that the requesting user is a member of the fund's organization before returning data.</td><td><span class="badge badge-high">High</span></td></tr>
+  <tr><td>SR-06</td><td>JWT tokens shall be stored in localStorage on the client. The client shall clear the token on 401 responses (except for auth endpoints).</td><td><span class="badge badge-med">Medium</span></td></tr>
+  <tr><td>SR-07</td><td>API error responses shall not expose internal stack traces, database connection strings, or sensitive configuration.</td><td><span class="badge badge-high">High</span></td></tr>
+  <tr><td>SR-08</td><td>Role-based access control shall restrict write operations based on user role within the organization.</td><td><span class="badge badge-med">Medium</span></td></tr>
+</table>
+
+<!-- ================================================================ -->
+<h2 id="sec9">9. Data Pipeline &amp; Seeding</h2>
+
+<h3>9.1 CSV Import</h3>
+<p>The <code>seed.py</code> script imports data from CSV files in the <code>api/data/</code> directory into MongoDB collections. This supports migration from legacy systems.</p>
+
+<table>
+  <tr><th>CSV File</th><th>Target Collection</th><th>Description</th></tr>
+  <tr><td>funds.csv</td><td><code>funds</code></td><td>Fund definitions</td></tr>
+  <tr><td>properties.csv</td><td><code>properties</code></td><td>Property records</td></tr>
+  <tr><td>tenants.csv</td><td><code>tenants</code></td><td>Tenant lease data</td></tr>
+  <tr><td>units.csv</td><td><code>units</code></td><td>Physical unit records</td></tr>
+  <tr><td>sqft.csv</td><td><code>sqft</code></td><td>Square footage summaries</td></tr>
+  <tr><td>totals.csv</td><td><code>totals</code></td><td>GL account totals</td></tr>
+  <tr><td>transactions.csv</td><td><code>fund_transactions</code></td><td>Investor transactions</td></tr>
+</table>
+
+<h3>9.2 User Seeding</h3>
+<p>The seed script also creates default users with pre-assigned organization memberships and roles:</p>
+<pre>
+SEED_USERS = [
+  (email, name, password, [(org_name, role), ...]),
+  ...
+]
+</pre>
+<p>Both <code>org_ids</code> (legacy) and <code>org_roles</code> (current) arrays are populated for backward compatibility.</p>
+
+<!-- ================================================================ -->
+<h2 id="sec10">10. Appendices</h2>
+
+<h3>A. Project File Structure</h3>
+<pre>
+Claude_org_fund/
+├── api/
+│   ├── main.py                 # HTTP Server entry point (port 8000)
+│   ├── seed.py                 # CSV import + user seeding
+│   ├── app/
+│   │   ├── config.py           # JSON env configs
+│   │   ├── auth.py             # JWT + bcrypt utilities
+│   │   ├── database.py         # PyMongo connection + indexes
+│   │   ├── logger.py           # File + console logging
+│   │   ├── models/
+│   │   │   ├── users.py
+│   │   │   ├── organizations.py
+│   │   │   ├── funds.py
+│   │   │   ├── properties.py
+│   │   │   ├── fund_properties.py
+│   │   │   └── balancesheet.py
+│   │   └── routes/
+│   │       ├── router.py       # Regex URL matching
+│   │       ├── auth.py
+│   │       ├── orgs.py
+│   │       ├── funds.py
+│   │       ├── properties.py
+│   │       ├── fund_properties.py
+│   │       └── balancesheet.py
+│   └── data/
+│       └── *.csv               # Seed data files
+├── ui/
+│   └── src/
+│       ├── App.tsx + App.css
+│       ├── api.ts              # Axios client with JWT interceptor
+│       ├── types.ts            # TypeScript interfaces
+│       ├── context/
+│       │   └── AuthContext.tsx
+│       ├── components/
+│       │   ├── Layout.tsx
+│       │   ├── Header.tsx
+│       │   ├── Sidebar.tsx
+│       │   └── ProtectedRoute.tsx
+│       └── pages/
+│           ├── CommandCenter.tsx
+│           ├── Dashboard.tsx
+│           ├── Funds.tsx
+│           ├── Properties.tsx
+│           ├── BalanceSheet.tsx
+│           ├── Members.tsx
+│           ├── Profile.tsx
+│           ├── Login.tsx
+│           └── Register.tsx
+└── docs/
+    ├── architecture-diagram.html
+    ├── database-diagram.html
+    └── SRS.html
+</pre>
+
+<h3>B. Related Documents</h3>
+<ul>
+  <li><a href="architecture-diagram.html">Architecture Diagram</a> &mdash; System architecture, request flow, auth flow, multi-tenancy model</li>
+  <li><a href="database-diagram.html">Database Diagram</a> &mdash; MongoDB collections ERD with relationships</li>
+</ul>
+
+<h3>C. Revision History</h3>
+<table>
+  <tr><th>Version</th><th>Date</th><th>Description</th></tr>
+  <tr><td>1.0</td><td>2026-03-06</td><td>Initial SRS document</td></tr>
+</table>
+
+</div>
+</body>
+</html>
