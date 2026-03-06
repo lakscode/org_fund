@@ -14,7 +14,8 @@ interface BalanceSheetData {
   expenseRatio: number;
   cash: number;
   dscr: number;
-  budgetVsActual: {
+  budget_vs_actual: number;
+  budgetVsActual_details: {
     actual: number;
     budget: number;
     variance: number;
@@ -181,7 +182,7 @@ export default function CommandCenter() {
             <MetricCard
               title="REVENUE"
               icon="$"
-              value={fmtCompact(data.noi + Math.abs(data.budgetVsActual.actual))}
+              value={fmtCompact(data.noi + Math.abs(data.budget_vs_actual))}
               subtitle="-1.8% vs Budget"
               subtitleColor="yellow"
               sources="GL \u00B7 RECENCY"
@@ -225,10 +226,10 @@ export default function CommandCenter() {
             <MetricCard
               title="BUDGET VS ACTUAL"
               icon="&#9776;"
-              value={fmtCompact(data.budgetVsActual.variance)}
-              valueColor={data.budgetVsActual.variance < 0 ? "#ef5350" : undefined}
-              subtitle={data.budgetVsActual.variance < 0 ? "NOI shortfall YTD" : "Favorable variance YTD"}
-              subtitleColor={data.budgetVsActual.variance >= 0 ? "green" : "red"}
+              value={fmtCompact(data.budgetVsActual_details.variance)}
+              valueColor={data.budgetVsActual_details.variance < 0 ? "#ef5350" : undefined}
+              subtitle={data.budgetVsActual_details.variance < 0 ? "NOI shortfall YTD" : "Favorable variance YTD"}
+              subtitleColor={data.budgetVsActual_details.variance >= 0 ? "green" : "red"}
               sources="GL"
             />
             <MetricCard
@@ -249,7 +250,7 @@ export default function CommandCenter() {
             />
           </div>
 
-          {/* Returns bar */}
+          {/* Returns bar 
           <div className="cc-returns-bar">
             <span className="cc-returns-label">RETURNS</span>
             <span className="cc-returns-period">1Y</span>
@@ -262,7 +263,7 @@ export default function CommandCenter() {
             <span className="cc-returns-val cc-returns-up">11.8%</span>
             <span className="cc-returns-val cc-returns-sm">7.2%</span>
           </div>
-
+            */}
           {/* Tabs */}
           <div className="cc-tabs">
             {TABS.map((tab) => (

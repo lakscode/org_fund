@@ -113,13 +113,31 @@ def get_balance_sheet(fund_id):
         _data = _balance_sheet["data"]
 
     # --- Calculations ---
+    noi, expense_ratio, total_cash, dscr, revenue = 0, 0, 0, 0, 0
+    fund_exp_actual, fund_exp_budget, budget_vs_actual= 0, 0, 0
 
     aum = get_value(_data, "19999999")
     total_investment_lp = get_value(_data, "15109999")
     total_investment_corp = get_value(_data, "15309999")
     eum = total_investment_lp - total_investment_corp
-    noi, expense_ratio, cash_total, dscr = 0, 0, 0, 0
-    fund_exp_actual, fund_exp_budget, budget_vs_actual= 0, 0, 0
+  
+    noi = get_value(_data, "79999999")
+    revenue = get_value(_data, "49999999")
+    
+    total_exprense = get_value(_data, "83009999") 
+    expense_ratio = get_value(_data, "79999999") # Expense Ratio = Total Expenses ÷ Total Revenue 
+    expense_ratio = total_exprense/ revenue
+
+    total_cash= get_value(_data, "10009999") 
+
+    total_debt_service =  get_value(_data, "80004999") 
+    dscr = noi /total_debt_service # DSCR = NOI ÷ Total Debt Service 
+    fund_exp_actual = 0  
+
+    ytd_return = 0 #YTD Return = Net Income (YTD) ÷ Total Equity 
+    net_income_after_tax =  get_value(_data, "86109999") 
+    total_equity = get_value(_data, "35009999") 
+    ytd_return = net_income_after_tax / total_equity
     result = {
         "fundId": fund_id,
         "fundCode": fund.get("fundCode", ""),
@@ -130,20 +148,20 @@ def get_balance_sheet(fund_id):
         "eum": round(eum, 2),
 
         "noi": round(noi, 2),
-
+        "revenue": round(revenue, 2),
         "expenseRatio": round(expense_ratio, 4),
 
-        "cash": round(cash_total, 2),
+        "cash": round(total_cash, 2),
 
         "dscr":  round(dscr, 2),
-
-        "budgetVsActual": {
+        "budget_vs_actual": round(budget_vs_actual, 2),
+        "budgetVsActual_details": {
             "actual": round(fund_exp_actual, 2),
             "budget": round(fund_exp_budget, 2),
             "variance": round(fund_exp_budget - fund_exp_actual, 2),
         },
 
-        "ytdReturn": round(budget_vs_actual, 2)
+        "ytdReturn": round(ytd_return, 2)
 
     }
 
