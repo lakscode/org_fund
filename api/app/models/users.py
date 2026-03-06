@@ -6,15 +6,25 @@ from app.logger import get_logger
 logger = get_logger("models.users")
 
 
+def _get_org_roles(doc):
+    """Return org_roles list, migrating from legacy org_ids if needed."""
+    if "org_roles" in doc and doc["org_roles"]:
+        return doc["org_roles"]
+    # Legacy: flat org_ids list -> convert with default role
+    return [{"org_id": oid, "role": "member"} for oid in doc.get("org_ids", [])]
+
+
 def serialize_user(doc):
     if not doc:
         return None
+    org_roles = _get_org_roles(doc)
     return {
         "id": str(doc["_id"]),
         "email": doc["email"],
         "name": doc["name"],
         "hashed_password": doc.get("hashed_password", ""),
-        "org_ids": doc.get("org_ids", []),
+        "org_ids": [r["org_id"] for r in org_roles],
+        "org_roles": org_roles,
     }
 
 
@@ -50,6 +60,7 @@ def create_user(email, name, hashed_password):
             "name": name,
             "hashed_password": hashed_password,
             "org_ids": [],
+            "org_roles": [],
         })
         logger.info("User created successfully: id=%s", result.inserted_id)
         return str(result.inserted_id)
@@ -58,14 +69,20 @@ def create_user(email, name, hashed_password):
         raise
 
 
-def add_user_to_org(user_id, org_id):
-    logger.info("Adding user %s to org %s", user_id, org_id)
+def add_user_to_org(user_id, org_id, role="member"):
+    logger.info("Adding user %s to org %s with role %s", user_id, org_id, role)
     try:
+        # Add to org_roles (new format)
+        users_col.update_one(
+            {"_id": ObjectId(user_id), "org_roles.org_id": {"$ne": org_id}},
+            {"$push": {"org_roles": {"org_id": org_id, "role": role}}},
+        )
+        # Keep org_ids in sync for backward compat
         users_col.update_one(
             {"_id": ObjectId(user_id)},
             {"$addToSet": {"org_ids": org_id}},
         )
-        logger.info("User %s added to org %s successfully", user_id, org_id)
+        logger.info("User %s added to org %s with role %s", user_id, org_id, role)
     except Exception as e:
         logger.error("Failed to add user %s to org %s: %s", user_id, org_id, e)
         raise
@@ -75,10 +92,16 @@ def get_org_members(org_id):
     logger.info("Fetching members for org %s", org_id)
     try:
         docs = users_col.find({"org_ids": org_id})
-        result = [
-            {"id": str(d["_id"]), "email": d["email"], "name": d["name"]}
-            for d in docs
-        ]
+        result = []
+        for d in docs:
+            org_roles = _get_org_roles(d)
+            role_entry = next((r for r in org_roles if r["org_id"] == org_id), None)
+            result.append({
+                "id": str(d["_id"]),
+                "email": d["email"],
+                "name": d["name"],
+                "role": role_entry["role"] if role_entry else "member",
+            })
         logger.info("Found %d members for org %s", len(result), org_id)
         return result
     except Exception as e:

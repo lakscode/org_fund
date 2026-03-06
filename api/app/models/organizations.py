@@ -78,12 +78,18 @@ def list_organizations(status=None):
 
 def get_user_orgs(user):
     user_id = user.get("id", "unknown")
+    org_roles = user.get("org_roles", [])
     org_ids = user.get("org_ids", [])
     logger.info("Fetching orgs for user %s (%d org_ids)", user_id, len(org_ids))
     try:
         oid_list = [ObjectId(oid) for oid in org_ids if oid]
         docs = organizations_col.find({"_id": {"$in": oid_list}})
-        result = [serialize_org(d) for d in docs]
+        role_map = {r["org_id"]: r["role"] for r in org_roles}
+        result = []
+        for d in docs:
+            org = serialize_org(d)
+            org["role"] = role_map.get(org["id"], "member")
+            result.append(org)
         logger.info("Fetched %d orgs for user %s", len(result), user_id)
         return result
     except Exception as e:

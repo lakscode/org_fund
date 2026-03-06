@@ -138,7 +138,8 @@ def get_balance_sheet(fund_id):
     net_income_after_tax =  get_value(_data, "86109999") 
     total_equity = get_value(_data, "35009999") 
     ytd_return = net_income_after_tax / total_equity
-
+    _actual= get_value(_data, "83009999") 
+    _budget= get_value(_data, "83009999") 
     budget_vs_actual = get_value(_data, "83009999") 
     result = {
         "fundId": fund_id,
@@ -158,9 +159,9 @@ def get_balance_sheet(fund_id):
         "dscr":  round(dscr, 2),
         "budget_vs_actual": round(budget_vs_actual, 2),
         "budgetVsActual_details": {
-            "actual": round(fund_exp_actual, 2),
-            "budget": round(fund_exp_budget, 2),
-            "variance": round(fund_exp_budget - fund_exp_actual, 2),
+            "actual": round(_actual, 2),
+            "budget": round(_budget, 2),
+            "variance": round(budget_vs_actual, 2),
         },
 
         "ytdReturn": round(ytd_return, 2)

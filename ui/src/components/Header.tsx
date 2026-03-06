@@ -2,6 +2,13 @@ import { useState, useRef, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "../context/AuthContext";
 
+const ROLE_LABELS: Record<string, string> = {
+  admin: "Administrator",
+  portfolio_manager: "Portfolio Manager",
+  analyst: "Analyst",
+  member: "Member",
+};
+
 export default function Header() {
   const { user, currentOrg, logout, setCurrentOrg } = useAuth();
   const [menuOpen, setMenuOpen] = useState(false);
@@ -54,7 +61,7 @@ export default function Header() {
         </button>
         <div className="header-user-info">
           <span className="header-user-name">{user.name}</span>
-          <span className="header-user-role">Portfolio Manager</span>
+          <span className="header-user-role">{currentOrg?.role ? (ROLE_LABELS[currentOrg.role] || currentOrg.role) : ""}</span>
         </div>
         <div className="avatar-wrapper" ref={menuRef}>
           <button

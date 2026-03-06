@@ -2,6 +2,7 @@ export interface Org {
   id: string;
   name: string;
   status: string;
+  role: string;
   createdAt: string;
   updatedAt: string;
 }
@@ -17,6 +18,7 @@ export interface OrgMember {
   id: string;
   email: string;
   name: string;
+  role: string;
 }
 
 export interface OrgData {

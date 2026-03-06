@@ -446,11 +446,19 @@ SEED_ORGS = [
 ]
 
 SEED_USERS = [
-    # (email, name, password, org_names[])
-    ("admin@lotuspac.com", "Admin User", "password123", ["Lotus Pacific", "Maple Investments", "Pacific Capital"]),
-    ("john@lotuspac.com", "John Smith", "password123", ["Lotus Pacific", "Maple Investments"]),
-    ("sarah@maple.com", "Sarah Chen", "password123", ["Maple Investments", "Pacific Capital"]),
-    ("mike@pacific.com", "Mike Johnson", "password123", ["Pacific Capital"]),
+    # (email, name, password, [(org_name, role)])
+    ("admin@lotuspac.com", "Admin User", "password123", [
+        ("Lotus Pacific", "admin"), ("Maple Investments", "admin"), ("Pacific Capital", "admin"),
+    ]),
+    ("john@lotuspac.com", "John Smith", "password123", [
+        ("Lotus Pacific", "portfolio_manager"), ("Maple Investments", "analyst"),
+    ]),
+    ("sarah@maple.com", "Sarah Chen", "password123", [
+        ("Maple Investments", "portfolio_manager"), ("Pacific Capital", "analyst"),
+    ]),
+    ("mike@pacific.com", "Mike Johnson", "password123", [
+        ("Pacific Capital", "portfolio_manager"),
+    ]),
 ]
 
 
@@ -477,20 +485,27 @@ def seed_orgs_and_users():
 
     # Create users
     hashed = hash_password("password123")
-    for email, name, _pw, org_names in SEED_USERS:
+    for email, name, _pw, org_role_list in SEED_USERS:
         existing = users_col.find_one({"email": email})
         if existing:
             logger.info("User already exists: %s", email)
             continue
-        org_id_strs = [org_name_to_id[n] for n in org_names if n in org_name_to_id]
+        org_roles = []
+        org_id_strs = []
+        for org_name, role in org_role_list:
+            if org_name in org_name_to_id:
+                oid = org_name_to_id[org_name]
+                org_id_strs.append(oid)
+                org_roles.append({"org_id": oid, "role": role})
         result = users_col.insert_one({
             "email": email,
             "name": name,
             "hashed_password": hashed,
             "org_ids": org_id_strs,
+            "org_roles": org_roles,
         })
         logger.info("Created user: %s (%s) -> orgs: %s", email, result.inserted_id,
-                     [n for n in org_names])
+                     [n for n, _ in org_role_list])
 
     logger.info("Seeded %d orgs and %d users", len(SEED_ORGS), len(SEED_USERS))
     return org_name_to_id

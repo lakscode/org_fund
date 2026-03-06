@@ -1,9 +1,19 @@
 import { NavLink } from "react-router-dom";
 import { useAuth } from "../context/AuthContext";
 
+const ROLE_LABELS: Record<string, string> = {
+  admin: "Administrator",
+  portfolio_manager: "Portfolio Manager",
+  analyst: "Analyst",
+  member: "Member",
+};
+
+function formatRole(role: string): string {
+  return ROLE_LABELS[role] || role.replace(/_/g, " ").replace(/\b\w/g, (c) => c.toUpperCase());
+}
+
 export default function Sidebar() {
-  const { user, currentOrg } = useAuth();
-  console.log("user", user)
+  const {currentOrg } = useAuth();
   return (
     <aside className="sidebar">
       <div className="sidebar-logo">
@@ -15,7 +25,9 @@ export default function Sidebar() {
         <div className="sidebar-fund-aum">
           {currentOrg ? currentOrg.name : "No org selected"}
         </div>
-        <div className="sidebar-fund-access">READ-ONLY ACCESS</div>
+        {currentOrg?.role && (
+          <div className="sidebar-fund-access">{formatRole(currentOrg.role)}</div>
+        )}
       </div>
 
       <nav className="sidebar-nav">
