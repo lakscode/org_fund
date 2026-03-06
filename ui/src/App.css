@@ -637,6 +637,29 @@ th { background: #fafafa; font-weight: 600; font-size: 0.75rem; text-transform: 
   border-bottom: 1px solid #f5f5f5;
 }
 
+.cc-pagination {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 0.5rem;
+  padding: 0.4rem 0.75rem;
+  font-size: 0.8rem;
+  color: #666;
+}
+.cc-pagination button {
+  background: none;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  padding: 0.15rem 0.5rem;
+  cursor: pointer;
+  font-size: 0.8rem;
+  color: #333;
+}
+.cc-pagination button:disabled {
+  opacity: 0.3;
+  cursor: default;
+}
+
 .cc-yield-green {
   color: #4caf50;
   font-weight: 600;

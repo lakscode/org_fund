@@ -98,6 +98,8 @@ export default function CommandCenter() {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
   const [activeTab, setActiveTab] = useState("Daily Brief");
+  const [assetPage, setAssetPage] = useState(0);
+  const ASSETS_PER_PAGE = 5;
 
   useEffect(() => {
     if (currentOrg) {
@@ -310,25 +312,39 @@ export default function CommandCenter() {
                     </tr>
                   </thead>
                   <tbody>
-                    {properties.length === 0 && (
-                      <tr><td colSpan={3}>No properties found.</td></tr>
-                    )}
-                    {properties
-                      .filter((p) => p.noiActual !== 0 || p.noiBudget !== 0)
-                      .sort((a, b) => b.noiActual - a.noiActual)
-                      .map((p) => (
-                      <tr key={p.id}>
-                        <td>{p.propertyName}</td>
-                        <td>{p.market || "—"}</td>
-                        {/* commented for now need to cross verify the calculation */}
-                        {/* <td>{fmtCompact(p.noiActual)}</td> */}
-                        <td>-</td>
-                        <td>-</td>
-                        <td>-</td>
-                      </tr>
-                    ))}
+                    {(() => {
+                      const filtered = properties
+                        .filter((p) => p.noiActual !== 0 || p.noiBudget !== 0)
+                        .sort((a, b) => b.noiActual - a.noiActual);
+                      const paged = filtered.slice(assetPage * ASSETS_PER_PAGE, (assetPage + 1) * ASSETS_PER_PAGE);
+                      return paged.length === 0 ? (
+                        <tr><td colSpan={5}>No properties found.</td></tr>
+                      ) : paged.map((p) => (
+                        <tr key={p.id}>
+                          <td>{p.propertyName}</td>
+                          <td>{p.market || "—"}</td>
+                          {/* commented for now need to cross verify the calculation */}
+                          {/* <td>{fmtCompact(p.noiActual)}</td> */}
+                          <td>-</td>
+                          <td>-</td>
+                          <td>-</td>
+                        </tr>
+                      ));
+                    })()}
                   </tbody>
                 </table>
+                {(() => {
+                  const total = properties.filter((p) => p.noiActual !== 0 || p.noiBudget !== 0).length;
+                  const totalPages = Math.ceil(total / ASSETS_PER_PAGE);
+                  if (totalPages <= 1) return null;
+                  return (
+                    <div className="cc-pagination">
+                      <button disabled={assetPage === 0} onClick={() => setAssetPage(assetPage - 1)}>&laquo;</button>
+                      <span>{assetPage + 1} / {totalPages}</span>
+                      <button disabled={assetPage >= totalPages - 1} onClick={() => setAssetPage(assetPage + 1)}>&raquo;</button>
+                    </div>
+                  );
+                })()}
               </div>
 
               {/* Action queue */}
