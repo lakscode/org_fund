@@ -2,14 +2,14 @@ import { useState, useRef, useEffect } from "react";
 import { useAuth } from "../context/AuthContext";
 import api from "../api";
 
-const SAMPLE_QUESTIONS = [
+/* const SAMPLE_QUESTIONS = [
   "What is our portfolio NOI YTD and how does it compare to budget?",
   "Show me the property portfolio overview by type and market.",
   "What is the current DSCR across our funds?",
   "Show me the top expense variance drivers across the portfolio.",
   "Give me tenant and lease overview.",
   "Summarize fund performance including returns.",
-];
+]; */
 
 interface Message {
   role: "user" | "assistant";
@@ -130,7 +130,7 @@ export default function Chat() {
           </form>
         </div>
 
-        <aside className="chat-context">
+        <aside className="chat-context" style={{display:'none'}}>
           <h4>ACTIVE CONTEXT</h4>
           <div className="chat-context-item">
             <span className="chat-context-label">Entity</span>
