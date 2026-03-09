@@ -1,5 +1,10 @@
 import csv
+import sys
+import os
 from pymongo import MongoClient
+
+sys.path.insert(0, os.path.join(os.path.dirname(__file__), ".."))
+from app.config import config
 
 
 class CSVSelectedRows:
@@ -82,8 +87,8 @@ class CSVSelectedRows:
         
         
 processor = CSVSelectedRows(
-    "mongodb+srv://writetolaks:17zivOWYPP0OuU5t@cluster0.fmrdwh8.mongodb.net/?retryWrites=true&w=majority",
-    "org_fund_dev",
+    config.MONGO_URI,
+    config.MONGO_DB,
     "balance_sheet"
 )
 

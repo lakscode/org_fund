@@ -1,6 +1,11 @@
 import csv
+import sys
+import os
 from datetime import datetime, UTC
 from pymongo import MongoClient
+
+sys.path.insert(0, os.path.join(os.path.dirname(__file__), ".."))
+from app.config import config
 
 
 class PropertyCSVImporter:
@@ -67,8 +72,8 @@ class PropertyCSVImporter:
 if __name__ == "__main__":
 
     importer = PropertyCSVImporter(
-        mongo_uri="mongodb+srv://writetolaks:17zivOWYPP0OuU5t@cluster0.fmrdwh8.mongodb.net/?retryWrites=true&w=majority",
-        db_name="org_fund_dev",
+        mongo_uri=config.MONGO_URI,
+        db_name=config.MONGO_DB,
         collection_name="properties",
         org_id="69a94fb12ef5155ff110c951"
     )
