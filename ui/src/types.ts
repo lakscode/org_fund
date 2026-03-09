@@ -31,6 +31,7 @@ export interface Fund {
   id: string;
   orgId: string;
   fundCode: string;
+  sCode?: string;
   fundName: string;
   fundType: string;
   vintageYear: number | null;

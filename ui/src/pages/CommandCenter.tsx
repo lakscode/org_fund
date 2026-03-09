@@ -96,6 +96,7 @@ export default function CommandCenter() {
   const [data, setData] = useState<BalanceSheetData | null>(null);
   const [properties, setProperties] = useState<Property[]>([]);
   const [loading, setLoading] = useState(false);
+  const [fundsLoading, setFundsLoading] = useState(false);
   const [error, setError] = useState("");
   const [activeTab, setActiveTab] = useState("Daily Brief");
   const [assetPage, setAssetPage] = useState(0);
@@ -104,7 +105,7 @@ export default function CommandCenter() {
 
   useEffect(() => {
     if (currentOrg) {
-     
+      setFundsLoading(true);
       api
         .get(`/orgs/${currentOrg.id}/funds`)
         .then((res) => {
@@ -113,7 +114,8 @@ export default function CommandCenter() {
             setSelectedFundId(res.data[0].id);
           }
         })
-        .catch(() => setFunds([]));
+        .catch(() => setFunds([]))
+        .finally(() => setFundsLoading(false));
 
       api
         .get(`/orgs/${currentOrg.id}/properties`)
@@ -150,17 +152,27 @@ export default function CommandCenter() {
       <div className="cc-title-row">
         <h2>Command Center</h2>
         <span className="cc-live-badge">LIVE</span>
-        <select
-          className="cc-fund-select"
-          value={selectedFundId}
-          onChange={(e) => setSelectedFundId(e.target.value)}
-        >
-          {funds.map((f) => (
-            <option key={f.id} value={f.id}>
-              {f.fundCode} - {f.fundName}
-            </option>
-          ))}
-        </select>
+        <div className="select-wrapper">
+          <select
+            className="cc-fund-select app-select"
+            value={selectedFundId}
+            onChange={(e) => setSelectedFundId(e.target.value)}
+            disabled={fundsLoading}
+          >
+            {fundsLoading ? (
+              <option>Loading funds...</option>
+            ) : funds.length === 0 ? (
+              <option>No funds available</option>
+            ) : (
+              funds.map((f) => (
+                <option key={f.id} value={f.id}>
+                  {f.fundCode} - {f.fundName}
+                </option>
+              ))
+            )}
+          </select>
+          {fundsLoading && <span className="select-spinner" />}
+        </div>
       </div>
       <p className="cc-subtitle">
         Executive portfolio-wide visibility

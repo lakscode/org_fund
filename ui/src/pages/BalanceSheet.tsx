@@ -61,10 +61,12 @@ export default function BalanceSheet() {
   const [selectedFundId, setSelectedFundId] = useState("");
   const [data, setData] = useState<BalanceSheetData | null>(null);
   const [loading, setLoading] = useState(false);
+  const [fundsLoading, setFundsLoading] = useState(false);
   const [error, setError] = useState("");
 
   useEffect(() => {
     if (currentOrg) {
+      setFundsLoading(true);
       api
         .get(`/orgs/${currentOrg.id}/funds`)
         .then((res) => {
@@ -73,7 +75,8 @@ export default function BalanceSheet() {
             setSelectedFundId(res.data[0].id);
           }
         })
-        .catch(() => setFunds([]));
+        .catch(() => setFunds([]))
+        .finally(() => setFundsLoading(false));
     }
   }, [currentOrg]);
 
@@ -98,16 +101,27 @@ export default function BalanceSheet() {
     <div className="balance-sheet">
       <div className="bs-header">
         <h2>Balance Sheet</h2>
-        <select
-          value={selectedFundId}
-          onChange={(e) => setSelectedFundId(e.target.value)}
-        >
-          {funds.map((f) => (
-            <option key={f.id} value={f.id}>
-              {f.fundCode} - {f.fundName}
-            </option>
-          ))}
-        </select>
+        <div className="select-wrapper">
+          <select
+            className="app-select"
+            value={selectedFundId}
+            onChange={(e) => setSelectedFundId(e.target.value)}
+            disabled={fundsLoading}
+          >
+            {fundsLoading ? (
+              <option>Loading funds...</option>
+            ) : funds.length === 0 ? (
+              <option>No funds available</option>
+            ) : (
+              funds.map((f) => (
+                <option key={f.id} value={f.id}>
+                  {f.fundCode} - {f.fundName}
+                </option>
+              ))
+            )}
+          </select>
+          {fundsLoading && <span className="select-spinner" />}
+        </div>
       </div>
 
       {loading && <p>Loading...</p>}

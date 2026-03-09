@@ -11,7 +11,7 @@ try:
     client.admin.command("ping")
     logger.info("MongoDB connection established successfully")
 except ConnectionFailure as e:
-    logger.error("Failed to connect to MongoDB: %s", e)
+    logger.error("Failed to connect to MongoDB: %s", e, exc_info=True)
     raise
 
 db = client[config.MONGO_DB]

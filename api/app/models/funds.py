@@ -20,6 +20,7 @@ def serialize_fund(doc):
         "orgId": str(doc["orgId"]),
         "externalIds": doc.get("externalIds", []),
         "fundCode": doc.get("fundCode", ""),
+        "sCode": doc.get("sCode", ""),
         "fundName": doc.get("fundName", ""),
         "fundType": doc.get("fundType", ""),
         "vintageYear": doc.get("vintageYear"),
@@ -54,7 +55,7 @@ def create_fund(org_id, data):
         logger.info("Fund created: id=%s", result.inserted_id)
         return str(result.inserted_id)
     except Exception as e:
-        logger.error("Failed to create fund orgId=%s, fundCode=%s: %s", org_id, data.get("fundCode"), e)
+        logger.error("Failed to create fund orgId=%s, fundCode=%s: %s", org_id, data.get("fundCode"), e, exc_info=True)
         raise
 
 
@@ -83,7 +84,7 @@ def list_funds_by_org(org_id, status=None):
         logger.info("Found %d funds for org %s", len(result), org_id)
         return result
     except Exception as e:
-        logger.error("Failed to list funds for org %s: %s", org_id, e)
+        logger.error("Failed to list funds for org %s: %s", org_id, e, exc_info=True)
         raise
 
 
@@ -101,7 +102,7 @@ def update_fund(fund_id, updates):
             logger.info("Fund %s not found for update", fund_id)
         return result.matched_count > 0
     except Exception as e:
-        logger.error("Failed to update fund %s: %s", fund_id, e)
+        logger.error("Failed to update fund %s: %s", fund_id, e, exc_info=True)
         raise
 
 
@@ -115,7 +116,7 @@ def delete_fund(fund_id):
             logger.info("Fund %s not found for deletion", fund_id)
         return result.deleted_count > 0
     except Exception as e:
-        logger.error("Failed to delete fund %s: %s", fund_id, e)
+        logger.error("Failed to delete fund %s: %s", fund_id, e, exc_info=True)
         raise
 
 

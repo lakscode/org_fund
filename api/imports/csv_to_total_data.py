@@ -85,20 +85,24 @@ class CSVSelectedRows:
         result = self.collection.update_one({"fundId": fundId}, {"$set":document}, upsert= True)
 
         
-        
-processor = CSVSelectedRows(
-    config.MONGO_URI,
-    config.MONGO_DB,
-    "balance_sheet"
-)
 
-selected_rows = [27, 30, 38, 58, 100, 91, 123, 13, 105, 129, 69]
+def import_balance_sheet(org_id, fund_id, s_code, csv_name):
+    if (org_id and fund_id and s_code):
+        if not csv_name:
+            csv_name = "../data/totals_data.csv"
+        processor = CSVSelectedRows(
+            config.MONGO_URI,
+            config.MONGO_DB,
+            "balance_sheet"
+        )
 
-processor.process_csv(
-    "../data/totals_data.csv",
-    selected_rows,
-    fundId="69a96f9182149d2a8b4f50bd",
-    sCode="lt_2004",
-    orgId="69a94fb12ef5155ff110c951"
-)
+        selected_rows = [27, 30, 38, 58, 100, 91, 123, 13, 105, 129, 69]
+
+        processor.process_csv(
+           csv_name,
+            selected_rows,
+            fundId=fund_id,
+            sCode=s_code,
+            orgId=org_id
+        )
 

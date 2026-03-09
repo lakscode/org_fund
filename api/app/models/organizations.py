@@ -37,7 +37,7 @@ def create_organization(name, status="active"):
         logger.info("Organization created: id=%s, name=%s", result.inserted_id, name)
         return str(result.inserted_id)
     except Exception as e:
-        logger.error("Failed to create organization name=%s: %s", name, e)
+        logger.error("Failed to create organization name=%s: %s", name, e, exc_info=True)
         raise
 
 
@@ -93,7 +93,7 @@ def get_user_orgs(user):
         logger.info("Fetched %d orgs for user %s", len(result), user_id)
         return result
     except Exception as e:
-        logger.error("Failed to fetch orgs for user %s: %s", user_id, e)
+        logger.error("Failed to fetch orgs for user %s: %s", user_id, e, exc_info=True)
         raise
 
 
@@ -111,7 +111,7 @@ def update_organization(org_id, updates):
             logger.info("Organization %s not found for update", org_id)
         return result.matched_count > 0
     except Exception as e:
-        logger.error("Failed to update organization %s: %s", org_id, e)
+        logger.error("Failed to update organization %s: %s", org_id, e, exc_info=True)
         raise
 
 
@@ -125,5 +125,5 @@ def delete_organization(org_id):
             logger.info("Organization %s not found for deletion", org_id)
         return result.deleted_count > 0
     except Exception as e:
-        logger.error("Failed to delete organization %s: %s", org_id, e)
+        logger.error("Failed to delete organization %s: %s", org_id, e, exc_info=True)
         raise

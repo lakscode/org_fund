@@ -7,7 +7,7 @@ os.makedirs(LOG_DIR, exist_ok=True)
 INFO_LOG = os.path.join(LOG_DIR, "info.log")
 ERROR_LOG = os.path.join(LOG_DIR, "error.log")
 
-LOG_FORMAT = "%(asctime)s [%(levelname)s] %(name)s (%(filename)s:%(lineno)d): %(message)s"
+LOG_FORMAT = "%(asctime)s [%(levelname)s] %(name)s (%(filename)s:%(lineno)d %(funcName)s): %(message)s"
 DATE_FORMAT = "%Y-%m-%d %H:%M:%S"
 
 formatter = logging.Formatter(LOG_FORMAT, datefmt=DATE_FORMAT)

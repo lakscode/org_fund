@@ -50,7 +50,6 @@ erDiagram
         datetime createdAt
         datetime updatedAt
     }
-
     properties {
         ObjectId _id PK
         string orgId FK
@@ -81,46 +80,7 @@ erDiagram
         string role
     }
 
-    tenants {
-        ObjectId _id PK
-        string orgId FK
-        string propertyId FK
-        string unitCode
-        string tenantName
-        string status
-        float sqft
-    }
-
-    units {
-        ObjectId _id PK
-        string orgId FK
-        string propertyId FK
-        string unitCode
-        string unitType
-        float sqft
-        string status
-    }
-
-    sqft {
-        ObjectId _id PK
-        string propertyId FK
-        string type
-        float totalSqft
-        float occupiedSqft
-    }
-
-    totals {
-        ObjectId _id PK
-        string propertyLegacyId
-        int accountId
-        int book
-        string month
-        float begin
-        float mtd
-        float budget
-        float beginBudget
-    }
-
+  
     balance_sheet {
         ObjectId _id PK
         string fundId FK
@@ -147,10 +107,6 @@ erDiagram
     funds ||--o{ fund_properties : "fundId"
     funds ||--o{ balance_sheet : "fundId"
     properties ||--o{ fund_properties : "propertyId"
-    properties ||--o{ tenants : "propertyId"
-    properties ||--o{ units : "propertyId"
-    properties ||--o{ sqft : "propertyId"
-    properties ||--o{ totals : "propertyLegacyId"
   </div>
 
   <script>mermaid.initialize({ startOnLoad: true, theme: 'default' });</script>

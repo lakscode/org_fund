@@ -49,7 +49,7 @@ def get_current_user(token):
         logger.error("Token has expired")
         return None
     except jwt.PyJWTError as e:
-        logger.error("Token decode failed: %s", e)
+        logger.error("Token decode failed: %s", e, exc_info=True)
         return None
     logger.info("Token valid, fetching user id=%s", user_id)
     user = find_user_by_id(user_id)

@@ -12,6 +12,7 @@ import BalanceSheet from "./pages/BalanceSheet";
 import CommandCenter from "./pages/CommandCenter";
 import Profile from "./pages/Profile";
 import Chat from "./pages/Chat";
+import Import from "./pages/Import";
 import "./App.css";
 
 function App() {
@@ -36,6 +37,7 @@ function App() {
             <Route path="/members" element={<Members />} />
             <Route path="/profile" element={<Profile />} />
             <Route path="/chat" element={<Chat />} />
+            <Route path="/import" element={<Import />} />
           </Route>
         </Routes>
       </AuthProvider>

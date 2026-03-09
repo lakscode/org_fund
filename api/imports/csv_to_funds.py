@@ -48,7 +48,7 @@ class FundCSVImporter:
             "orgId": self.org_id,
             "externalIds": {},
             "fundCode": row.get("hMy").rstrip(),
-            "propertyCode": row.get("hProperty").rstrip(),
+            "hProperty": row.get("hProperty").rstrip(),
             "startDate": now,
             "endDate":None,
             "ownershipPct":"",
@@ -87,14 +87,17 @@ class FundCSVImporter:
 
 
 
-if __name__ == "__main__":
+def import_funds(org_id, csvname):
+    csv_name = "../data/table_fund_data.csv"
+    if csv_name:
+        csv_name= csvname
+    if org_id:
+        importer = FundCSVImporter(
+            mongo_uri=config.MONGO_URI,
+            db_name=config.MONGO_DB,
+            collection_name="funds",
+            org_id=org_id,
+            collectionname_mapping="fund_properties"
+        )
 
-    importer = FundCSVImporter(
-        mongo_uri=config.MONGO_URI,
-        db_name=config.MONGO_DB,
-        collection_name="funds",
-        org_id="69a94fb12ef5155ff110c951",
-        collectionname_mapping="fund_properties"
-    )
-
-    importer.import_csv_fund("../data/table_fund_data.csv")
+        importer.import_csv_fund(csv_name)

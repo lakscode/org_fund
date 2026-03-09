@@ -57,13 +57,19 @@ export default function Sidebar() {
         </NavLink>
       </nav>
 
-      <div className="sidebar-bottom">
-        <div className="sidebar-admin-label">ADMIN</div>
-        <NavLink to="/profile">
-          <span className="sidebar-icon">&#9881;</span>
-          Settings
-        </NavLink>
-      </div>
+      {currentOrg?.role === "admin" && (
+        <div className="sidebar-bottom">
+          <div className="sidebar-admin-label">ADMIN</div>
+          <NavLink to="/import">
+            <span className="sidebar-icon">&#8645;</span>
+            Import
+          </NavLink>
+          <NavLink to="/profile">
+            <span className="sidebar-icon">&#9881;</span>
+            Settings
+          </NavLink>
+        </div>
+      )}
     </aside>
   );
 }

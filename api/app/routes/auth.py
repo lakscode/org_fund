@@ -34,7 +34,7 @@ def register(body):
         logger.info("Registration complete for email=%s", email)
         return 200, {"access_token": token, "token_type": "bearer"}
     except Exception as e:
-        logger.error("Registration failed for email=%s: %s", email, e)
+        logger.error("Registration failed for email=%s: %s", email, e, exc_info=True)
         return 500, {"detail": "Internal server error"}
 
 
@@ -75,5 +75,5 @@ def me(current_user):
             "orgs": orgs,
         }
     except Exception as e:
-        logger.error("Failed to fetch profile for user id=%s: %s", user_id, e)
+        logger.error("Failed to fetch profile for user id=%s: %s", user_id, e, exc_info=True)
         return 500, {"detail": "Internal server error"}

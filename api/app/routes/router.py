@@ -12,6 +12,7 @@ from app.routes import properties as property_routes
 from app.routes import fund_properties as fp_routes
 from app.routes import balancesheet as bs_routes
 from app.routes import chat as chat_routes
+from app.routes import imports as import_routes
 from app.logger import get_logger
 
 logger = get_logger("router")
@@ -364,6 +365,16 @@ def handle_post(handler):
         body = _read_body(handler)
         status, data = chat_routes.handle_chat(org_id, body, user)
         logger.info("POST /api/orgs/%s/chat -> %d", org_id, status)
+        return "json", status, data
+
+    # Import: CSV upload
+    if path in ("/api/import", "/api/import/"):
+        user, err = _auth_or_401(handler)
+        if err:
+            return err
+        print("IN router before handle_import")
+        status, data = import_routes.handle_import(handler, user)
+        logger.info("POST /api/import -> %d", status)
         return "json", status, data
 
     logger.info("POST %s - not found", path)

@@ -69,13 +69,16 @@ class PropertyCSVImporter:
             print(f"{len(result.inserted_ids)} properties inserted")
 
 
-if __name__ == "__main__":
+def import_properties(org_id, csvname):
+    csv_name = "../data/table_property.csv"
+    if csvname:
+        csv_name = csvname
+    if org_id:
+        importer = PropertyCSVImporter(
+            mongo_uri=config.MONGO_URI,
+            db_name=config.MONGO_DB,
+            collection_name="properties",
+            org_id=org_id
+        )
 
-    importer = PropertyCSVImporter(
-        mongo_uri=config.MONGO_URI,
-        db_name=config.MONGO_DB,
-        collection_name="properties",
-        org_id="69a94fb12ef5155ff110c951"
-    )
-
-    importer.import_csv_property("../data/table_property.csv")
+        importer.import_csv_property(csv_name)

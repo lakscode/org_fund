@@ -44,7 +44,7 @@ def create_fund_property(org_id, data):
         logger.info("Fund-property link created: id=%s", result.inserted_id)
         return str(result.inserted_id)
     except Exception as e:
-        logger.error("Failed to create fund-property link: %s", e)
+        logger.error("Failed to create fund-property link: %s", e, exc_info=True)
         raise
 
 
@@ -70,7 +70,7 @@ def list_by_fund(fund_id):
         logger.info("Found %d fund-property links for fund %s", len(result), fund_id)
         return result
     except Exception as e:
-        logger.error("Failed to list fund-properties for fund %s: %s", fund_id, e)
+        logger.error("Failed to list fund-properties for fund %s: %s", fund_id, e, exc_info=True)
         raise
 
 
@@ -82,7 +82,7 @@ def list_by_property(property_id):
         logger.info("Found %d fund-property links for property %s", len(result), property_id)
         return result
     except Exception as e:
-        logger.error("Failed to list fund-properties for property %s: %s", property_id, e)
+        logger.error("Failed to list fund-properties for property %s: %s", property_id, e, exc_info=True)
         raise
 
 
@@ -94,7 +94,7 @@ def list_by_org(org_id):
         logger.info("Found %d fund-property links for org %s", len(result), org_id)
         return result
     except Exception as e:
-        logger.error("Failed to list fund-properties for org %s: %s", org_id, e)
+        logger.error("Failed to list fund-properties for org %s: %s", org_id, e, exc_info=True)
         raise
 
 
@@ -111,7 +111,7 @@ def update_fund_property(fp_id, updates):
             logger.info("Fund-property %s not found for update", fp_id)
         return result.matched_count > 0
     except Exception as e:
-        logger.error("Failed to update fund-property %s: %s", fp_id, e)
+        logger.error("Failed to update fund-property %s: %s", fp_id, e, exc_info=True)
         raise
 
 
@@ -125,5 +125,5 @@ def delete_fund_property(fp_id):
             logger.info("Fund-property %s not found for deletion", fp_id)
         return result.deleted_count > 0
     except Exception as e:
-        logger.error("Failed to delete fund-property %s: %s", fp_id, e)
+        logger.error("Failed to delete fund-property %s: %s", fp_id, e, exc_info=True)
         raise

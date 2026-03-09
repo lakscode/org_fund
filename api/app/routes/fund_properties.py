@@ -18,7 +18,7 @@ def list_by_org(org_id, current_user):
         logger.info("Found %d fund-property links for org %s", len(fps), org_id)
         return 200, fps
     except Exception as e:
-        logger.error("Failed to list fund-properties for org %s: %s", org_id, e)
+        logger.error("Failed to list fund-properties for org %s: %s", org_id, e, exc_info=True)
         return 500, {"detail": "Internal server error"}
 
 
@@ -29,7 +29,7 @@ def list_by_fund(fund_id, current_user):
         logger.info("Found %d fund-property links for fund %s", len(fps), fund_id)
         return 200, fps
     except Exception as e:
-        logger.error("Failed to list fund-properties for fund %s: %s", fund_id, e)
+        logger.error("Failed to list fund-properties for fund %s: %s", fund_id, e, exc_info=True)
         return 500, {"detail": "Internal server error"}
 
 
@@ -40,7 +40,7 @@ def list_by_property(property_id, current_user):
         logger.info("Found %d fund-property links for property %s", len(fps), property_id)
         return 200, fps
     except Exception as e:
-        logger.error("Failed to list fund-properties for property %s: %s", property_id, e)
+        logger.error("Failed to list fund-properties for property %s: %s", property_id, e, exc_info=True)
         return 500, {"detail": "Internal server error"}
 
 
@@ -57,7 +57,7 @@ def get(fp_id, current_user):
         logger.info("Fund-property fetched: %s", fp_id)
         return 200, fp
     except Exception as e:
-        logger.error("Failed to get fund-property %s: %s", fp_id, e)
+        logger.error("Failed to get fund-property %s: %s", fp_id, e, exc_info=True)
         return 500, {"detail": "Internal server error"}
 
 
@@ -78,7 +78,7 @@ def create(org_id, body, current_user):
         logger.info("Fund-property created: id=%s in org %s", fp_id, org_id)
         return 201, {"id": fp_id}
     except Exception as e:
-        logger.error("Failed to create fund-property in org %s: %s", org_id, e)
+        logger.error("Failed to create fund-property in org %s: %s", org_id, e, exc_info=True)
         return 500, {"detail": "Internal server error"}
 
 
@@ -96,7 +96,7 @@ def update(fp_id, body, current_user):
         logger.info("Fund-property %s updated", fp_id)
         return 200, {"detail": "Fund-property updated"}
     except Exception as e:
-        logger.error("Failed to update fund-property %s: %s", fp_id, e)
+        logger.error("Failed to update fund-property %s: %s", fp_id, e, exc_info=True)
         return 500, {"detail": "Internal server error"}
 
 
@@ -114,5 +114,5 @@ def delete(fp_id, current_user):
         logger.info("Fund-property %s deleted", fp_id)
         return 200, {"detail": "Fund-property deleted"}
     except Exception as e:
-        logger.error("Failed to delete fund-property %s: %s", fp_id, e)
+        logger.error("Failed to delete fund-property %s: %s", fp_id, e, exc_info=True)
         return 500, {"detail": "Internal server error"}

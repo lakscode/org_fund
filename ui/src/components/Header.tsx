@@ -37,20 +37,26 @@ export default function Header() {
   return (
     <header className="header">
       <div className="header-left">
-        <select
-          className="header-org-select"
-          value={currentOrg?.id ?? ""}
-          onChange={(e) => {
-            const org = user.orgs.find((o) => o.id === e.target.value);
-            if (org) setCurrentOrg(org);
-          }}
-        >
-          {user && user.orgs && user.orgs.map((org) => (
-            <option key={org.id} value={org.id}>
-              {org.name}
-            </option>
-          ))}
-        </select>
+        <div className="select-wrapper">
+          <select
+            className="header-org-select app-select"
+            value={currentOrg?.id ?? ""}
+            onChange={(e) => {
+              const org = user.orgs.find((o) => o.id === e.target.value);
+              if (org) setCurrentOrg(org);
+            }}
+          >
+            {user && user.orgs && user.orgs.length === 0 ? (
+              <option>No organizations</option>
+            ) : (
+              user.orgs.map((org) => (
+                <option key={org.id} value={org.id}>
+                  {org.name}
+                </option>
+              ))
+            )}
+          </select>
+        </div>
       </div>
       <div className="header-right">
         <button className="header-icon-btn" title="Notifications">
