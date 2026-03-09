@@ -42,17 +42,17 @@ interface BalanceSheetData {
   };
 }
 
-function fmt(value: number): string {
+function fmt(value?: number): string {
   return new Intl.NumberFormat("en-US", {
     style: "currency",
     currency: "USD",
     minimumFractionDigits: 0,
     maximumFractionDigits: 0,
-  }).format(value);
+  }).format(value ?? 0);
 }
 
-function pct(value: number): string {
-  return `${value.toFixed(2)}%`;
+function pct(value?: number): string {
+  return `${(value ?? 0).toFixed(2)}%`;
 }
 
 export default function BalanceSheet() {
@@ -122,34 +122,34 @@ export default function BalanceSheet() {
           <div className="bs-grid">
             <div className="bs-card">
               <h3>Assets Under Management</h3>
-              <div className="bs-value">{fmt(data.aum.aggregateInvestmentValue)}</div>
+              <div className="bs-value">{fmt(data.aum?.aggregateInvestmentValue)}</div>
               <div className="bs-breakdown">
-                <span>Investments LP: {fmt(data.aum.investmentsLP)}</span>
-                <span>Investments Corp: {fmt(data.aum.investmentsCorp)}</span>
+                <span>Investments LP: {fmt(data.aum?.investmentsLP)}</span>
+                <span>Investments Corp: {fmt(data.aum?.investmentsCorp)}</span>
               </div>
             </div>
 
             <div className="bs-card">
               <h3>Equity Under Management</h3>
-              <div className="bs-value">{fmt(data.eum.equityUnderManagement)}</div>
+              <div className="bs-value">{fmt(data.eum?.equityUnderManagement)}</div>
               <div className="bs-breakdown">
-                <span>AUM: {fmt(data.eum.aggregateInvestmentValue)}</span>
-                <span>Mortgage Debt: {fmt(data.eum.totalMortgageDebt)}</span>
+                <span>AUM: {fmt(data.eum?.aggregateInvestmentValue)}</span>
+                <span>Mortgage Debt: {fmt(data.eum?.totalMortgageDebt)}</span>
               </div>
             </div>
 
             <div className="bs-card">
               <h3>Portfolio NOI</h3>
-              <div className="bs-value">{fmt(data.noi.netOperatingIncome)}</div>
+              <div className="bs-value">{fmt(data.noi?.netOperatingIncome)}</div>
               <div className="bs-breakdown">
-                <span>Revenue: {fmt(data.noi.revenue)}</span>
-                <span>Op. Expenses: {fmt(data.noi.operatingExpenses)}</span>
+                <span>Revenue: {fmt(data.noi?.revenue)}</span>
+                <span>Op. Expenses: {fmt(data.noi?.operatingExpenses)}</span>
               </div>
             </div>
 
             <div className="bs-card">
               <h3>Expense Ratio</h3>
-              <div className="bs-value">{pct(data.expenseRatio * 100)}</div>
+              <div className="bs-value">{pct((data.expenseRatio ?? 0) * 100)}</div>
             </div>
 
             <div className="bs-card">
@@ -159,28 +159,28 @@ export default function BalanceSheet() {
 
             <div className="bs-card">
               <h3>Portfolio DSCR</h3>
-              <div className="bs-value">{data.dscr.debtServiceCoverageRatio.toFixed(2)}x</div>
+              <div className="bs-value">{(data.dscr?.debtServiceCoverageRatio ?? 0).toFixed(2)}x</div>
               <div className="bs-breakdown">
-                <span>NOI: {fmt(data.dscr.noi)}</span>
-                <span>Debt Expenses: {fmt(data.dscr.totalDebtExpenses)}</span>
+                <span>NOI: {fmt(data.dscr?.noi)}</span>
+                <span>Debt Expenses: {fmt(data.dscr?.totalDebtExpenses)}</span>
               </div>
             </div>
 
             <div className="bs-card">
               <h3>Budget vs Actual</h3>
-              <div className="bs-value">{fmt(data.budgetVsActual.variance)}</div>
+              <div className="bs-value">{fmt(data.budgetVsActual?.variance)}</div>
               <div className="bs-breakdown">
-                <span>Actual: {fmt(data.budgetVsActual.actual)}</span>
-                <span>Budget: {fmt(data.budgetVsActual.budget)}</span>
+                <span>Actual: {fmt(data.budgetVsActual?.actual)}</span>
+                <span>Budget: {fmt(data.budgetVsActual?.budget)}</span>
               </div>
             </div>
 
             <div className="bs-card">
               <h3>YTD Return (Fund Level)</h3>
-              <div className="bs-value">{pct(data.ytdReturn.returnPct)}</div>
+              <div className="bs-value">{pct(data.ytdReturn?.returnPct)}</div>
               <div className="bs-breakdown">
-                <span>Net Income: {fmt(data.ytdReturn.netIncome)}</span>
-                <span>Total Equity: {fmt(data.ytdReturn.totalEquity)}</span>
+                <span>Net Income: {fmt(data.ytdReturn?.netIncome)}</span>
+                <span>Total Equity: {fmt(data.ytdReturn?.totalEquity)}</span>
               </div>
             </div>
           </div>

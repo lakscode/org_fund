@@ -3,14 +3,18 @@ import { useAuth } from "../context/AuthContext";
 import api from "../api";
 import type { Property } from "../types";
 
+const PAGE_SIZE = 10;
+
 export default function Properties() {
   const { currentOrg } = useAuth();
   const [properties, setProperties] = useState<Property[]>([]);
   const [loading, setLoading] = useState(true);
+  const [page, setPage] = useState(0);
 
   useEffect(() => {
     if (currentOrg) {
       setLoading(true);
+      setPage(0);
       api
         .get(`/orgs/${currentOrg.id}/properties`)
         .then((res) => setProperties(res.data))
@@ -21,6 +25,9 @@ export default function Properties() {
 
   if (!currentOrg) return <p>No organization selected.</p>;
   if (loading) return <p>Loading...</p>;
+
+  const totalPages = Math.ceil(properties.length / PAGE_SIZE);
+  const paginated = properties.slice(page * PAGE_SIZE, (page + 1) * PAGE_SIZE);
 
   return (
     <div className="properties">
@@ -38,7 +45,7 @@ export default function Properties() {
           </tr>
         </thead>
         <tbody>
-          {properties.map((prop) => (
+          {paginated.map((prop) => (
             <tr key={prop.id}>
               <td>{prop.propertyCode}</td>
               <td>{prop.propertyName}</td>
@@ -54,6 +61,13 @@ export default function Properties() {
           ))}
         </tbody>
       </table>
+      {totalPages > 1 && (
+        <div className="cc-pagination">
+          <button disabled={page === 0} onClick={() => setPage(page - 1)}>&laquo;</button>
+          <span>{page + 1} / {totalPages}</span>
+          <button disabled={page >= totalPages - 1} onClick={() => setPage(page + 1)}>&raquo;</button>
+        </div>
+      )}
     </div>
   );
 }

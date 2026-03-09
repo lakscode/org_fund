@@ -3,14 +3,18 @@ import { useAuth } from "../context/AuthContext";
 import api from "../api";
 import type { Fund } from "../types";
 
+const PAGE_SIZE = 10;
+
 export default function Funds() {
   const { currentOrg } = useAuth();
   const [funds, setFunds] = useState<Fund[]>([]);
   const [loading, setLoading] = useState(true);
+  const [page, setPage] = useState(0);
 
   useEffect(() => {
     if (currentOrg) {
       setLoading(true);
+      setPage(0);
       api
         .get(`/orgs/${currentOrg.id}/funds`)
         .then((res) => setFunds(res.data))
@@ -21,6 +25,9 @@ export default function Funds() {
 
   if (!currentOrg) return <p>No organization selected.</p>;
   if (loading) return <p>Loading...</p>;
+
+  const totalPages = Math.ceil(funds.length / PAGE_SIZE);
+  const paginated = funds.slice(page * PAGE_SIZE, (page + 1) * PAGE_SIZE);
 
   return (
     <div className="funds">
@@ -37,7 +44,7 @@ export default function Funds() {
           </tr>
         </thead>
         <tbody>
-          {funds.map((fund) => (
+          {paginated.map((fund) => (
             <tr key={fund.id}>
               <td>{fund.fundCode}</td>
               <td>{fund.fundName}</td>
@@ -52,6 +59,13 @@ export default function Funds() {
           ))}
         </tbody>
       </table>
+      {totalPages > 1 && (
+        <div className="cc-pagination">
+          <button disabled={page === 0} onClick={() => setPage(page - 1)}>&laquo;</button>
+          <span>{page + 1} / {totalPages}</span>
+          <button disabled={page >= totalPages - 1} onClick={() => setPage(page + 1)}>&raquo;</button>
+        </div>
+      )}
     </div>
   );
 }
