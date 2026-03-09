@@ -51,6 +51,10 @@ export default function Sidebar() {
           <span className="sidebar-icon">&#9679;</span>
           Members
         </NavLink>
+        <NavLink to="/chat">
+          <span className="sidebar-icon">&#9993;</span>
+          REstackAI Chat
+        </NavLink>
       </nav>
 
       <div className="sidebar-bottom">

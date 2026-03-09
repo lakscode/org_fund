@@ -11,6 +11,7 @@ import Properties from "./pages/Properties";
 import BalanceSheet from "./pages/BalanceSheet";
 import CommandCenter from "./pages/CommandCenter";
 import Profile from "./pages/Profile";
+import Chat from "./pages/Chat";
 import "./App.css";
 
 function App() {
@@ -34,6 +35,7 @@ function App() {
             <Route path="/balance-sheet" element={<BalanceSheet />} />
             <Route path="/members" element={<Members />} />
             <Route path="/profile" element={<Profile />} />
+            <Route path="/chat" element={<Chat />} />
           </Route>
         </Routes>
       </AuthProvider>

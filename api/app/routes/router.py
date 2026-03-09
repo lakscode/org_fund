@@ -11,6 +11,7 @@ from app.routes import funds as fund_routes
 from app.routes import properties as property_routes
 from app.routes import fund_properties as fp_routes
 from app.routes import balancesheet as bs_routes
+from app.routes import chat as chat_routes
 from app.logger import get_logger
 
 logger = get_logger("router")
@@ -34,6 +35,7 @@ RE_FUND_BALANCESHEET = re.compile(r"^/api/funds/([^/]+)/balancesheet/?$")
 RE_ORG_MEMBERS = re.compile(r"^/api/orgs/([a-f0-9]{24})/members/?$")
 RE_ORG_MEMBER = re.compile(r"^/api/orgs/([a-f0-9]{24})/members/([a-f0-9]{24})$")
 RE_ORG_MEMBER_RESET_PW = re.compile(r"^/api/orgs/([a-f0-9]{24})/members/([a-f0-9]{24})/reset-password$")
+RE_ORG_CHAT = re.compile(r"^/api/orgs/([a-f0-9]{24})/chat/?$")
 
 
 def set_server_started(ts):
@@ -350,6 +352,18 @@ def handle_post(handler):
         body = _read_body(handler)
         status, data = org_routes.reset_member_password(org_id, member_id, body, user)
         logger.info("POST /api/orgs/%s/members/%s/reset-password -> %d", org_id, member_id, status)
+        return "json", status, data
+
+    # Chat: query
+    m = RE_ORG_CHAT.match(path)
+    if m:
+        user, err = _auth_or_401(handler)
+        if err:
+            return err
+        org_id = m.group(1)
+        body = _read_body(handler)
+        status, data = chat_routes.handle_chat(org_id, body, user)
+        logger.info("POST /api/orgs/%s/chat -> %d", org_id, status)
         return "json", status, data
 
     logger.info("POST %s - not found", path)
