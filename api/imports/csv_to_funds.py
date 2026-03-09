@@ -62,8 +62,10 @@ class FundCSVImporter:
 
     def import_csv_fund(self, csv_path):
 
-        docs = []
-        doc_mappings =[]
+        inserted = 0
+        updated = 0
+        mapping_inserted = 0
+        mapping_updated = 0
 
         with open(csv_path, newline='', encoding='utf-8-sig') as csvfile:
 
@@ -71,19 +73,47 @@ class FundCSVImporter:
 
             for row in reader:
                 doc = self.build_document(row)
-                docs.append(doc)
-                
-                doc_mapping = self.build_fund_property(row)
-                doc_mappings.append(doc_mapping)
-                
+                now = doc.pop("createdAt")
+                doc.pop("updatedAt")
 
-        if docs:
-            result = self.collection.insert_many(docs)
-            print(f"{len(result.inserted_ids)} funds inserted")
-            
-        if doc_mappings:
-            result = self.collectionname_mapping.insert_many(doc_mappings)
-            print(f"{len(result.inserted_ids)} fund mappingss inserted")
+                filter_key = {"orgId": self.org_id, "fundCode": doc["fundCode"]}
+                result = self.collection.update_one(
+                    filter_key,
+                    {
+                        "$set": {**doc, "updatedAt": now},
+                        "$setOnInsert": {"createdAt": now},
+                    },
+                    upsert=True,
+                )
+                if result.upserted_id:
+                    inserted += 1
+                elif result.modified_count:
+                    updated += 1
+
+                doc_mapping = self.build_fund_property(row)
+                map_now = doc_mapping.pop("createdAt")
+                doc_mapping.pop("updatedAt")
+
+                map_filter = {
+                    "orgId": self.org_id,
+                    "fundCode": doc_mapping["fundCode"],
+                    "hProperty": doc_mapping["hProperty"],
+                }
+                result = self.collectionname_mapping.update_one(
+                    map_filter,
+                    {
+                        "$set": {**doc_mapping, "updatedAt": map_now},
+                        "$setOnInsert": {"createdAt": map_now},
+                    },
+                    upsert=True,
+                )
+                if result.upserted_id:
+                    mapping_inserted += 1
+                elif result.modified_count:
+                    mapping_updated += 1
+
+        print(f"Funds: {inserted} inserted, {updated} updated")
+        print(f"Fund mappings: {mapping_inserted} inserted, {mapping_updated} updated")
 
 
 

@@ -54,7 +54,8 @@ class PropertyCSVImporter:
 
     def import_csv_property(self, csv_path):
 
-        docs = []
+        inserted = 0
+        updated = 0
 
         with open(csv_path, newline='', encoding='utf-8-sig') as csvfile:
 
@@ -62,11 +63,24 @@ class PropertyCSVImporter:
 
             for row in reader:
                 doc = self.build_property_document(row)
-                docs.append(doc)
+                now = doc.pop("createdAt")
+                doc.pop("updatedAt")
 
-        if docs:
-            result = self.collection.insert_many(docs)
-            print(f"{len(result.inserted_ids)} properties inserted")
+                filter_key = {"orgId": self.org_id, "propertyCode": doc["propertyCode"]}
+                result = self.collection.update_one(
+                    filter_key,
+                    {
+                        "$set": {**doc, "updatedAt": now},
+                        "$setOnInsert": {"createdAt": now},
+                    },
+                    upsert=True,
+                )
+                if result.upserted_id:
+                    inserted += 1
+                elif result.modified_count:
+                    updated += 1
+
+        print(f"Properties: {inserted} inserted, {updated} updated")
 
 
 def import_properties(org_id, csvname):
