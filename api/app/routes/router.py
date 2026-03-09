@@ -31,6 +31,9 @@ RE_PROPERTY_FUND_PROPS = re.compile(r"^/api/properties/([a-f0-9]{24})/fund-prope
 RE_ORG_FUND_PROPS = re.compile(r"^/api/orgs/([a-f0-9]{24})/fund-properties/?$")
 RE_FUND_PROP = re.compile(r"^/api/fund-properties/([a-f0-9]{24})$")
 RE_FUND_BALANCESHEET = re.compile(r"^/api/funds/([^/]+)/balancesheet/?$")
+RE_ORG_MEMBERS = re.compile(r"^/api/orgs/([a-f0-9]{24})/members/?$")
+RE_ORG_MEMBER = re.compile(r"^/api/orgs/([a-f0-9]{24})/members/([a-f0-9]{24})$")
+RE_ORG_MEMBER_RESET_PW = re.compile(r"^/api/orgs/([a-f0-9]{24})/members/([a-f0-9]{24})/reset-password$")
 
 
 def set_server_started(ts):
@@ -325,6 +328,30 @@ def handle_post(handler):
         logger.info("POST /api/orgs/%s/fund-properties -> %d", org_id, status)
         return "json", status, data
 
+    # Org members: add user
+    m = RE_ORG_MEMBERS.match(path)
+    if m:
+        user, err = _auth_or_401(handler)
+        if err:
+            return err
+        org_id = m.group(1)
+        body = _read_body(handler)
+        status, data = org_routes.add_member(org_id, body, user)
+        logger.info("POST /api/orgs/%s/members -> %d", org_id, status)
+        return "json", status, data
+
+    # Org members: reset password
+    m = RE_ORG_MEMBER_RESET_PW.match(path)
+    if m:
+        user, err = _auth_or_401(handler)
+        if err:
+            return err
+        org_id, member_id = m.group(1), m.group(2)
+        body = _read_body(handler)
+        status, data = org_routes.reset_member_password(org_id, member_id, body, user)
+        logger.info("POST /api/orgs/%s/members/%s/reset-password -> %d", org_id, member_id, status)
+        return "json", status, data
+
     logger.info("POST %s - not found", path)
     return "json", 404, {"detail": "Not found"}
 
@@ -382,6 +409,18 @@ def handle_put(handler):
         body = _read_body(handler)
         status, data = fp_routes.update(fp_id, body, user)
         logger.info("PUT /api/fund-properties/%s -> %d", fp_id, status)
+        return "json", status, data
+
+    # Org members: edit
+    m = RE_ORG_MEMBER.match(path)
+    if m:
+        user, err = _auth_or_401(handler)
+        if err:
+            return err
+        org_id, member_id = m.group(1), m.group(2)
+        body = _read_body(handler)
+        status, data = org_routes.edit_member(org_id, member_id, body, user)
+        logger.info("PUT /api/orgs/%s/members/%s -> %d", org_id, member_id, status)
         return "json", status, data
 
     logger.info("PUT %s - not found", path)

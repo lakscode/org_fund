@@ -3,6 +3,7 @@ from app.models.users import (
     find_user_by_id,
     create_user,
     add_user_to_org,
+    update_user,
     get_org_members,
 )
 from app.models.organizations import (

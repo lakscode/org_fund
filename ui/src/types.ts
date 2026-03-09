@@ -19,6 +19,7 @@ export interface OrgMember {
   email: string;
   name: string;
   role: string;
+  createdAt: string;
 }
 
 export interface OrgData {

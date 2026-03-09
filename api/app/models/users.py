@@ -88,6 +88,34 @@ def add_user_to_org(user_id, org_id, role="member"):
         raise
 
 
+def update_user(user_id, updates):
+    """Update user fields (name, email) and optionally org role."""
+    logger.info("Updating user %s with fields: %s", user_id, list(updates.keys()))
+    try:
+        set_fields = {}
+        if "name" in updates:
+            set_fields["name"] = updates["name"]
+        if "email" in updates:
+            set_fields["email"] = updates["email"]
+        if "hashed_password" in updates:
+            set_fields["hashed_password"] = updates["hashed_password"]
+
+        if set_fields:
+            users_col.update_one({"_id": ObjectId(user_id)}, {"$set": set_fields})
+
+        # Update role within org_roles array
+        if "role" in updates and "org_id" in updates:
+            users_col.update_one(
+                {"_id": ObjectId(user_id), "org_roles.org_id": updates["org_id"]},
+                {"$set": {"org_roles.$.role": updates["role"]}},
+            )
+        logger.info("User %s updated", user_id)
+        return True
+    except Exception as e:
+        logger.error("Failed to update user %s: %s", user_id, e)
+        raise
+
+
 def get_org_members(org_id):
     logger.info("Fetching members for org %s", org_id)
     try:
@@ -101,6 +129,7 @@ def get_org_members(org_id):
                 "email": d["email"],
                 "name": d["name"],
                 "role": role_entry["role"] if role_entry else "member",
+                "createdAt": d["_id"].generation_time.isoformat(),
             })
         logger.info("Found %d members for org %s", len(result), org_id)
         return result
