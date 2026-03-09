@@ -23,6 +23,11 @@ export default function Register() {
 
   return (
     <div className="auth-page">
+      <div className="auth-branding">
+        <img src="/images/logo.png" alt="REstackAI" className="auth-logo-img" />
+        <h1>REstackAI</h1>
+        <p>Real Estate Operating System</p>
+      </div>
       <form onSubmit={handleSubmit} className="auth-form">
         <h2>Register</h2>
         {error && <p className="error">{error}</p>}

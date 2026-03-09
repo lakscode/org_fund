@@ -22,10 +22,18 @@ export default function Login() {
 
   return (
     <div className="auth-page">
+      <div className="auth-branding">
+        <img src="/images/logo.png" alt="REstackAI" className="auth-logo-img" />
+        <h1>REstackAI</h1>
+        <p>Real Estate Operating System</p>
+      </div>
       <form onSubmit={handleSubmit} className="auth-form">
-        <h2>Login</h2>
+        <h2>Welcome back</h2>
+        <p className="auth-subtitle">Sign in to your account</p>
         {error && <p className="error">{error}</p>}
+        <label>Email</label>
         <input type="email" placeholder="Email" value={email} onChange={(e) => setEmail(e.target.value)} required />
+        <label>Password</label>
         <input
           type="password"
           placeholder="Password"
@@ -33,7 +41,7 @@ export default function Login() {
           onChange={(e) => setPassword(e.target.value)}
           required
         />
-        <button type="submit">Login</button>
+        <button type="submit">Sign In</button>
         <p>
           Don't have an account? <Link to="/register">Register</Link>
         </p>
