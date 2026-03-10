@@ -387,14 +387,6 @@ body {
 }
 
 /* ===== Dashboard ===== */
-.dashboard h2 { margin-bottom: 0.5rem; }
-.org-description { color: #666; margin-bottom: 1.5rem; }
-
-.stats-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-  gap: 1rem;
-}
 
 .stat-card {
   background: #fff;
@@ -406,11 +398,7 @@ body {
 .stat-card h3 { font-size: 0.85rem; color: #888; text-transform: uppercase; margin-bottom: 0.5rem; }
 .stat-value { font-size: 1.75rem; font-weight: 700; color: #1976d2; }
 
-/* ===== Members ===== */
-.members h2 { margin-bottom: 1rem; }
-
 /* ===== Profile ===== */
-.profile h2 { margin-bottom: 1.5rem; }
 
 .profile-card {
   background: #fff;
@@ -432,8 +420,6 @@ body {
 .profile-org-status { font-size: 0.75rem; padding: 0.15rem 0.5rem; border-radius: 10px; background: #e8f5e9; color: #2e7d32; text-transform: capitalize; }
 
 /* ===== Funds & Properties ===== */
-.funds h2, .properties h2 { margin-bottom: 0.25rem; }
-.list-count { color: #888; font-size: 0.9rem; margin-bottom: 1rem; }
 .capitalize { text-transform: capitalize; }
 
 .asset-name { font-weight: 600; font-size: 0.88rem; }
@@ -447,10 +433,8 @@ body {
 
 
 /* ===== Balance Sheet ===== */
-.balance-sheet h2 { margin-bottom: 0.25rem; }
 .bs-header { display: flex; align-items: center; gap: 1.5rem; margin-bottom: 0.5rem; }
 .bs-header .app-select { min-width: 220px; }
-.bs-subtitle { color: #888; font-size: 0.9rem; margin-bottom: 1.25rem; }
 .bs-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 1rem; }
 .bs-card { background: #fff; padding: 1.25rem 1.5rem; border-radius: 8px; box-shadow: 0 1px 4px rgba(0, 0, 0, 0.1); }
 .bs-card h3 { font-size: 0.8rem; color: #888; text-transform: uppercase; margin-bottom: 0.5rem; font-weight: 600; }
@@ -500,12 +484,6 @@ body {
   font-weight: 700;
   text-transform: uppercase;
   letter-spacing: 0.8px;
-}
-
-.cc-subtitle {
-  color: #888;
-  font-size: 0.9rem;
-  margin-bottom: 1.25rem;
 }
 
 .cc-loading {
@@ -1944,9 +1922,6 @@ body {
   /* Main content */
   .main-content { padding: 1rem; }
 
-  /* Dashboard */
-  .stats-grid { grid-template-columns: 1fr 1fr; }
-
   /* Command Center cards */
   .cc-row-6, .cc-row-5 { grid-template-columns: 1fr 1fr; }
   .cc-title-row { flex-wrap: wrap; gap: 0.5rem; }
@@ -1994,8 +1969,6 @@ body {
 @media (max-width: 480px) {
   .main-content { padding: 0.75rem; }
 
-  /* Dashboard */
-  .stats-grid { grid-template-columns: 1fr; }
   .stat-value { font-size: 1.4rem; }
 
   /* CC cards single column */

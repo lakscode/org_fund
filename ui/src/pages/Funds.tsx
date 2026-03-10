@@ -4,6 +4,7 @@ import api from "../api";
 import { Table, Tag } from "antd";
 import type { ColumnsType } from "antd/es/table";
 import type { Fund, Property } from "../types";
+import { fmtCompact } from "../utils/formatters";
 
 interface FundProperties {
   [fundId: string]: { data: Property[]; loading: boolean };
@@ -41,14 +42,7 @@ export default function Funds() {
 
   if (!currentOrg) return <p>No organization selected.</p>;
 
-  const fmtCompact = (value: number): string => {
-    const abs = Math.abs(value);
-    const sign = value < 0 ? "-" : "";
-    if (abs >= 1_000_000_000) return `${sign}$${(abs / 1_000_000_000).toFixed(1)}B`;
-    if (abs >= 1_000_000) return `${sign}$${(abs / 1_000_000).toFixed(1)}M`;
-    if (abs >= 1_000) return `${sign}$${(abs / 1_000).toFixed(0)}K`;
-    return `${sign}$${abs.toFixed(0)}`;
-  };
+
 
   const columns: ColumnsType<Fund> = [
     { title: "Name", dataIndex: "fundName", key: "fundName" },
