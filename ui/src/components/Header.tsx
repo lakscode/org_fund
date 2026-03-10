@@ -1,6 +1,7 @@
 import { useState, useRef, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "../context/AuthContext";
+import { Avatar } from "antd";
 
 const ROLE_LABELS: Record<string, string> = {
   admin: "Administrator",
@@ -70,13 +71,14 @@ export default function Header() {
           <span className="header-user-role">{currentOrg?.role ? (ROLE_LABELS[currentOrg.role] || currentOrg.role) : ""}</span>
         </div>
         <div className="avatar-wrapper" ref={menuRef}>
-          <button
-            className="avatar"
+          <Avatar
+            size={38}
             onClick={() => setMenuOpen(!menuOpen)}
+            style={{ cursor: "pointer", backgroundColor: "#0f7b6c", fontWeight: 600, fontSize: "0.85rem" }}
             title={user.name}
           >
             {initials}
-          </button>
+          </Avatar>
           {menuOpen && (
             <div className="avatar-menu">
               <div className="avatar-menu-header">

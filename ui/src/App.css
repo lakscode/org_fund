@@ -134,7 +134,7 @@ body {
 
 .sidebar-fund-access {
   font-size: 0.65rem;
-  color: #4fc3f7;
+  color: #5ec5b0;
   font-weight: 600;
   letter-spacing: 0.5px;
 }
@@ -330,23 +330,6 @@ body {
 
 /* Avatar */
 .avatar-wrapper { position: relative; }
-
-.avatar {
-  width: 38px;
-  height: 38px;
-  border-radius: 50%;
-  background: linear-gradient(135deg, #4fc3f7, #1976d2);
-  color: #fff;
-  font-weight: 700;
-  font-size: 0.8rem;
-  border: 2px solid #e0e0e0;
-  cursor: pointer;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.avatar:hover { border-color: #4fc3f7; }
 
 .avatar-menu {
   position: absolute;
