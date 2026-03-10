@@ -68,6 +68,12 @@ export interface Property {
   market: string;
   propertyType: string;
   status: string;
+  noiActual?: number;
+  noiBudget?: number;
+  noiVariance?: number;
+  noiVsBudgetPct?: number;
+  occupancy?: number;
+  dscr?: number;
   createdAt: string;
   updatedAt: string;
 }

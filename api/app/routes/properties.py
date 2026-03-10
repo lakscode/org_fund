@@ -3,6 +3,7 @@ from app.models import (
     list_properties_by_fund, update_property, delete_property,
     get_noi_vs_budget_by_org,
 )
+from app.database import tenants_col, units_col
 from app.logger import get_logger
 
 logger = get_logger("routes.properties")
@@ -28,11 +29,36 @@ def list_properties(org_id, current_user, query_params=None):
             market=params.get("market"),
         )
         noi_map = get_noi_vs_budget_by_org(org_id)
+
+        # Get occupancy data: tenant count and unit count per property
+        prop_ids = [p["id"] for p in props]
+        tenant_pipeline = [
+            {"$match": {"propertyId": {"$in": prop_ids}}},
+            {"$group": {"_id": "$propertyId", "count": {"$sum": 1}}},
+        ]
+        unit_pipeline = [
+            {"$match": {"propertyId": {"$in": prop_ids}}},
+            {"$group": {"_id": "$propertyId", "count": {"$sum": 1}}},
+        ]
+        tenant_counts = {r["_id"]: r["count"] for r in tenants_col.aggregate(tenant_pipeline)}
+        unit_counts = {r["_id"]: r["count"] for r in units_col.aggregate(unit_pipeline)}
+
         for p in props:
             noi = noi_map.get(p.get("propertyCode"), {})
             p["noiActual"] = noi.get("noiActual", 0)
             p["noiBudget"] = noi.get("noiBudget", 0)
             p["noiVariance"] = noi.get("noiVariance", 0)
+
+            # Occupancy
+            units = unit_counts.get(p["id"], 0)
+            tenants = tenant_counts.get(p["id"], 0)
+            p["occupancy"] = round((tenants / units * 100), 1) if units > 0 else 0
+
+            # DSCR placeholder (property-level DSCR from NOI / debt service)
+            p["dscr"] = 0
+
+            # NOI vs Budget percentage
+            p["noiVsBudgetPct"] = round(((noi.get("noiActual", 0) / noi.get("noiBudget", 1)) * 100 - 100), 1) if noi.get("noiBudget") else 0
         logger.info("Found %d properties for org %s", len(props), org_id)
         return 200, props
     except Exception as e:
