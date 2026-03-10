@@ -14,10 +14,10 @@
   --color-primary-ring-light: rgba(15, 123, 108, 0.12);
 
   /* ── Colors – neutral ── */
-  --color-bg: #f5f6f8;
+  --color-bg: #F8FAFC; /*#f5f6f8;*/
   --color-surface: #fff;
   --color-text: #333;
-  --color-text-dark: #1a1a2e;
+  --color-text-dark: #333132; /*#1a1a2e;*/
   --color-text-heading: #222;
   --color-text-muted: #888;
   --color-text-secondary: #666;

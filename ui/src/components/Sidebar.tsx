@@ -17,6 +17,7 @@ export default function Sidebar() {
   return (
     <aside className="sidebar">
       <div className="sidebar-logo">
+        <img src="/images/logo.png" alt="REstackAI" className="sidebar-logo-img" />
         <span className="sidebar-logo-text">REstackAI</span>
       </div>
 
