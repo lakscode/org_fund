@@ -130,7 +130,7 @@ export default function BalanceSheet() {
       {data && !loading && (
         <>
           <p className="page-subtitle">
-            {data.fundName} &middot; {data.propertyCount} properties
+            {data.fundName ?? "—"} &middot; {data.propertyCount ?? 0} properties
           </p>
 
           <div className="bs-grid">
@@ -168,7 +168,7 @@ export default function BalanceSheet() {
 
             <div className="bs-card">
               <h3>Cash</h3>
-              <div className="bs-value">{fmt(data.cash)}</div>
+              <div className="bs-value">{fmt(data.cash ?? 0)}</div>
             </div>
 
             <div className="bs-card">

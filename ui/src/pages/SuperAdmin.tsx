@@ -183,12 +183,12 @@ export default function SuperAdmin() {
       key: "orgs",
       render: (_: unknown, record: SAUser) => (
         <div className="sa-user-orgs">
-          {record.org_roles.map((r) => (
+          {(record.org_roles ?? []).map((r) => (
             <Tag key={r.org_id} closable onClose={() => unmapUser(record.id, r.org_id)}>
               {orgNameById(r.org_id)} <em>({r.role})</em>
             </Tag>
           ))}
-          {record.org_roles.length === 0 && <em className="sa-muted">No orgs</em>}
+          {(record.org_roles ?? []).length === 0 && <em className="sa-muted">No orgs</em>}
         </div>
       ),
     },

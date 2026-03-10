@@ -241,7 +241,7 @@ export default function CommandCenter() {
             <MetricCard
               title="REVENUE"
               icon="$"
-              value={fmtCompact(data.noi + Math.abs(data.budget_vs_actual))}
+              value={fmtCompact((data.noi ?? 0) + Math.abs(data.budget_vs_actual ?? 0))}
               subtitle="-1.8% vs Budget"
               subtitleColor="yellow"
               sources="GL \u00B7 RECENCY"
@@ -249,7 +249,7 @@ export default function CommandCenter() {
             <MetricCard
               title="EXPENSE RATIO"
               icon="%"
-              value={`${(data.expenseRatio * 100).toFixed(1)}%`}
+              value={`${((data.expenseRatio ?? 0) * 100).toFixed(1)}%`}
               subtitle="+2.1pp vs Budget"
               subtitleColor="yellow"
               sources="GL \u00B7 RECENCY"
@@ -277,26 +277,26 @@ export default function CommandCenter() {
             <MetricCard
               title="PORTFOLIO DSCR"
               icon="&#9684;"
-              value={`${data.dscr.toFixed(2)}x`}
-              subtitle={data.dscr >= 1.25 ? "Above 1.25x covenant" : "Below 1.25x covenant"}
-              subtitleColor={data.dscr >= 1.25 ? "green" : "red"}
+              value={`${(data.dscr ?? 0).toFixed(2)}x`}
+              subtitle={(data.dscr ?? 0) >= 1.25 ? "Above 1.25x covenant" : "Below 1.25x covenant"}
+              subtitleColor={(data.dscr ?? 0) >= 1.25 ? "green" : "red"}
               sources="GL + DEBT"
             />
             <MetricCard
               title="BUDGET VS ACTUAL"
               icon="&#9776;"
-              value={fmtCompact(data.budgetVsActual_details.variance)}
-              valueColor={data.budgetVsActual_details.variance < 0 ? "#ef5350" : undefined}
-              subtitle={data.budgetVsActual_details.variance < 0 ? "NOI shortfall YTD" : "Favorable variance YTD"}
-              subtitleColor={data.budgetVsActual_details.variance >= 0 ? "green" : "red"}
+              value={fmtCompact(data.budgetVsActual_details?.variance ?? 0)}
+              valueColor={(data.budgetVsActual_details?.variance ?? 0) < 0 ? "#ef5350" : undefined}
+              subtitle={(data.budgetVsActual_details?.variance ?? 0) < 0 ? "NOI shortfall YTD" : "Favorable variance YTD"}
+              subtitleColor={(data.budgetVsActual_details?.variance ?? 0) >= 0 ? "green" : "red"}
               sources="GL"
             />
             <MetricCard
               title="YTD RETURN"
               icon="&#8599;"
-              value={`${data.ytdReturn.toFixed(1)}%`}
+              value={`${(data.ytdReturn ?? 0).toFixed(1)}%`}
               subtitle="Levered \u00B7 Net"
-              subtitleColor={data.ytdReturn >= 0 ? "green" : "red"}
+              subtitleColor={(data.ytdReturn ?? 0) >= 0 ? "green" : "red"}
               sources="CALCULATED"
             />
             <MetricCard

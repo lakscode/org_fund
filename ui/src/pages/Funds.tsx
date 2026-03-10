@@ -56,19 +56,19 @@ export default function Funds() {
       title: "AUM",
       dataIndex: "aum",
       key: "aum",
-      render: (v: number) => fmtCompact(v || 0),
+      render: (v: number) => fmtCompact(v ?? 0),
     },
     {
       title: "EUM",
       dataIndex: "eum",
       key: "eum",
-      render: (v: number) => fmtCompact(v || 0),
+      render: (v: number) => fmtCompact(v ?? 0),
     },
     {
       title: "Cash",
       dataIndex: "cash",
       key: "cash",
-      render: (v: number) => fmtCompact(v || 0),
+      render: (v: number) => fmtCompact(v ?? 0),
     },
     {
       title: "Properties",
@@ -81,7 +81,7 @@ export default function Funds() {
       dataIndex: "ytdReturn",
       key: "ytdReturn",
       render: (v: number) => {
-        const val = v || 0;
+        const val = v ?? 0;
         return (
           <span style={{ color: val >= 0 ? "#4caf50" : "#ef5350" }}>
             {val.toFixed(1)}%
