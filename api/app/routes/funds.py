@@ -1,6 +1,8 @@
 from app.models import (
-    create_fund, find_fund_by_id, list_funds_by_org, update_fund, delete_fund
+    create_fund, find_fund_by_id, list_funds_by_org, update_fund, delete_fund,
+    get_balance_sheet,
 )
+from app.database import fund_properties_col
 from app.logger import get_logger
 
 logger = get_logger("routes.funds")
@@ -19,6 +21,26 @@ def list_funds(org_id, current_user):
         return 403, {"detail": "Not a member of this organization"}
     try:
         funds = list_funds_by_org(org_id)
+        for fund in funds:
+            try:
+                bs = get_balance_sheet(fund["id"])
+                fund["aum"] = bs.get("aum", 0) if bs else 0
+                fund["eum"] = bs.get("eum", 0) if bs else 0
+                fund["cash"] = bs.get("cash", 0) if bs else 0
+                fund["ytdReturn"] = bs.get("ytdReturn", 0) if bs else 0
+            except Exception:
+                fund["aum"] = 0
+                fund["eum"] = 0
+                fund["cash"] = 0
+                fund["ytdReturn"] = 0
+            try:
+                count = fund_properties_col.count_documents({
+                    "orgId": org_id,
+                    "fundCode": fund.get("fundCode", ""),
+                })
+                fund["propertyCount"] = count
+            except Exception:
+                fund["propertyCount"] = 0
         logger.info("Found %d funds for org %s", len(funds), org_id)
         return 200, funds
     except Exception as e:

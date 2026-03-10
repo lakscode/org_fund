@@ -2,7 +2,7 @@ from datetime import datetime, timezone
 
 from bson import ObjectId
 from bson.errors import InvalidId
-from app.database import properties_col, totals_col
+from app.database import properties_col, totals_col, fund_properties_col, funds_col
 from app.logger import get_logger
 
 logger = get_logger("models.properties")
@@ -97,11 +97,30 @@ def list_properties_by_org(org_id, status=None, property_type=None, market=None)
 
 
 def list_properties_by_fund(fund_id):
+    """List properties linked to a fund via fund_properties collection (by fundCode)."""
     logger.info("Listing properties for fund %s", fund_id)
     try:
-        docs = properties_col.find({"fundIds": fund_id}).sort("propertyCode", 1)
+        from bson import ObjectId as _OID
+        fund = funds_col.find_one({"_id": _OID(fund_id)})
+        if not fund:
+            logger.info("Fund not found: %s", fund_id)
+            return []
+        fund_code = fund.get("fundCode", "")
+        org_id = str(fund.get("orgId", ""))
+        # Get property codes linked to this fund
+        fps = fund_properties_col.find(
+            {"orgId": org_id, "fundCode": fund_code},
+            {"propertyCode": 1},
+        )
+        prop_codes = list({fp["propertyCode"] for fp in fps if fp.get("propertyCode")})
+        if not prop_codes:
+            logger.info("No property codes found for fund %s (code=%s)", fund_id, fund_code)
+            return []
+        docs = properties_col.find(
+            {"orgId": org_id, "propertyCode": {"$in": prop_codes}}
+        ).sort("propertyCode", 1)
         result = [serialize_property(d) for d in docs]
-        logger.info("Found %d properties for fund %s", len(result), fund_id)
+        logger.info("Found %d properties for fund %s (code=%s)", len(result), fund_id, fund_code)
         return result
     except Exception as e:
         logger.error("Failed to list properties for fund %s: %s", fund_id, e)

@@ -50,6 +50,11 @@ export interface Fund {
   settings: Record<string, unknown>;
   createdAt: string;
   updatedAt: string;
+  aum?: number;
+  eum?: number;
+  cash?: number;
+  propertyCount?: number;
+  ytdReturn?: number;
 }
 
 export interface Property {
