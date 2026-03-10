@@ -25,6 +25,7 @@ class PropertyCSVImporter:
 
             "externalIds": {},
             "propertyCode": row.get("HMY").rstrip(),
+            "sCode": row.get("SCODE").rstrip(),
             "propertyName": row.get("SADDR1").rstrip(),
             "address": {
                 "line1": row.get("SADDR2").rstrip(),
