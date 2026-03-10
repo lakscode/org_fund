@@ -149,9 +149,9 @@ export default function Properties() {
   ];
 
   return (
-    <div className="properties container-fluid px-0">
-      <h2>Assets</h2>
-      <p className="list-count">{filtered.length} properties</p>
+    <div className="properties page-container">
+      <h2 className="page-title">Assets</h2>
+      <p className="page-subtitle">{filtered.length} properties</p>
 
       <div className="assets-filters row g-2 align-items-center">
         <div className="col-12 col-sm-auto">

@@ -98,9 +98,9 @@ export default function BalanceSheet() {
   if (!currentOrg) return <p>No organization selected.</p>;
 
   return (
-    <div className="balance-sheet container-fluid px-0">
+    <div className="balance-sheet page-container">
       <div className="bs-header">
-        <h2>Balance Sheet</h2>
+        <h2 className="page-title">Balance Sheet</h2>
         <div className="select-wrapper">
           <select
             className="app-select"
@@ -129,7 +129,7 @@ export default function BalanceSheet() {
 
       {data && !loading && (
         <>
-          <p className="bs-subtitle">
+          <p className="page-subtitle">
             {data.fundName} &middot; {data.propertyCount} properties
           </p>
 

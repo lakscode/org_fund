@@ -78,10 +78,10 @@ export default function Chat() {
   };
 
   return (
-    <div className="chat-page container-fluid px-0">
+    <div className="chat-page page-container">
       <div className="chat-header">
-        <h2>REstackAI Chat</h2>
-        <p className="chat-header-sub">Ask questions about your portfolio using governed metrics</p>
+        <h2 className="page-title">REstackAI Chat</h2>
+        <p className="page-subtitle">Ask questions about your portfolio using governed metrics</p>
       </div>
 
       <div className="chat-body">

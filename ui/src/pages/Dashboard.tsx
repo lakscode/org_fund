@@ -17,9 +17,9 @@ export default function Dashboard() {
   if (!orgData) return <p>Loading...</p>;
 
   return (
-    <div className="dashboard container-fluid px-0">
-      <h2>{orgData.org.name}</h2>
-      <p className="org-status">Status: {orgData.org.status}</p>
+    <div className="dashboard page-container">
+      <h2 className="page-title">{orgData.org.name}</h2>
+      <p className="page-subtitle">Status: {orgData.org.status}</p>
       <div className="row g-3">
         <div className="col-12 col-sm-6 col-lg-3">
           <div className="stat-card h-100">

@@ -119,9 +119,9 @@ export default function Funds() {
   ];
 
   return (
-    <div className="funds container-fluid px-0">
-      <h2>Funds</h2>
-      <p className="list-count">{funds.length} funds</p>
+    <div className="funds page-container">
+      <h2 className="page-title">Funds</h2>
+      <p className="page-subtitle">{funds.length} funds</p>
       <div className="table-responsive">
         <Table
           columns={columns}

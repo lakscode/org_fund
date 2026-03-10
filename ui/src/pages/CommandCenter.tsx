@@ -175,10 +175,10 @@ export default function CommandCenter() {
   ];
 
   return (
-    <div className="command-center container-fluid px-0">
+    <div className="command-center page-container">
       {/* Title */}
       <div className="cc-title-row">
-        <h2>Command Center</h2>
+        <h2 className="page-title">Command Center</h2>
         <span className="cc-live-badge">LIVE</span>
         <div className="select-wrapper">
           <select
@@ -202,7 +202,7 @@ export default function CommandCenter() {
           {fundsLoading && <span className="select-spinner" />}
         </div>
       </div>
-      <p className="cc-subtitle">
+      <p className="page-subtitle">
         Executive portfolio-wide visibility
         {selectedFund ? ` \u00B7 ${selectedFund.fundName}` : ""}
       </p>

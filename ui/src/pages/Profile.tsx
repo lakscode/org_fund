@@ -141,10 +141,10 @@ export default function Profile() {
   ];
 
   return (
-    <div className="settings container-fluid px-0">
+    <div className="settings page-container">
       <div className="settings-section">
         <div className="settings-section-header">
-          <h2>Users</h2>
+          <h2 className="page-title">Users</h2>
           <button className="btn-primary" onClick={openAdd}>
             + Add User
           </button>

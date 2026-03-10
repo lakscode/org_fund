@@ -119,9 +119,9 @@ export default function Notifications() {
   };
 
   return (
-    <div className="notifications-page container-fluid px-0">
+    <div className="notifications-page page-container">
       <div className="notifications-header">
-        <h2>Notifications</h2>
+        <h2 className="page-title">Notifications</h2>
         <div className="notifications-actions">
           <div className="notifications-filter">
             <button

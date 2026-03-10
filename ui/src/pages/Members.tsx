@@ -29,9 +29,9 @@ export default function Members() {
   ];
 
   return (
-    <div className="members container-fluid px-0">
-      <h2>Members - {currentOrg.name}</h2>
-      <p className="list-count">{members.length} members</p>
+    <div className="members page-container">
+      <h2 className="page-title">Members - {currentOrg.name}</h2>
+      <p className="page-subtitle">{members.length} members</p>
       <div className="table-responsive">
         <Table
           columns={columns}

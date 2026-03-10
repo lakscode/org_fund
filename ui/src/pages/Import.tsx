@@ -125,9 +125,9 @@ export default function Import() {
   const activeOption = IMPORT_OPTIONS.find((o) => o.type === selectedType);
 
   return (
-    <div className="import-page container-fluid px-0">
-      <h2>Import Data</h2>
-      <p className="import-subtitle">
+    <div className="import-page page-container">
+      <h2 className="page-title">Import Data</h2>
+      <p className="page-subtitle">
         Upload CSV files to import data into <strong>{currentOrg.name}</strong>
       </p>
 

@@ -202,8 +202,8 @@ export default function SuperAdmin() {
   ];
 
   return (
-    <div className="sa-page container-fluid px-0">
-      <h2>Super Admin</h2>
+    <div className="sa-page page-container">
+      <h2 className="page-title">Super Admin</h2>
 
       <div className="sa-tabs">
         <button className={`sa-tab ${tab === "orgs" ? "active" : ""}`} onClick={() => setTab("orgs")}>
