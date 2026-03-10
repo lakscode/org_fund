@@ -1,56 +1,45 @@
 import { useEffect, useState } from "react";
 import { useAuth } from "../context/AuthContext";
 import api from "../api";
-import type { OrgData } from "../types";
-
-const PAGE_SIZE = 10;
+import { Table } from "antd";
+import type { ColumnsType } from "antd/es/table";
+import type { OrgData, OrgMember } from "../types";
 
 export default function Members() {
   const { currentOrg } = useAuth();
-  const [orgData, setOrgData] = useState<OrgData | null>(null);
-  const [page, setPage] = useState(0);
+  const [members, setMembers] = useState<OrgMember[]>([]);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     if (currentOrg) {
-      setPage(0);
-      api.get(`/orgs/${currentOrg.id}`).then((res) => setOrgData(res.data));
+      setLoading(true);
+      api
+        .get(`/orgs/${currentOrg.id}`)
+        .then((res: { data: OrgData }) => setMembers(res.data.members))
+        .catch(() => setMembers([]))
+        .finally(() => setLoading(false));
     }
   }, [currentOrg]);
 
   if (!currentOrg) return <p>No organization selected.</p>;
-  if (!orgData) return <p>Loading...</p>;
 
-  const members = orgData.members;
-  const totalPages = Math.ceil(members.length / PAGE_SIZE);
-  const paginated = members.slice(page * PAGE_SIZE, (page + 1) * PAGE_SIZE);
+  const columns: ColumnsType<OrgMember> = [
+    { title: "Name", dataIndex: "name", key: "name" },
+    { title: "Email", dataIndex: "email", key: "email" },
+  ];
 
   return (
     <div className="members">
-      <h2>Members - {orgData.org.name}</h2>
+      <h2>Members - {currentOrg.name}</h2>
       <p className="list-count">{members.length} members</p>
-      <table>
-        <thead>
-          <tr>
-            <th>Name</th>
-            <th>Email</th>
-          </tr>
-        </thead>
-        <tbody>
-          {paginated.map((m) => (
-            <tr key={m.id}>
-              <td>{m.name}</td>
-              <td>{m.email}</td>
-            </tr>
-          ))}
-        </tbody>
-      </table>
-      {totalPages > 1 && (
-        <div className="cc-pagination">
-          <button disabled={page === 0} onClick={() => setPage(page - 1)}>&laquo;</button>
-          <span>{page + 1} / {totalPages}</span>
-          <button disabled={page >= totalPages - 1} onClick={() => setPage(page + 1)}>&raquo;</button>
-        </div>
-      )}
+      <Table
+        columns={columns}
+        dataSource={members}
+        rowKey="id"
+        loading={loading}
+        pagination={{ pageSize: 10, showSizeChanger: false }}
+        size="small"
+      />
     </div>
   );
 }

@@ -1,9 +1,9 @@
 import { useEffect, useState } from "react";
 import { useAuth } from "../context/AuthContext";
 import api from "../api";
+import { Table, Tag, Button, Space } from "antd";
+import type { ColumnsType } from "antd/es/table";
 import type { OrgMember } from "../types";
-
-const PAGE_SIZE = 10;
 
 type ModalMode = "add" | "edit" | "resetpw" | null;
 
@@ -11,7 +11,6 @@ export default function Profile() {
   const { user, currentOrg } = useAuth();
   const [members, setMembers] = useState<OrgMember[]>([]);
   const [loading, setLoading] = useState(true);
-  const [page, setPage] = useState(0);
   const [modal, setModal] = useState<ModalMode>(null);
   const [editTarget, setEditTarget] = useState<OrgMember | null>(null);
   const [form, setForm] = useState({ name: "", email: "", role: "member" });
@@ -24,10 +23,7 @@ export default function Profile() {
       setLoading(true);
       api
         .get(`/orgs/${currentOrg.id}`)
-        .then((res) => {
-          setMembers(res.data.members);
-          setPage(0);
-        })
+        .then((res) => setMembers(res.data.members))
         .catch(() => setMembers([]))
         .finally(() => setLoading(false));
     }
@@ -36,9 +32,6 @@ export default function Profile() {
   useEffect(fetchMembers, [currentOrg]);
 
   if (!user) return null;
-
-  const totalPages = Math.ceil(members.length / PAGE_SIZE);
-  const paginated = members.slice(page * PAGE_SIZE, (page + 1) * PAGE_SIZE);
 
   const openAdd = () => {
     setForm({ name: "", email: "", role: "member" });
@@ -115,6 +108,38 @@ export default function Profile() {
     return new Date(iso).toLocaleDateString("en-US");
   };
 
+  const columns: ColumnsType<OrgMember> = [
+    { title: "Name", dataIndex: "name", key: "name", render: (v: string) => <strong>{v}</strong> },
+    { title: "Email", dataIndex: "email", key: "email" },
+    { title: "Company", key: "company", render: () => currentOrg?.name },
+    {
+      title: "Roles",
+      dataIndex: "role",
+      key: "role",
+      render: (role: string) => <Tag>{role}</Tag>,
+    },
+    {
+      title: "Created",
+      dataIndex: "createdAt",
+      key: "createdAt",
+      render: (v: string) => formatDate(v),
+    },
+    {
+      title: "Actions",
+      key: "actions",
+      render: (_: unknown, record: OrgMember) => (
+        <Space>
+          <Button type="link" size="small" onClick={() => openEdit(record)} title="Edit">
+            &#9998;
+          </Button>
+          <Button type="link" size="small" onClick={() => openResetPw(record)} title="Reset Password">
+            &#128274;
+          </Button>
+        </Space>
+      ),
+    },
+  ];
+
   return (
     <div className="settings">
       <div className="settings-section">
@@ -125,58 +150,14 @@ export default function Profile() {
           </button>
         </div>
 
-        {loading ? (
-          <p>Loading...</p>
-        ) : (
-          <>
-            <table>
-              <thead>
-                <tr>
-                  <th>Name</th>
-                  <th>Email</th>
-                  <th>Company</th>
-                  <th>Roles</th>
-                  <th>Created</th>
-                  <th>Actions</th>
-                </tr>
-              </thead>
-              <tbody>
-                {paginated.map((m) => (
-                  <tr key={m.id}>
-                    <td className="td-bold">{m.name}</td>
-                    <td>{m.email}</td>
-                    <td>{currentOrg?.name}</td>
-                    <td>
-                      <span className="role-badge">{m.role}</span>
-                    </td>
-                    <td>{formatDate(m.createdAt)}</td>
-                    <td className="actions-cell">
-                      <button className="action-btn" title="Edit" onClick={() => openEdit(m)}>
-                        &#9998;
-                      </button>
-                      <button className="action-btn" title="Reset Password" onClick={() => openResetPw(m)}>
-                        &#128274;
-                      </button>
-                    </td>
-                  </tr>
-                ))}
-              </tbody>
-            </table>
-            {totalPages > 1 && (
-              <div className="cc-pagination">
-                <button disabled={page === 0} onClick={() => setPage(page - 1)}>
-                  &laquo;
-                </button>
-                <span>
-                  {page + 1} / {totalPages}
-                </span>
-                <button disabled={page >= totalPages - 1} onClick={() => setPage(page + 1)}>
-                  &raquo;
-                </button>
-              </div>
-            )}
-          </>
-        )}
+        <Table
+          columns={columns}
+          dataSource={members}
+          rowKey="id"
+          loading={loading}
+          pagination={{ pageSize: 10, showSizeChanger: false }}
+          size="small"
+        />
       </div>
 
       {/* Add User Modal */}

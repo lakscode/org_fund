@@ -1,9 +1,11 @@
 import { useEffect, useState, useMemo } from "react";
 import { useAuth } from "../context/AuthContext";
 import api from "../api";
+import { Table, Input, Select, Tag } from "antd";
+import type { ColumnsType } from "antd/es/table";
 import type { Property } from "../types";
 
-const PAGE_SIZE = 10;
+const { Search } = Input;
 
 function fmt(v?: number): string {
   if (v == null) return "$0";
@@ -15,7 +17,6 @@ export default function Properties() {
   const { currentOrg } = useAuth();
   const [properties, setProperties] = useState<Property[]>([]);
   const [loading, setLoading] = useState(true);
-  const [page, setPage] = useState(0);
   const [search, setSearch] = useState("");
   const [marketFilter, setMarketFilter] = useState("");
   const [typeFilter, setTypeFilter] = useState("");
@@ -23,7 +24,6 @@ export default function Properties() {
   useEffect(() => {
     if (currentOrg) {
       setLoading(true);
-      setPage(0);
       api
         .get(`/orgs/${currentOrg.id}/properties`)
         .then((res) => setProperties(res.data))
@@ -32,7 +32,6 @@ export default function Properties() {
     }
   }, [currentOrg]);
 
-  // Extract unique markets and types from data
   const markets = useMemo(() => {
     const set = new Set<string>();
     properties.forEach((p) => {
@@ -50,7 +49,6 @@ export default function Properties() {
     return Array.from(set).sort();
   }, [properties]);
 
-  // Filter properties
   const filtered = useMemo(() => {
     const q = search.toLowerCase();
     return properties.filter((p) => {
@@ -67,16 +65,88 @@ export default function Properties() {
     });
   }, [properties, search, marketFilter, typeFilter]);
 
-  // Reset page when filters change
-  useEffect(() => {
-    setPage(0);
-  }, [search, marketFilter, typeFilter]);
-
   if (!currentOrg) return <p>No organization selected.</p>;
-  if (loading) return <p>Loading...</p>;
 
-  const totalPages = Math.ceil(filtered.length / PAGE_SIZE);
-  const paginated = filtered.slice(page * PAGE_SIZE, (page + 1) * PAGE_SIZE);
+  const columns: ColumnsType<Property> = [
+    {
+      title: "Name",
+      dataIndex: "propertyName",
+      key: "propertyName",
+      render: (name: string) => <span className="asset-name">{name}</span>,
+    },
+    {
+      title: "Market",
+      dataIndex: "market",
+      key: "market",
+      render: (v: unknown) => (typeof v === "string" ? v : ""),
+    },
+    {
+      title: "Type",
+      dataIndex: "propertyType",
+      key: "propertyType",
+      render: (v: string) => <span className="capitalize">{v}</span>,
+    },
+    {
+      title: "NOI YTD",
+      dataIndex: "noiActual",
+      key: "noiActual",
+      align: "right",
+      render: (v: number) => fmt(v),
+    },
+    {
+      title: "NOI vs Budget",
+      dataIndex: "noiVsBudgetPct",
+      key: "noiVsBudgetPct",
+      align: "right",
+      render: (v: number) => {
+        const pct = v ?? 0;
+        return (
+          <span style={{ color: pct >= 0 ? "#4caf50" : "#ef5350" }}>
+            {pct >= 0 ? "+" : ""}{pct.toFixed(1)}%
+          </span>
+        );
+      },
+    },
+    {
+      title: "Occupancy",
+      dataIndex: "occupancy",
+      key: "occupancy",
+      align: "right",
+      render: (v: number) => `${(v ?? 0).toFixed(1)}%`,
+    },
+    {
+      title: "DSCR",
+      dataIndex: "dscr",
+      key: "dscr",
+      align: "right",
+      render: (v: number) => `${(v ?? 0).toFixed(2)}x`,
+    },
+    {
+      title: "Rent Expiring",
+      key: "rentExpiring",
+      render: () => "—",
+    },
+    {
+      title: "Risk",
+      key: "risk",
+      render: (_: unknown, record: Property) => {
+        const occ = record.occupancy ?? 0;
+        const level = occ >= 80 ? "Low" : occ >= 50 ? "Medium" : "High";
+        const color = occ >= 80 ? "green" : occ >= 50 ? "orange" : "red";
+        return <Tag color={color}>{level}</Tag>;
+      },
+    },
+    {
+      title: "Month-End",
+      dataIndex: "status",
+      key: "status",
+      render: (status: string) => (
+        <Tag color={status === "active" ? "green" : status === "closed" ? "red" : "default"}>
+          {status}
+        </Tag>
+      ),
+    },
+  ];
 
   return (
     <div className="properties">
@@ -84,98 +154,38 @@ export default function Properties() {
       <p className="list-count">{filtered.length} properties</p>
 
       <div className="assets-filters">
-        <div className="assets-search">
-          <span className="assets-search-icon">&#128269;</span>
-          <input
-            type="text"
-            placeholder="Search property name, city..."
-            value={search}
-            onChange={(e) => setSearch(e.target.value)}
-          />
-        </div>
-        <select
-          className="assets-select"
-          value={marketFilter}
-          onChange={(e) => setMarketFilter(e.target.value)}
-        >
-          <option value="">All Markets</option>
-          {markets.map((m) => (
-            <option key={m} value={m}>{m}</option>
-          ))}
-        </select>
-        <select
-          className="assets-select"
-          value={typeFilter}
-          onChange={(e) => setTypeFilter(e.target.value)}
-        >
-          <option value="">All Types</option>
-          {types.map((t) => (
-            <option key={t} value={t}>{t.charAt(0).toUpperCase() + t.slice(1)}</option>
-          ))}
-        </select>
+        <Search
+          placeholder="Search property name, city..."
+          allowClear
+          onChange={(e) => setSearch(e.target.value)}
+          style={{ width: 280 }}
+        />
+        <Select
+          value={marketFilter || undefined}
+          placeholder="All Markets"
+          allowClear
+          onChange={(v) => setMarketFilter(v || "")}
+          style={{ width: 180 }}
+          options={markets.map((m) => ({ label: m, value: m }))}
+        />
+        <Select
+          value={typeFilter || undefined}
+          placeholder="All Types"
+          allowClear
+          onChange={(v) => setTypeFilter(v || "")}
+          style={{ width: 180 }}
+          options={types.map((t) => ({ label: t.charAt(0).toUpperCase() + t.slice(1), value: t }))}
+        />
       </div>
 
-      <table className="assets-table">
-        <thead>
-          <tr>
-            <th>Name</th>
-            <th>Market</th>
-            <th>Type</th>
-            <th className="text-right">NOI YTD</th>
-            <th className="text-right">NOI vs Budget</th>
-            <th className="text-right">Occupancy</th>
-            <th className="text-right">DSCR</th>
-            <th>Rent Expiring</th>
-            <th>Risk</th>
-            <th>Month-End</th>
-          </tr>
-        </thead>
-        <tbody>
-          {paginated.map((prop) => {
-            const budgetPct = prop.noiVsBudgetPct ?? 0;
-            const occ = prop.occupancy ?? 0;
-            return (
-              <tr key={prop.id}>
-                <td>
-                  <div className="asset-name">{prop.propertyName}</div>
-                 {/*  <div className="asset-code">{prop.propertyCode}</div> */}
-                </td>
-                <td>{typeof prop.market === "string" ? prop.market : ""}</td>
-                <td className="capitalize">{prop.propertyType}</td>
-                <td className="text-right">{fmt(prop.noiActual)}</td>
-                <td className="text-right">
-                  <span className={budgetPct >= 0 ? "text-green" : "text-red"}>
-                    {budgetPct >= 0 ? "+" : ""}{budgetPct.toFixed(1)}%
-                  </span>
-                </td>
-                <td className="text-right">{occ.toFixed(1)}%</td>
-                <td className="text-right">{(prop.dscr ?? 0).toFixed(2)}x</td>
-                <td>—</td>
-                <td>
-                  <span className={`risk-badge risk-${occ >= 80 ? "low" : occ >= 50 ? "medium" : "high"}`}>
-                    {occ >= 80 ? "Low" : occ >= 50 ? "Medium" : "High"}
-                  </span>
-                </td>
-                <td>
-                  <span className={`status-badge status-${prop.status}`}>
-                    {prop.status}
-                  </span>
-                </td>
-              </tr>
-            );
-          })}
-          {paginated.length === 0 && (
-            <tr><td colSpan={10} style={{ textAlign: "center", padding: "2rem", color: "#888" }}>No properties match your filters.</td></tr>
-          )}
-        </tbody>
-      </table>
-      {totalPages > 1 && (
-        <div className="cc-pagination">
-          <button disabled={page === 0} onClick={() => setPage(page - 1)}>&laquo;</button>
-          <span>{page + 1} / {totalPages}</span>
-          <button disabled={page >= totalPages - 1} onClick={() => setPage(page + 1)}>&raquo;</button>
-        </div>
-      )}
+      <Table
+        columns={columns}
+        dataSource={filtered}
+        rowKey="id"
+        loading={loading}
+        pagination={{ pageSize: 10, showSizeChanger: false }}
+        size="small"
+      />
     </div>
   );
 }

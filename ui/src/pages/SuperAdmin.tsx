@@ -1,6 +1,8 @@
 import { useEffect, useState } from "react";
 import { useAuth } from "../context/AuthContext";
 import api from "../api";
+import { Table, Tag, Button, Space } from "antd";
+import type { ColumnsType } from "antd/es/table";
 import type { Org, SAUser } from "../types";
 
 type Tab = "orgs" | "users";
@@ -138,6 +140,67 @@ export default function SuperAdmin() {
     ? orgs.filter((o) => !mapModal.org_roles.some((r) => r.org_id === o.id))
     : [];
 
+  const orgColumns: ColumnsType<Org> = [
+    { title: "Name", dataIndex: "name", key: "name" },
+    {
+      title: "Status",
+      dataIndex: "status",
+      key: "status",
+      render: (status: string) => (
+        <Tag color={status === "active" ? "green" : status === "inactive" ? "red" : "default"}>{status}</Tag>
+      ),
+    },
+    {
+      title: "Created",
+      dataIndex: "createdAt",
+      key: "createdAt",
+      render: (v: string) => (v ? new Date(v).toLocaleDateString() : ""),
+    },
+    {
+      title: "Actions",
+      key: "actions",
+      render: (_: unknown, record: Org) => (
+        <Button danger size="small" onClick={() => deleteOrg(record.id)}>Delete</Button>
+      ),
+    },
+  ];
+
+  const userColumns: ColumnsType<SAUser> = [
+    {
+      title: "Name",
+      dataIndex: "name",
+      key: "name",
+      render: (name: string, record: SAUser) => (
+        <>
+          {name}
+          {record.isSuperAdmin && <Tag color="purple" style={{ marginLeft: 6 }}>SA</Tag>}
+        </>
+      ),
+    },
+    { title: "Email", dataIndex: "email", key: "email" },
+    {
+      title: "Organizations",
+      key: "orgs",
+      render: (_: unknown, record: SAUser) => (
+        <div className="sa-user-orgs">
+          {record.org_roles.map((r) => (
+            <Tag key={r.org_id} closable onClose={() => unmapUser(record.id, r.org_id)}>
+              {orgNameById(r.org_id)} <em>({r.role})</em>
+            </Tag>
+          ))}
+          {record.org_roles.length === 0 && <em className="sa-muted">No orgs</em>}
+        </div>
+      ),
+    },
+    {
+      title: "Actions",
+      key: "actions",
+      render: (_: unknown, record: SAUser) => (
+        <Button size="small" onClick={() => openMapModal(record)}>+ Map Org</Button>
+      ),
+    },
+  ];
+
   return (
     <div className="sa-page">
       <h2>Super Admin</h2>
@@ -151,7 +214,7 @@ export default function SuperAdmin() {
         </button>
       </div>
 
-      {/* ─── ORGS TAB ─── */}
+      {/* ORGS TAB */}
       {tab === "orgs" && (
         <div className="sa-section">
           <div className="sa-create-row">
@@ -166,38 +229,18 @@ export default function SuperAdmin() {
           </div>
           {orgMsg && <p className="sa-msg">{orgMsg}</p>}
 
-          {orgsLoading ? (
-            <p className="sa-loading">Loading organizations...</p>
-          ) : (
-            <table className="sa-table">
-              <thead>
-                <tr>
-                  <th>Name</th>
-                  <th>Status</th>
-                  <th>Created</th>
-                  <th>Actions</th>
-                </tr>
-              </thead>
-              <tbody>
-                {orgs.map((o) => (
-                  <tr key={o.id}>
-                    <td>{o.name}</td>
-                    <td><span className={`sa-badge sa-badge-${o.status}`}>{o.status}</span></td>
-                    <td>{o.createdAt ? new Date(o.createdAt).toLocaleDateString() : ""}</td>
-                    <td>
-                      <button className="sa-btn sa-btn-danger sa-btn-sm" onClick={() => deleteOrg(o.id)}>
-                        Delete
-                      </button>
-                    </td>
-                  </tr>
-                ))}
-              </tbody>
-            </table>
-          )}
+          <Table
+            columns={orgColumns}
+            dataSource={orgs}
+            rowKey="id"
+            loading={orgsLoading}
+            pagination={false}
+            size="small"
+          />
         </div>
       )}
 
-      {/* ─── USERS TAB ─── */}
+      {/* USERS TAB */}
       {tab === "users" && (
         <div className="sa-section">
           <div className="sa-create-row">
@@ -249,52 +292,18 @@ export default function SuperAdmin() {
             </div>
           )}
 
-          {usersLoading ? (
-            <p className="sa-loading">Loading users...</p>
-          ) : (
-            <table className="sa-table">
-              <thead>
-                <tr>
-                  <th>Name</th>
-                  <th>Email</th>
-                  <th>Organizations</th>
-                  <th>Actions</th>
-                </tr>
-              </thead>
-              <tbody>
-                {users.map((u) => (
-                  <tr key={u.id}>
-                    <td>
-                      {u.name}
-                      {u.isSuperAdmin && <span className="sa-badge sa-badge-super">SA</span>}
-                    </td>
-                    <td>{u.email}</td>
-                    <td>
-                      <div className="sa-user-orgs">
-                        {u.org_roles.map((r) => (
-                          <span key={r.org_id} className="sa-org-chip">
-                            {orgNameById(r.org_id)} <em>({r.role})</em>
-                            <button className="sa-chip-remove" title="Remove from org"
-                              onClick={() => unmapUser(u.id, r.org_id)}>&times;</button>
-                          </span>
-                        ))}
-                        {u.org_roles.length === 0 && <em className="sa-muted">No orgs</em>}
-                      </div>
-                    </td>
-                    <td>
-                      <button className="sa-btn sa-btn-secondary sa-btn-sm" onClick={() => openMapModal(u)}>
-                        + Map Org
-                      </button>
-                    </td>
-                  </tr>
-                ))}
-              </tbody>
-            </table>
-          )}
+          <Table
+            columns={userColumns}
+            dataSource={users}
+            rowKey="id"
+            loading={usersLoading}
+            pagination={false}
+            size="small"
+          />
         </div>
       )}
 
-      {/* ─── MAP USER MODAL ─── */}
+      {/* MAP USER MODAL */}
       {mapModal && (
         <div className="sa-modal-overlay" onClick={() => setMapModal(null)}>
           <div className="sa-modal" onClick={(e) => e.stopPropagation()}>

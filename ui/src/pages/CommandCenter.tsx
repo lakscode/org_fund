@@ -1,6 +1,8 @@
 import { useEffect, useState } from "react";
 import { useAuth } from "../context/AuthContext";
 import api from "../api";
+import { Table } from "antd";
+import type { ColumnsType } from "antd/es/table";
 import type { Fund } from "../types";
 
 interface BalanceSheetData {
@@ -99,9 +101,6 @@ export default function CommandCenter() {
   const [fundsLoading, setFundsLoading] = useState(false);
   const [error, setError] = useState("");
   const [activeTab, setActiveTab] = useState("Daily Brief");
-  const [assetPage, setAssetPage] = useState(0);
-  const [rankPage, setRankPage] = useState(0);
-  const ASSETS_PER_PAGE = 5;
 
   useEffect(() => {
     if (currentOrg) {
@@ -145,6 +144,35 @@ export default function CommandCenter() {
   if (!currentOrg) return <p>No organization selected.</p>;
 
   const selectedFund = funds.find((f) => f.id === selectedFundId);
+
+  const filteredProperties = properties
+    .filter((p) => p.noiActual !== 0 || p.noiBudget !== 0)
+    .sort((a, b) => b.noiActual - a.noiActual);
+
+  const assetsColumns: ColumnsType<Property> = [
+    { title: "Asset Name", dataIndex: "propertyName", key: "propertyName" },
+    { title: "Market", dataIndex: "market", key: "market", render: (v: string) => v || "—" },
+    { title: "NOI vs Budget", key: "noiBudget", render: (_: unknown, r: Property) => fmtCompact(r.noiActual) },
+    { title: "NOI Trend", key: "noiTrend", render: () => "-" },
+    { title: "Lease Risk", key: "leaseRisk", render: () => "-" },
+  ];
+
+  const rankColumns: ColumnsType<Property> = [
+    { title: "Asset Name", dataIndex: "propertyName", key: "propertyName" },
+    { title: "NOI", key: "noi", render: (_: unknown, r: Property) => fmtCompact(r.noiActual) },
+    {
+      title: "Variance",
+      key: "variance",
+      render: (_: unknown, r: Property) => (
+        <span style={{ color: r.noiVariance >= 0 ? "#4caf50" : "#ef5350" }}>
+          {fmtCompact(r.noiVariance)}
+        </span>
+      ),
+    },
+    { title: "Occupancy", key: "occupancy", render: () => "-" },
+    { title: "Expense Ratio", key: "expenseRatio", render: () => "-" },
+    { title: "DSCR", key: "dscr", render: () => "-" },
+  ];
 
   return (
     <div className="command-center">
@@ -281,20 +309,6 @@ export default function CommandCenter() {
             />
           </div>
 
-          {/* Returns bar 
-          <div className="cc-returns-bar">
-            <span className="cc-returns-label">RETURNS</span>
-            <span className="cc-returns-period">1Y</span>
-            <span className="cc-returns-val cc-returns-up">12.4%</span>
-            <span className="cc-returns-val cc-returns-sm">7.8%</span>
-            <span className="cc-returns-period">3Y</span>
-            <span className="cc-returns-val cc-returns-up">10.1%</span>
-            <span className="cc-returns-val cc-returns-sm">6.5%</span>
-            <span className="cc-returns-period">5Y</span>
-            <span className="cc-returns-val cc-returns-up">11.8%</span>
-            <span className="cc-returns-val cc-returns-sm">7.2%</span>
-          </div>
-            */}
           {/* Tabs */}
           <div className="cc-tabs">
             {TABS.map((tab) => (
@@ -314,50 +328,13 @@ export default function CommandCenter() {
               {/* Assets table */}
               <div className="cc-assets-panel">
                 <h3>Assets Ranked by Performance and Risk</h3>
-                <table className="cc-assets-table">
-                  <thead>
-                    <tr>
-                      <th>Asset Name</th>
-                      <th>Market</th>
-                      <th>NOI vs Budget</th>
-                      <th>NOI Trend</th>
-                      <th>Lease Risk</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    {(() => {
-                      const filtered = properties
-                        .filter((p) => p.noiActual !== 0 || p.noiBudget !== 0)
-                        .sort((a, b) => b.noiActual - a.noiActual);
-                      const paged = filtered.slice(assetPage * ASSETS_PER_PAGE, (assetPage + 1) * ASSETS_PER_PAGE);
-                      return paged.length === 0 ? (
-                        <tr><td colSpan={5}>No properties found.</td></tr>
-                      ) : paged.map((p) => (
-                        <tr key={p.id}>
-                          <td>{p.propertyName}</td>
-                          <td>{p.market || "—"}</td>
-                          {/* commented for now need to cross verify the calculation */}
-                          <td>{fmtCompact(p.noiActual)}</td>
-                          <td>-</td>
-                          <td>-</td>
-                          <td>-</td>
-                        </tr>
-                      ));
-                    })()}
-                  </tbody>
-                </table>
-                {(() => {
-                  const total = properties.filter((p) => p.noiActual !== 0 || p.noiBudget !== 0).length;
-                  const totalPages = Math.ceil(total / ASSETS_PER_PAGE);
-                  if (totalPages <= 1) return null;
-                  return (
-                    <div className="cc-pagination">
-                      <button disabled={assetPage === 0} onClick={() => setAssetPage(assetPage - 1)}>&laquo;</button>
-                      <span>{assetPage + 1} / {totalPages}</span>
-                      <button disabled={assetPage >= totalPages - 1} onClick={() => setAssetPage(assetPage + 1)}>&raquo;</button>
-                    </div>
-                  );
-                })()}
+                <Table
+                  columns={assetsColumns}
+                  dataSource={filteredProperties}
+                  rowKey="id"
+                  pagination={{ pageSize: 5, showSizeChanger: false, size: "small" }}
+                  size="small"
+                />
               </div>
 
               {/* Action queue */}
@@ -386,52 +363,13 @@ export default function CommandCenter() {
               {/* Asset Performance Ranking */}
               <div className="cc-assets-panel cc-ranking-panel">
                 <h3>Asset Performance Ranking</h3>
-                <table className="cc-assets-table">
-                  <thead>
-                    <tr>
-                      <th>Asset Name</th>
-                      <th>NOI</th>
-                      <th>Variance</th>
-                      <th>Occupancy</th>
-                      <th>Expense Ratio</th>
-                      <th>DSCR</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    {(() => {
-                      const filtered = properties
-                        .filter((p) => p.noiActual !== 0 || p.noiBudget !== 0)
-                        .sort((a, b) => b.noiActual - a.noiActual);
-                      const paged = filtered.slice(rankPage * ASSETS_PER_PAGE, (rankPage + 1) * ASSETS_PER_PAGE);
-                      return paged.length === 0 ? (
-                        <tr><td colSpan={6}>No data available.</td></tr>
-                      ) : paged.map((p) => (
-                        <tr key={p.id}>
-                          <td>{p.propertyName}</td>
-                          <td>{fmtCompact(p.noiActual)}</td>
-                          <td style={{ color: p.noiVariance >= 0 ? "#4caf50" : "#ef5350" }}>
-                            {fmtCompact(p.noiVariance)}
-                          </td>
-                          <td>-</td>
-                          <td>-</td>
-                          <td>-</td>
-                        </tr>
-                      ));
-                    })()}
-                  </tbody>
-                </table>
-                {(() => {
-                  const total = properties.filter((p) => p.noiActual !== 0 || p.noiBudget !== 0).length;
-                  const totalPages = Math.ceil(total / ASSETS_PER_PAGE);
-                  if (totalPages <= 1) return null;
-                  return (
-                    <div className="cc-pagination">
-                      <button disabled={rankPage === 0} onClick={() => setRankPage(rankPage - 1)}>&laquo;</button>
-                      <span>{rankPage + 1} / {totalPages}</span>
-                      <button disabled={rankPage >= totalPages - 1} onClick={() => setRankPage(rankPage + 1)}>&raquo;</button>
-                    </div>
-                  );
-                })()}
+                <Table
+                  columns={rankColumns}
+                  dataSource={filteredProperties}
+                  rowKey="id"
+                  pagination={{ pageSize: 5, showSizeChanger: false, size: "small" }}
+                  size="small"
+                />
               </div>
             </div>
           )}
