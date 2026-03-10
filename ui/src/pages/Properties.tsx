@@ -149,43 +149,51 @@ export default function Properties() {
   ];
 
   return (
-    <div className="properties">
+    <div className="properties container-fluid px-0">
       <h2>Assets</h2>
       <p className="list-count">{filtered.length} properties</p>
 
-      <div className="assets-filters">
-        <Search
-          placeholder="Search property name, city..."
-          allowClear
-          onChange={(e) => setSearch(e.target.value)}
-          style={{ width: 280 }}
-        />
-        <Select
-          value={marketFilter || undefined}
-          placeholder="All Markets"
-          allowClear
-          onChange={(v) => setMarketFilter(v || "")}
-          style={{ width: 180 }}
-          options={markets.map((m) => ({ label: m, value: m }))}
-        />
-        <Select
-          value={typeFilter || undefined}
-          placeholder="All Types"
-          allowClear
-          onChange={(v) => setTypeFilter(v || "")}
-          style={{ width: 180 }}
-          options={types.map((t) => ({ label: t.charAt(0).toUpperCase() + t.slice(1), value: t }))}
-        />
+      <div className="assets-filters row g-2 align-items-center">
+        <div className="col-12 col-sm-auto">
+          <Search
+            placeholder="Search property name, city..."
+            allowClear
+            onChange={(e) => setSearch(e.target.value)}
+            style={{ width: "100%", maxWidth: 280 }}
+          />
+        </div>
+        <div className="col-6 col-sm-auto">
+          <Select
+            value={marketFilter || undefined}
+            placeholder="All Markets"
+            allowClear
+            onChange={(v) => setMarketFilter(v || "")}
+            style={{ width: "100%" }}
+            options={markets.map((m) => ({ label: m, value: m }))}
+          />
+        </div>
+        <div className="col-6 col-sm-auto">
+          <Select
+            value={typeFilter || undefined}
+            placeholder="All Types"
+            allowClear
+            onChange={(v) => setTypeFilter(v || "")}
+            style={{ width: "100%" }}
+            options={types.map((t) => ({ label: t.charAt(0).toUpperCase() + t.slice(1), value: t }))}
+          />
+        </div>
       </div>
 
-      <Table
-        columns={columns}
-        dataSource={filtered}
-        rowKey="id"
-        loading={loading}
-        pagination={{ pageSize: 10, showSizeChanger: false }}
-        size="small"
-      />
+      <div className="table-responsive">
+        <Table
+          columns={columns}
+          dataSource={filtered}
+          rowKey="id"
+          loading={loading}
+          pagination={{ pageSize: 10, showSizeChanger: false }}
+          size="small"
+        />
+      </div>
     </div>
   );
 }

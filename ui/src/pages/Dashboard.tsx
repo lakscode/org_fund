@@ -17,17 +17,21 @@ export default function Dashboard() {
   if (!orgData) return <p>Loading...</p>;
 
   return (
-    <div className="dashboard">
+    <div className="dashboard container-fluid px-0">
       <h2>{orgData.org.name}</h2>
       <p className="org-status">Status: {orgData.org.status}</p>
-      <div className="stats-grid">
-        <div className="stat-card">
-          <h3>Members</h3>
-          <p className="stat-value">{orgData.members.length}</p>
+      <div className="row g-3">
+        <div className="col-12 col-sm-6 col-lg-3">
+          <div className="stat-card h-100">
+            <h3>Members</h3>
+            <p className="stat-value">{orgData.members.length}</p>
+          </div>
         </div>
-        <div className="stat-card">
-          <h3>Organization</h3>
-          <p className="stat-value">{orgData.org.name}</p>
+        <div className="col-12 col-sm-6 col-lg-3">
+          <div className="stat-card h-100">
+            <h3>Organization</h3>
+            <p className="stat-value">{orgData.org.name}</p>
+          </div>
         </div>
       </div>
     </div>

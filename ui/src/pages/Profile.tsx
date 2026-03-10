@@ -141,7 +141,7 @@ export default function Profile() {
   ];
 
   return (
-    <div className="settings">
+    <div className="settings container-fluid px-0">
       <div className="settings-section">
         <div className="settings-section-header">
           <h2>Users</h2>
@@ -150,14 +150,16 @@ export default function Profile() {
           </button>
         </div>
 
-        <Table
-          columns={columns}
-          dataSource={members}
-          rowKey="id"
-          loading={loading}
-          pagination={{ pageSize: 10, showSizeChanger: false }}
-          size="small"
-        />
+        <div className="table-responsive">
+          <Table
+            columns={columns}
+            dataSource={members}
+            rowKey="id"
+            loading={loading}
+            pagination={{ pageSize: 10, showSizeChanger: false }}
+            size="small"
+          />
+        </div>
       </div>
 
       {/* Add User Modal */}

@@ -175,7 +175,7 @@ export default function CommandCenter() {
   ];
 
   return (
-    <div className="command-center">
+    <div className="command-center container-fluid px-0">
       {/* Title */}
       <div className="cc-title-row">
         <h2>Command Center</h2>
@@ -328,13 +328,15 @@ export default function CommandCenter() {
               {/* Assets table */}
               <div className="cc-assets-panel">
                 <h3>Assets Ranked by Performance and Risk</h3>
-                <Table
-                  columns={assetsColumns}
-                  dataSource={filteredProperties}
-                  rowKey="id"
-                  pagination={{ pageSize: 5, showSizeChanger: false, size: "small" }}
-                  size="small"
-                />
+                <div className="table-responsive">
+                  <Table
+                    columns={assetsColumns}
+                    dataSource={filteredProperties}
+                    rowKey="id"
+                    pagination={{ pageSize: 5, showSizeChanger: false, size: "small" }}
+                    size="small"
+                  />
+                </div>
               </div>
 
               {/* Action queue */}
@@ -363,13 +365,15 @@ export default function CommandCenter() {
               {/* Asset Performance Ranking */}
               <div className="cc-assets-panel cc-ranking-panel">
                 <h3>Asset Performance Ranking</h3>
-                <Table
-                  columns={rankColumns}
-                  dataSource={filteredProperties}
-                  rowKey="id"
-                  pagination={{ pageSize: 5, showSizeChanger: false, size: "small" }}
-                  size="small"
-                />
+                <div className="table-responsive">
+                  <Table
+                    columns={rankColumns}
+                    dataSource={filteredProperties}
+                    rowKey="id"
+                    pagination={{ pageSize: 5, showSizeChanger: false, size: "small" }}
+                    size="small"
+                  />
+                </div>
               </div>
             </div>
           )}

@@ -12,10 +12,15 @@ function formatRole(role: string): string {
   return ROLE_LABELS[role] || role.replace(/_/g, " ").replace(/\b\w/g, (c) => c.toUpperCase());
 }
 
-export default function Sidebar() {
+interface SidebarProps {
+  open: boolean;
+  onClose: () => void;
+}
+
+export default function Sidebar({ open, onClose }: SidebarProps) {
   const { currentOrg, user } = useAuth();
   return (
-    <aside className="sidebar">
+    <aside className={`sidebar ${open ? "sidebar-open" : ""}`}>
       <div className="sidebar-logo">
         <img src="/images/logo.png" alt="REstackAI" className="sidebar-logo-img" />
         <span className="sidebar-logo-text">REstackAI</span>
@@ -31,7 +36,7 @@ export default function Sidebar() {
         )}
       </div>
 
-      <nav className="sidebar-nav">
+      <nav className="sidebar-nav" onClick={onClose}>
         <NavLink to="/command-center">
           <span className="sidebar-icon">&#9632;</span>
           Command Center

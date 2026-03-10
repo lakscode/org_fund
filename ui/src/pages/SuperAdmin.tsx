@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { useAuth } from "../context/AuthContext";
 import api from "../api";
-import { Table, Tag, Button, Space } from "antd";
+import { Table, Tag, Button } from "antd";
 import type { ColumnsType } from "antd/es/table";
 import type { Org, SAUser } from "../types";
 
@@ -202,7 +202,7 @@ export default function SuperAdmin() {
   ];
 
   return (
-    <div className="sa-page">
+    <div className="sa-page container-fluid px-0">
       <h2>Super Admin</h2>
 
       <div className="sa-tabs">
@@ -229,14 +229,16 @@ export default function SuperAdmin() {
           </div>
           {orgMsg && <p className="sa-msg">{orgMsg}</p>}
 
-          <Table
-            columns={orgColumns}
-            dataSource={orgs}
-            rowKey="id"
-            loading={orgsLoading}
-            pagination={false}
-            size="small"
-          />
+          <div className="table-responsive">
+            <Table
+              columns={orgColumns}
+              dataSource={orgs}
+              rowKey="id"
+              loading={orgsLoading}
+              pagination={false}
+              size="small"
+            />
+          </div>
         </div>
       )}
 
@@ -292,14 +294,16 @@ export default function SuperAdmin() {
             </div>
           )}
 
-          <Table
-            columns={userColumns}
-            dataSource={users}
-            rowKey="id"
-            loading={usersLoading}
-            pagination={false}
-            size="small"
-          />
+          <div className="table-responsive">
+            <Table
+              columns={userColumns}
+              dataSource={users}
+              rowKey="id"
+              loading={usersLoading}
+              pagination={false}
+              size="small"
+            />
+          </div>
         </div>
       )}
 

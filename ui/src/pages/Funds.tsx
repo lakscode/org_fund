@@ -119,36 +119,38 @@ export default function Funds() {
   ];
 
   return (
-    <div className="funds">
+    <div className="funds container-fluid px-0">
       <h2>Funds</h2>
       <p className="list-count">{funds.length} funds</p>
-      <Table
-        columns={columns}
-        dataSource={funds}
-        rowKey="id"
-        loading={loading}
-        pagination={{ pageSize: 10, showSizeChanger: false }}
-        size="small"
-        expandable={{
-          expandedRowRender: (record) => {
-            const fp = fundProps[record.id];
-            if (!fp || fp.loading) return <p>Loading properties...</p>;
-            if (fp.data.length === 0) return <p className="sa-muted">No properties linked to this fund.</p>;
-            return (
-              <Table
-                columns={propColumns}
-                dataSource={fp.data}
-                rowKey="id"
-                pagination={false}
-                size="small"
-              />
-            );
-          },
-          onExpand: (expanded, record) => {
-            if (expanded) fetchFundProperties(record.id);
-          },
-        }}
-      />
+      <div className="table-responsive">
+        <Table
+          columns={columns}
+          dataSource={funds}
+          rowKey="id"
+          loading={loading}
+          pagination={{ pageSize: 10, showSizeChanger: false }}
+          size="small"
+          expandable={{
+            expandedRowRender: (record) => {
+              const fp = fundProps[record.id];
+              if (!fp || fp.loading) return <p>Loading properties...</p>;
+              if (fp.data.length === 0) return <p className="sa-muted">No properties linked to this fund.</p>;
+              return (
+                <Table
+                  columns={propColumns}
+                  dataSource={fp.data}
+                  rowKey="id"
+                  pagination={false}
+                  size="small"
+                />
+              );
+            },
+            onExpand: (expanded, record) => {
+              if (expanded) fetchFundProperties(record.id);
+            },
+          }}
+        />
+      </div>
     </div>
   );
 }

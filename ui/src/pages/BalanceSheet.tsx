@@ -98,7 +98,7 @@ export default function BalanceSheet() {
   if (!currentOrg) return <p>No organization selected.</p>;
 
   return (
-    <div className="balance-sheet">
+    <div className="balance-sheet container-fluid px-0">
       <div className="bs-header">
         <h2>Balance Sheet</h2>
         <div className="select-wrapper">

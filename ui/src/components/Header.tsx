@@ -10,7 +10,11 @@ const ROLE_LABELS: Record<string, string> = {
   member: "Member",
 };
 
-export default function Header() {
+interface HeaderProps {
+  onMenuToggle: () => void;
+}
+
+export default function Header({ onMenuToggle }: HeaderProps) {
   const { user, currentOrg, logout, setCurrentOrg } = useAuth();
   const [menuOpen, setMenuOpen] = useState(false);
   const menuRef = useRef<HTMLDivElement>(null);
@@ -38,6 +42,9 @@ export default function Header() {
   return (
     <header className="header">
       <div className="header-left">
+        <button className="header-menu-btn" onClick={onMenuToggle}>
+          &#9776;
+        </button>
         <div className="select-wrapper">
           <select
             className="header-org-select app-select"
@@ -75,7 +82,7 @@ export default function Header() {
             size={38}
             onClick={() => setMenuOpen(!menuOpen)}
             style={{ cursor: "pointer", backgroundColor: "#0f7b6c", fontWeight: 600, fontSize: "0.85rem" }}
-            title={user.name}
+            alt={user.name}
           >
             {initials}
           </Avatar>

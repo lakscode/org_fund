@@ -34,11 +34,11 @@ def list_funds(org_id, current_user):
                 fund["cash"] = 0
                 fund["ytdReturn"] = 0
             try:
-                count = fund_properties_col.count_documents({
-                    "orgId": org_id,
-                    "fundCode": fund.get("fundCode", ""),
-                })
-                fund["propertyCount"] = count
+                prop_codes = fund_properties_col.distinct(
+                    "propertyCode",
+                    {"orgId": org_id, "fundCode": fund.get("fundCode", "")},
+                )
+                fund["propertyCount"] = len(prop_codes)
             except Exception:
                 fund["propertyCount"] = 0
         logger.info("Found %d funds for org %s", len(funds), org_id)

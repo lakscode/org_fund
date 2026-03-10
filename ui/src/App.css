@@ -451,6 +451,19 @@ body {
   align-items: center;
   gap: 0.75rem;
   margin-bottom: 0.15rem;
+  flex-wrap: wrap;
+}
+
+.cc-title-row .select-wrapper {
+  flex: 1 1 auto;
+  min-width: 0;
+}
+
+.cc-fund-select {
+  width: 100%;
+  max-width: 320px;
+  min-width: 0 !important;
+  text-overflow: ellipsis;
 }
 
 .cc-title-row h2 {
@@ -1829,4 +1842,169 @@ body {
 .sa-modal .sa-btn {
   margin-top: 0.75rem;
   margin-right: 0.5rem;
+}
+
+/* ============================================================
+   MOBILE SIDEBAR TOGGLE BUTTON (hidden on desktop)
+   ============================================================ */
+.header-menu-btn {
+  display: none;
+  width: 36px;
+  height: 36px;
+  border: none;
+  background: transparent;
+  border-radius: 8px;
+  font-size: 1.2rem;
+  color: #666;
+  cursor: pointer;
+  align-items: center;
+  justify-content: center;
+  margin-right: 0.5rem;
+}
+.header-menu-btn:hover { background: #f0f0f0; }
+
+/* Sidebar overlay (mobile only) */
+.sidebar-overlay {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.4);
+  z-index: 199;
+}
+
+/* ============================================================
+   RESPONSIVE – TABLET (max-width: 1024px)
+   ============================================================ */
+@media (max-width: 1024px) {
+  .main-content { padding: 1.25rem 1.25rem; }
+
+  /* Chat: stack context sidebar below */
+  .chat-body { flex-direction: column; }
+  .chat-context { width: 100%; }
+
+  /* Profile card stack */
+  .profile-card { flex-direction: column; gap: 1.25rem; }
+
+  /* Balance sheet grid */
+  .bs-grid { grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); }
+
+  /* SA modal */
+  .sa-modal { min-width: auto; width: 90%; max-width: 500px; }
+
+  /* Import card */
+  .import-card { max-width: 100%; }
+
+  /* CC daily brief */
+  .cc-daily-brief { grid-template-columns: 1fr; }
+}
+
+/* ============================================================
+   RESPONSIVE – MOBILE (max-width: 768px)
+   ============================================================ */
+@media (max-width: 768px) {
+  /* Sidebar: off-canvas on mobile */
+  .sidebar {
+    position: fixed;
+    left: -220px;
+    top: 0;
+    bottom: 0;
+    z-index: 200;
+    transition: left 0.25s ease;
+  }
+  .sidebar.sidebar-open { left: 0; }
+  .sidebar-overlay { display: block; }
+
+  /* Show hamburger button */
+  .header-menu-btn { display: flex; }
+
+  /* Header adjustments */
+  .header { padding: 0 0.75rem; }
+  .header-org-select { min-width: 140px; font-size: 0.8rem; }
+  .header-user-info { display: none; }
+  .header-right { gap: 0.4rem; }
+
+  /* Main content */
+  .main-content { padding: 1rem; }
+
+  /* Dashboard */
+  .stats-grid { grid-template-columns: 1fr 1fr; }
+
+  /* Command Center cards */
+  .cc-row-6, .cc-row-5 { grid-template-columns: 1fr 1fr; }
+  .cc-title-row { flex-wrap: wrap; gap: 0.5rem; }
+  .cc-fund-select { min-width: 140px; }
+
+  /* CC tabs: scrollable */
+  .cc-tabs { overflow-x: auto; white-space: nowrap; -webkit-overflow-scrolling: touch; }
+  .cc-tab { padding: 0.65rem 0.85rem; font-size: 0.8rem; flex-shrink: 0; }
+
+  /* Tables: horizontal scroll */
+  .ant-table-wrapper { overflow-x: auto; }
+
+  /* Filters stack */
+  .assets-filters { flex-wrap: wrap; }
+
+  /* Import types */
+  .import-types { grid-template-columns: 1fr; }
+
+  /* Notifications */
+  .notifications-header { flex-direction: column; align-items: stretch; }
+  .notifications-actions { flex-wrap: wrap; }
+
+  /* SA page */
+  .sa-page { padding: 1rem; }
+  .sa-create-row { flex-wrap: wrap; }
+  .sa-form-grid { flex-direction: column; }
+  .sa-form-grid .sa-input, .sa-form-grid .app-select { min-width: 0; }
+  .sa-map-row { flex-wrap: wrap; }
+
+  /* Chat */
+  .chat-page { height: calc(100vh - 56px); }
+  .chat-suggestions { grid-template-columns: 1fr; }
+  .chat-msg-bubble { max-width: 85%; }
+
+  /* Modal */
+  .modal { max-width: 95%; padding: 1.5rem; margin: 0 0.5rem; }
+
+  /* Auth */
+  .auth-form { max-width: 90%; padding: 2rem 1.5rem; }
+}
+
+/* ============================================================
+   RESPONSIVE – SMALL MOBILE (max-width: 480px)
+   ============================================================ */
+@media (max-width: 480px) {
+  .main-content { padding: 0.75rem; }
+
+  /* Dashboard */
+  .stats-grid { grid-template-columns: 1fr; }
+  .stat-value { font-size: 1.4rem; }
+
+  /* CC cards single column */
+  .cc-row-6, .cc-row-5 { grid-template-columns: 1fr; }
+  .cc-card-value { font-size: 1.3rem; }
+
+  /* Balance sheet */
+  .bs-grid { grid-template-columns: 1fr; }
+  .bs-header { flex-direction: column; align-items: flex-start; gap: 0.75rem; }
+
+  /* Header */
+  .header-org-select { min-width: 120px; font-size: 0.78rem; }
+
+  /* SA modal full width */
+  .sa-modal { width: 95%; min-width: 0; padding: 1rem; }
+
+  /* Import */
+  .import-bs-fields { grid-template-columns: 1fr; }
+
+  /* Chat */
+  .chat-msg-bubble { max-width: 92%; }
+  .chat-input-bar { padding: 0.75rem; gap: 0.5rem; }
+
+  /* Profile */
+  .profile-card { padding: 1.25rem; }
+
+  /* Notifications */
+  .notif-card { padding: 0.75rem 0.85rem; }
+  .notif-title-row { flex-direction: column; align-items: flex-start; gap: 0.25rem; }
 }

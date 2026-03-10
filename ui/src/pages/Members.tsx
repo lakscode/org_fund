@@ -29,17 +29,19 @@ export default function Members() {
   ];
 
   return (
-    <div className="members">
+    <div className="members container-fluid px-0">
       <h2>Members - {currentOrg.name}</h2>
       <p className="list-count">{members.length} members</p>
-      <Table
-        columns={columns}
-        dataSource={members}
-        rowKey="id"
-        loading={loading}
-        pagination={{ pageSize: 10, showSizeChanger: false }}
-        size="small"
-      />
+      <div className="table-responsive">
+        <Table
+          columns={columns}
+          dataSource={members}
+          rowKey="id"
+          loading={loading}
+          pagination={{ pageSize: 10, showSizeChanger: false }}
+          size="small"
+        />
+      </div>
     </div>
   );
 }
