@@ -26,7 +26,7 @@ const IMPORT_OPTIONS: ImportOption[] = [
     label: "Properties",
     icon: "\u2302",
     description: "Import property records with address and type data",
-    columns: "HMY, SADDR1, SADDR2, SCITY, SSTATE, SZIPCODE, ITYPE",
+    columns: "HMY, SCODE, SADDR1, SADDR2, SCITY, SSTATE, SZIPCODE, ITYPE",
   },
   {
     type: "balancesheet",
