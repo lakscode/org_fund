@@ -1,0 +1,103 @@
+@import url("https://use.typekit.net/allotrope.css");
+@import url("https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;500;600;700;800&display=swap");
+
+:root {
+  /* ── Fonts ── */
+  --font-logo: "Allotrope", "Urbanist", "Inter", -apple-system, sans-serif;
+  --font-body: "Manrope", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+
+  /* ── Colors – brand ── */
+  --color-primary: #0f7b6c;
+  --color-primary-hover: #0a6359;
+  --color-primary-light: #f0faf8;
+  --color-primary-ring: rgba(15, 123, 108, 0.2);
+  --color-primary-ring-light: rgba(15, 123, 108, 0.12);
+
+  /* ── Colors – neutral ── */
+  --color-bg: #f5f6f8;
+  --color-surface: #fff;
+  --color-text: #333;
+  --color-text-dark: #1a1a2e;
+  --color-text-heading: #222;
+  --color-text-muted: #888;
+  --color-text-secondary: #666;
+  --color-text-tertiary: #999;
+  --color-text-faint: #aaa;
+  --color-text-placeholder: #bbb;
+
+  /* ── Colors – sidebar ── */
+  --color-sidebar-bg: hsl(210 12% 13%);
+  --color-sidebar-text: #fff;
+  --color-sidebar-muted: #8a8fa0;
+  --color-sidebar-border: rgba(255, 255, 255, 0.08);
+
+  /* ── Colors – borders ── */
+  --color-border: #e5e7eb;
+  --color-border-light: #f0f0f0;
+  --color-border-input: #d1d5db;
+  --color-border-medium: #ddd;
+  --color-border-header: #e8e8e8;
+  --color-border-card: #eaeaea;
+
+  /* ── Colors – semantic ── */
+  --color-success: #4caf50;
+  --color-success-bg: #e8f5e9;
+  --color-success-text: #2e7d32;
+  --color-error: #d32f2f;
+  --color-error-bg: #fce4ec;
+  --color-error-text: #c62828;
+  --color-warning: #ff9800;
+  --color-warning-text: #f59e0b;
+  --color-info: #1976d2;
+  --color-info-light: #3b82f6;
+  --color-danger: #ef5350;
+  --color-danger-text: #dc2626;
+
+  /* ── Colors – misc ── */
+  --color-avatar-gradient-start: #4fc3f7;
+  --color-avatar-gradient-end: #1976d2;
+  --color-auth-bg: #1c2025;
+  --color-hover-bg: #f0f0f0;
+  --color-bg-subtle: #f8f9fa;
+  --color-bg-muted: #fafafa;
+  --color-bg-card-hover: #f8fffe;
+
+  /* ── Sizes – font ── */
+  --text-xs: 0.6rem;
+  --text-sm: 0.75rem;
+  --text-base: 0.85rem;
+  --text-md: 0.9rem;
+  --text-lg: 1rem;
+  --text-xl: 1.1rem;
+  --text-2xl: 1.35rem;
+  --text-3xl: 1.5rem;
+  --text-4xl: 1.75rem;
+
+  /* ── Sizes – spacing ── */
+  --space-xs: 0.25rem;
+  --space-sm: 0.5rem;
+  --space-md: 0.75rem;
+  --space-lg: 1rem;
+  --space-xl: 1.25rem;
+  --space-2xl: 1.5rem;
+  --space-3xl: 2rem;
+
+  /* ── Sizes – layout ── */
+  --sidebar-width: 220px;
+  --header-height: 56px;
+
+  /* ── Radii ── */
+  --radius-sm: 4px;
+  --radius-md: 6px;
+  --radius-lg: 8px;
+  --radius-xl: 10px;
+  --radius-pill: 12px;
+  --radius-full: 50%;
+
+  /* ── Shadows ── */
+  --shadow-sm: 0 1px 4px rgba(0, 0, 0, 0.06);
+  --shadow-md: 0 1px 4px rgba(0, 0, 0, 0.1);
+  --shadow-lg: 0 4px 20px rgba(0, 0, 0, 0.15);
+  --shadow-xl: 0 8px 32px rgba(0, 0, 0, 0.2);
+  --shadow-card-hover: 0 2px 12px rgba(0, 0, 0, 0.07);
+}
