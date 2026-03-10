@@ -13,6 +13,7 @@ import CommandCenter from "./pages/CommandCenter";
 import Profile from "./pages/Profile";
 import Chat from "./pages/Chat";
 import Import from "./pages/Import";
+import Notifications from "./pages/Notifications";
 import "./App.css";
 
 function App() {
@@ -38,6 +39,7 @@ function App() {
             <Route path="/profile" element={<Profile />} />
             <Route path="/chat" element={<Chat />} />
             <Route path="/import" element={<Import />} />
+            <Route path="/notifications" element={<Notifications />} />
           </Route>
         </Routes>
       </AuthProvider>

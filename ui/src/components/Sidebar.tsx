@@ -55,6 +55,10 @@ export default function Sidebar() {
           <span className="sidebar-icon">&#9993;</span>
           REstackAI Chat
         </NavLink>
+        <NavLink to="/notifications">
+          <span className="sidebar-icon">&#128276;</span>
+          Notifications
+        </NavLink>
       </nav>
 
       {currentOrg?.role === "admin" && (
