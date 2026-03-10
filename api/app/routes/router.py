@@ -13,6 +13,7 @@ from app.routes import fund_properties as fp_routes
 from app.routes import balancesheet as bs_routes
 from app.routes import chat as chat_routes
 from app.routes import imports as import_routes
+from app.routes import superadmin as sa_routes
 from app.logger import get_logger
 
 logger = get_logger("router")
@@ -37,6 +38,8 @@ RE_ORG_MEMBERS = re.compile(r"^/api/orgs/([a-f0-9]{24})/members/?$")
 RE_ORG_MEMBER = re.compile(r"^/api/orgs/([a-f0-9]{24})/members/([a-f0-9]{24})$")
 RE_ORG_MEMBER_RESET_PW = re.compile(r"^/api/orgs/([a-f0-9]{24})/members/([a-f0-9]{24})/reset-password$")
 RE_ORG_CHAT = re.compile(r"^/api/orgs/([a-f0-9]{24})/chat/?$")
+RE_SA_ORG = re.compile(r"^/api/sa/orgs/([a-f0-9]{24})$")
+RE_SA_USER = re.compile(r"^/api/sa/users/([a-f0-9]{24})$")
 
 
 def set_server_started(ts):
@@ -258,6 +261,22 @@ def handle_get(handler):
         logger.info("GET /api/fund-properties/%s -> %d", fp_id, status)
         return "json", status, data
 
+    # Super Admin: list all orgs
+    if path in ("/api/sa/orgs", "/api/sa/orgs/"):
+        user, err = _auth_or_401(handler)
+        if err:
+            return err
+        status, data = sa_routes.sa_list_orgs(user)
+        return "json", status, data
+
+    # Super Admin: list all users
+    if path in ("/api/sa/users", "/api/sa/users/"):
+        user, err = _auth_or_401(handler)
+        if err:
+            return err
+        status, data = sa_routes.sa_list_users(user)
+        return "json", status, data
+
     logger.info("GET %s - not found", path)
     return "json", 404, {"detail": "Not found"}
 
@@ -367,6 +386,42 @@ def handle_post(handler):
         logger.info("POST /api/orgs/%s/chat -> %d", org_id, status)
         return "json", status, data
 
+    # Super Admin: create org
+    if path in ("/api/sa/orgs", "/api/sa/orgs/"):
+        user, err = _auth_or_401(handler)
+        if err:
+            return err
+        body = _read_body(handler)
+        status, data = sa_routes.sa_create_org(body, user)
+        return "json", status, data
+
+    # Super Admin: create user
+    if path in ("/api/sa/users", "/api/sa/users/"):
+        user, err = _auth_or_401(handler)
+        if err:
+            return err
+        body = _read_body(handler)
+        status, data = sa_routes.sa_create_user(body, user)
+        return "json", status, data
+
+    # Super Admin: map user to orgs
+    if path in ("/api/sa/map-user", "/api/sa/map-user/"):
+        user, err = _auth_or_401(handler)
+        if err:
+            return err
+        body = _read_body(handler)
+        status, data = sa_routes.sa_map_user_to_org(body, user)
+        return "json", status, data
+
+    # Super Admin: remove user from org
+    if path in ("/api/sa/unmap-user", "/api/sa/unmap-user/"):
+        user, err = _auth_or_401(handler)
+        if err:
+            return err
+        body = _read_body(handler)
+        status, data = sa_routes.sa_remove_user_from_org(body, user)
+        return "json", status, data
+
     # Import: CSV upload
     if path in ("/api/import", "/api/import/"):
         user, err = _auth_or_401(handler)
@@ -448,6 +503,28 @@ def handle_put(handler):
         logger.info("PUT /api/orgs/%s/members/%s -> %d", org_id, member_id, status)
         return "json", status, data
 
+    # Super Admin: update org
+    m = RE_SA_ORG.match(path)
+    if m:
+        user, err = _auth_or_401(handler)
+        if err:
+            return err
+        org_id = m.group(1)
+        body = _read_body(handler)
+        status, data = sa_routes.sa_update_org(org_id, body, user)
+        return "json", status, data
+
+    # Super Admin: update user
+    m = RE_SA_USER.match(path)
+    if m:
+        user, err = _auth_or_401(handler)
+        if err:
+            return err
+        user_id = m.group(1)
+        body = _read_body(handler)
+        status, data = sa_routes.sa_update_user(user_id, body, user)
+        return "json", status, data
+
     logger.info("PUT %s - not found", path)
     return "json", 404, {"detail": "Not found"}
 
@@ -501,6 +578,16 @@ def handle_delete(handler):
         fp_id = m.group(1)
         status, data = fp_routes.delete(fp_id, user)
         logger.info("DELETE /api/fund-properties/%s -> %d", fp_id, status)
+        return "json", status, data
+
+    # Super Admin: delete org
+    m = RE_SA_ORG.match(path)
+    if m:
+        user, err = _auth_or_401(handler)
+        if err:
+            return err
+        org_id = m.group(1)
+        status, data = sa_routes.sa_delete_org(org_id, user)
         return "json", status, data
 
     logger.info("DELETE %s - not found", path)

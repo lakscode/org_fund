@@ -483,8 +483,25 @@ def seed_orgs_and_users():
             org_name_to_id[org_def["name"]] = str(result.inserted_id)
             logger.info("Created org: %s (%s)", org_def["name"], result.inserted_id)
 
-    # Create users
+    # Create super admin
     hashed = hash_password("password123")
+    existing_sa = users_col.find_one({"email": "superadmin@restackai.com"})
+    if not existing_sa:
+        all_org_ids = list(org_name_to_id.values())
+        all_org_roles = [{"org_id": oid, "role": "admin"} for oid in all_org_ids]
+        result = users_col.insert_one({
+            "email": "superadmin@restackai.com",
+            "name": "Super Admin",
+            "hashed_password": hashed,
+            "org_ids": all_org_ids,
+            "org_roles": all_org_roles,
+            "isSuperAdmin": True,
+        })
+        logger.info("Created super admin: superadmin@restackai.com (%s)", result.inserted_id)
+    else:
+        logger.info("Super admin already exists: superadmin@restackai.com")
+
+    # Create users
     for email, name, _pw, org_role_list in SEED_USERS:
         existing = users_col.find_one({"email": email})
         if existing:

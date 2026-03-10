@@ -423,7 +423,7 @@ def handle_chat(org_id, body, current_user):
     """Process a chat message and return a data-driven response."""
     logger.info("Chat query for org %s by user %s", org_id, current_user["id"])
 
-    if org_id not in current_user.get("org_ids", []):
+    if not current_user.get("isSuperAdmin") and org_id not in current_user.get("org_ids", []):
         return 403, {"detail": "Not a member of this organization"}
 
     question = body.get("message", "").strip()

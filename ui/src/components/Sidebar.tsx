@@ -13,11 +13,11 @@ function formatRole(role: string): string {
 }
 
 export default function Sidebar() {
-  const {currentOrg } = useAuth();
+  const { currentOrg, user } = useAuth();
   return (
     <aside className="sidebar">
       <div className="sidebar-logo">
-        <img src="/images/logo.png" alt="Logo" className="sidebar-logo-img" /> REstackAI
+        <span className="sidebar-logo-text">REstackAI</span>
       </div>
 
       <div className="sidebar-fund-info">
@@ -71,6 +71,16 @@ export default function Sidebar() {
           <NavLink to="/profile">
             <span className="sidebar-icon">&#9881;</span>
             Settings
+          </NavLink>
+        </div>
+      )}
+
+      {user?.isSuperAdmin && (
+        <div className="sidebar-bottom">
+          <div className="sidebar-admin-label">SUPER ADMIN</div>
+          <NavLink to="/super-admin">
+            <span className="sidebar-icon">&#9733;</span>
+            Manage
           </NavLink>
         </div>
       )}

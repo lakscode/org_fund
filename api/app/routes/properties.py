@@ -8,9 +8,15 @@ from app.logger import get_logger
 logger = get_logger("routes.properties")
 
 
+def _has_org_access(user, org_id):
+    if user.get("isSuperAdmin"):
+        return True
+    return org_id in user.get("org_ids", [])
+
+
 def list_properties(org_id, current_user, query_params=None):
     logger.info("Listing properties for org %s by user %s", org_id, current_user["id"])
-    if org_id not in current_user.get("org_ids", []):
+    if not _has_org_access(current_user, org_id):
         logger.info("Access denied: user %s not in org %s", current_user["id"], org_id)
         return 403, {"detail": "Not a member of this organization"}
     try:
@@ -52,7 +58,7 @@ def get_property(property_id, current_user):
         if not prop:
             logger.info("Property not found: %s", property_id)
             return 404, {"detail": "Property not found"}
-        if prop["orgId"] not in current_user.get("org_ids", []):
+        if not _has_org_access(current_user, prop["orgId"]):
             logger.info("Access denied: user %s not in org %s", current_user["id"], prop["orgId"])
             return 403, {"detail": "Not a member of this organization"}
         logger.info("Property fetched: %s", property_id)
@@ -64,7 +70,7 @@ def get_property(property_id, current_user):
 
 def create(org_id, body, current_user):
     logger.info("Creating property in org %s by user %s", org_id, current_user["id"])
-    if org_id not in current_user.get("org_ids", []):
+    if not _has_org_access(current_user, org_id):
         logger.info("Access denied: user %s not in org %s", current_user["id"], org_id)
         return 403, {"detail": "Not a member of this organization"}
 
@@ -90,7 +96,7 @@ def update(property_id, body, current_user):
         if not prop:
             logger.info("Property not found: %s", property_id)
             return 404, {"detail": "Property not found"}
-        if prop["orgId"] not in current_user.get("org_ids", []):
+        if not _has_org_access(current_user, prop["orgId"]):
             logger.info("Access denied: user %s not in org %s", current_user["id"], prop["orgId"])
             return 403, {"detail": "Not a member of this organization"}
         update_property(property_id, body)
@@ -108,7 +114,7 @@ def delete(property_id, current_user):
         if not prop:
             logger.info("Property not found: %s", property_id)
             return 404, {"detail": "Property not found"}
-        if prop["orgId"] not in current_user.get("org_ids", []):
+        if not _has_org_access(current_user, prop["orgId"]):
             logger.info("Access denied: user %s not in org %s", current_user["id"], prop["orgId"])
             return 403, {"detail": "Not a member of this organization"}
         delete_property(property_id)

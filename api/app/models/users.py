@@ -25,6 +25,7 @@ def serialize_user(doc):
         "hashed_password": doc.get("hashed_password", ""),
         "org_ids": [r["org_id"] for r in org_roles],
         "org_roles": org_roles,
+        "isSuperAdmin": doc.get("isSuperAdmin", False),
     }
 
 
@@ -113,6 +114,48 @@ def update_user(user_id, updates):
         return True
     except Exception as e:
         logger.error("Failed to update user %s: %s", user_id, e)
+        raise
+
+
+def list_all_users():
+    """List all users in the system (super admin only)."""
+    logger.info("Listing all users")
+    try:
+        docs = users_col.find({}).sort("email", 1)
+        result = []
+        for d in docs:
+            org_roles = _get_org_roles(d)
+            result.append({
+                "id": str(d["_id"]),
+                "email": d["email"],
+                "name": d["name"],
+                "isSuperAdmin": d.get("isSuperAdmin", False),
+                "org_roles": org_roles,
+                "createdAt": d["_id"].generation_time.isoformat(),
+            })
+        logger.info("Found %d users total", len(result))
+        return result
+    except Exception as e:
+        logger.error("Failed to list all users: %s", e, exc_info=True)
+        raise
+
+
+def remove_user_from_org(user_id, org_id):
+    """Remove a user from an organization."""
+    logger.info("Removing user %s from org %s", user_id, org_id)
+    try:
+        users_col.update_one(
+            {"_id": ObjectId(user_id)},
+            {
+                "$pull": {
+                    "org_roles": {"org_id": org_id},
+                    "org_ids": org_id,
+                },
+            },
+        )
+        logger.info("User %s removed from org %s", user_id, org_id)
+    except Exception as e:
+        logger.error("Failed to remove user %s from org %s: %s", user_id, org_id, e, exc_info=True)
         raise
 
 

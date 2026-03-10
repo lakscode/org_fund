@@ -1,4 +1,4 @@
-from app.models import find_user_by_email, create_user, create_organization, add_user_to_org, get_user_orgs
+from app.models import find_user_by_email, create_user, create_organization, add_user_to_org, get_user_orgs, list_organizations
 from app.auth import hash_password, verify_password, create_access_token
 from app.logger import get_logger
 
@@ -68,10 +68,19 @@ def me(current_user):
     try:
         orgs = get_user_orgs(current_user)
         logger.info("Profile fetched for user id=%s (%d orgs)", user_id, len(orgs))
+        is_super = current_user.get("isSuperAdmin", False)
+        # Super admin sees all orgs
+        if is_super:
+            all_orgs = list_organizations()
+            for o in all_orgs:
+                o["role"] = "admin"
+            orgs = all_orgs
+
         return 200, {
             "id": current_user["id"],
             "email": current_user["email"],
             "name": current_user["name"],
+            "isSuperAdmin": is_super,
             "orgs": orgs,
         }
     except Exception as e:

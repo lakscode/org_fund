@@ -1,3 +1,5 @@
+@import url("https://use.typekit.net/allotrope.css");
+
 * {
   margin: 0;
   padding: 0;
@@ -67,13 +69,16 @@ body {
 /* ===== Layout ===== */
 .app-layout {
   display: flex;
-  min-height: 100vh;
+  height: 100vh;
+  overflow: hidden;
 }
 
 .app-body {
   display: flex;
   flex-direction: column;
   flex: 1;
+  min-width: 0;
+  overflow: hidden;
 }
 
 /* ===== Dark Sidebar ===== */
@@ -89,14 +94,15 @@ body {
 .sidebar-logo {
   display: flex;
   align-items: center;
-  gap: 0.6rem;
   padding: 1.25rem 1.25rem 1rem;
 }
 
-.sidebar-logo-img {
-  max-height: 32px;
-  width: auto;
-  object-fit: contain;
+.sidebar-logo-text {
+  font-family: "Allotrope", "Urbanist", "Inter", -apple-system, sans-serif;
+  font-size: 1.35rem;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+  color: #fff;
 }
 
 .sidebar-fund-info {
@@ -131,6 +137,8 @@ body {
   flex-direction: column;
   padding: 0.75rem 0;
   flex: 1;
+  overflow-y: auto;
+  min-height: 0;
 }
 
 .sidebar-nav a,
@@ -168,6 +176,7 @@ body {
 .sidebar-bottom {
   padding: 0.75rem 0;
   border-top: 1px solid rgba(255, 255, 255, 0.08);
+  flex-shrink: 0;
 }
 
 .sidebar-admin-label {
@@ -1692,4 +1701,320 @@ th { background: #fafafa; font-weight: 600; font-size: 0.75rem; text-transform: 
   font-size: 2.5rem;
   display: block;
   margin-bottom: 0.75rem;
+}
+
+/* ─── Super Admin page ─── */
+.sa-page {
+  padding: 1.5rem 2rem;
+  max-width: 1100px;
+}
+
+.sa-page h2 {
+  font-size: 1.5rem;
+  color: #222;
+  margin-bottom: 1rem;
+}
+
+.sa-restricted {
+  color: #888;
+  font-size: 0.95rem;
+  text-align: center;
+  padding: 3rem;
+}
+
+.sa-tabs {
+  display: flex;
+  gap: 0;
+  margin-bottom: 1.5rem;
+  border-bottom: 2px solid #e9ecef;
+}
+
+.sa-tab {
+  padding: 0.6rem 1.5rem;
+  border: none;
+  background: transparent;
+  cursor: pointer;
+  font-size: 0.9rem;
+  color: #666;
+  border-bottom: 2px solid transparent;
+  margin-bottom: -2px;
+  transition: all 0.15s;
+}
+
+.sa-tab.active {
+  color: #0f7b6c;
+  border-bottom-color: #0f7b6c;
+  font-weight: 600;
+}
+
+.sa-tab:hover {
+  color: #0f7b6c;
+}
+
+.sa-section {
+  margin-bottom: 2rem;
+}
+
+.sa-create-row {
+  display: flex;
+  gap: 0.75rem;
+  margin-bottom: 1rem;
+  align-items: center;
+}
+
+.sa-input {
+  padding: 0.5rem 0.75rem;
+  border: 1px solid #d1d5db;
+  border-radius: 6px;
+  font-size: 0.88rem;
+  outline: none;
+  transition: border-color 0.15s;
+}
+
+.sa-input:focus {
+  border-color: #0f7b6c;
+}
+
+.sa-btn {
+  padding: 0.5rem 1rem;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 0.85rem;
+  transition: all 0.15s;
+  white-space: nowrap;
+}
+
+.sa-btn-primary {
+  background: #0f7b6c;
+  color: #fff;
+}
+
+.sa-btn-primary:hover {
+  background: #0a5d52;
+}
+
+.sa-btn-primary:disabled {
+  background: #9cc;
+  cursor: not-allowed;
+}
+
+.sa-btn-secondary {
+  background: #e9ecef;
+  color: #333;
+}
+
+.sa-btn-secondary:hover {
+  background: #d1d5db;
+}
+
+.sa-btn-danger {
+  background: #fee2e2;
+  color: #dc2626;
+}
+
+.sa-btn-danger:hover {
+  background: #fca5a5;
+}
+
+.sa-btn-sm {
+  padding: 0.3rem 0.6rem;
+  font-size: 0.8rem;
+}
+
+.sa-msg {
+  font-size: 0.85rem;
+  color: #0f7b6c;
+  margin-bottom: 0.75rem;
+}
+
+.sa-loading {
+  color: #888;
+  font-size: 0.9rem;
+  padding: 1rem 0;
+}
+
+.sa-table {
+  width: 100%;
+  border-collapse: collapse;
+  background: #fff;
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.06);
+}
+
+.sa-table th {
+  text-align: left;
+  padding: 0.7rem 1rem;
+  font-size: 0.8rem;
+  text-transform: uppercase;
+  color: #888;
+  background: #f8f9fa;
+  border-bottom: 1px solid #e9ecef;
+}
+
+.sa-table td {
+  padding: 0.7rem 1rem;
+  font-size: 0.88rem;
+  border-bottom: 1px solid #f0f0f0;
+  vertical-align: middle;
+}
+
+.sa-table tr:last-child td {
+  border-bottom: none;
+}
+
+.sa-table tr:hover td {
+  background: #f8fffe;
+}
+
+.sa-badge {
+  display: inline-block;
+  padding: 0.15rem 0.5rem;
+  border-radius: 10px;
+  font-size: 0.75rem;
+  font-weight: 500;
+}
+
+.sa-badge-active {
+  background: #d1fae5;
+  color: #065f46;
+}
+
+.sa-badge-inactive {
+  background: #fee2e2;
+  color: #991b1b;
+}
+
+.sa-badge-super {
+  background: #fef3c7;
+  color: #92400e;
+  margin-left: 0.5rem;
+}
+
+.sa-user-orgs {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+}
+
+.sa-org-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.25rem;
+  padding: 0.2rem 0.6rem;
+  background: #e0f2fe;
+  color: #0369a1;
+  border-radius: 12px;
+  font-size: 0.78rem;
+}
+
+.sa-org-chip em {
+  color: #6b7280;
+  font-style: normal;
+  font-size: 0.72rem;
+}
+
+.sa-chip-remove {
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: #ef4444;
+  font-size: 0.9rem;
+  padding: 0 0.15rem;
+  line-height: 1;
+}
+
+.sa-chip-remove:hover {
+  color: #dc2626;
+}
+
+.sa-muted {
+  color: #999;
+  font-size: 0.82rem;
+}
+
+/* Create user form */
+.sa-create-form {
+  background: #fff;
+  border: 1px solid #e9ecef;
+  border-radius: 8px;
+  padding: 1.25rem;
+  margin-bottom: 1.25rem;
+}
+
+.sa-create-form h4 {
+  margin-bottom: 0.75rem;
+  color: #333;
+  font-size: 0.95rem;
+}
+
+.sa-form-grid {
+  display: flex;
+  gap: 0.75rem;
+  margin-bottom: 0.75rem;
+  flex-wrap: wrap;
+}
+
+.sa-form-grid .sa-input,
+.sa-form-grid .app-select {
+  flex: 1;
+  min-width: 150px;
+}
+
+.sa-org-mappings {
+  margin-bottom: 1rem;
+}
+
+.sa-org-mappings h5 {
+  font-size: 0.85rem;
+  color: #666;
+  margin-bottom: 0.5rem;
+}
+
+.sa-map-row {
+  display: flex;
+  gap: 0.5rem;
+  align-items: center;
+  margin-bottom: 0.4rem;
+}
+
+.sa-map-row .app-select {
+  flex: 1;
+}
+
+/* Map user modal */
+.sa-modal-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.4);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+}
+
+.sa-modal {
+  background: #fff;
+  border-radius: 10px;
+  padding: 1.5rem;
+  min-width: 400px;
+  max-width: 500px;
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.15);
+}
+
+.sa-modal h3 {
+  margin-bottom: 0.25rem;
+  font-size: 1.1rem;
+}
+
+.sa-modal-sub {
+  color: #666;
+  font-size: 0.85rem;
+  margin-bottom: 1rem;
+}
+
+.sa-modal .sa-btn {
+  margin-top: 0.75rem;
+  margin-right: 0.5rem;
 }

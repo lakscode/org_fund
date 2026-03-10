@@ -9,6 +9,13 @@ from app.logger import get_logger
 logger = get_logger("routes.orgs")
 
 
+def _has_org_access(user, org_id):
+    """Check if user is super admin or a member of the org."""
+    if user.get("isSuperAdmin"):
+        return True
+    return org_id in user.get("org_ids", [])
+
+
 def list_user_orgs(current_user):
     user_id = current_user["id"]
     logger.info("Listing orgs for user id=%s", user_id)
@@ -31,8 +38,7 @@ def get_org_data(org_id, current_user):
             logger.info("Org not found: org_id=%s", org_id)
             return 404, {"detail": "Organization not found"}
 
-        user_org_ids = current_user.get("org_ids", [])
-        if org["id"] not in user_org_ids:
+        if not _has_org_access(current_user, org["id"]):
             logger.info("Access denied: user %s not a member of org %s", user_id, org_id)
             return 403, {"detail": "Not a member of this organization"}
 
@@ -64,8 +70,7 @@ def create_org(body, current_user):
 
 def update_org(org_id, body, current_user):
     logger.info("Updating org %s by user %s", org_id, current_user["id"])
-    user_org_ids = current_user.get("org_ids", [])
-    if org_id not in user_org_ids:
+    if not _has_org_access(current_user, org_id):
         logger.info("Access denied: user %s not in org %s", current_user["id"], org_id)
         return 403, {"detail": "Not a member of this organization"}
     try:
@@ -81,8 +86,7 @@ def update_org(org_id, body, current_user):
 
 def delete_org(org_id, current_user):
     logger.info("Deleting org %s by user %s", org_id, current_user["id"])
-    user_org_ids = current_user.get("org_ids", [])
-    if org_id not in user_org_ids:
+    if not _has_org_access(current_user, org_id):
         logger.info("Access denied: user %s not in org %s", current_user["id"], org_id)
         return 403, {"detail": "Not a member of this organization"}
     try:
@@ -100,8 +104,7 @@ def add_member(org_id, body, current_user):
     """Add an existing or new user to an organization."""
     logger.info("Adding member to org %s by user %s", org_id, current_user["id"])
 
-    user_org_ids = current_user.get("org_ids", [])
-    if org_id not in user_org_ids:
+    if not _has_org_access(current_user, org_id):
         return 403, {"detail": "Not a member of this organization"}
 
     email = body.get("email")
@@ -136,7 +139,7 @@ def edit_member(org_id, user_id, body, current_user):
     """Edit a member's name, email, or role within an org."""
     logger.info("Editing member %s in org %s by user %s", user_id, org_id, current_user["id"])
 
-    if org_id not in current_user.get("org_ids", []):
+    if not _has_org_access(current_user, org_id):
         return 403, {"detail": "Not a member of this organization"}
 
     target = find_user_by_id(user_id)
@@ -165,7 +168,7 @@ def reset_member_password(org_id, user_id, body, current_user):
     """Reset a member's password."""
     logger.info("Resetting password for user %s in org %s by user %s", user_id, org_id, current_user["id"])
 
-    if org_id not in current_user.get("org_ids", []):
+    if not _has_org_access(current_user, org_id):
         return 403, {"detail": "Not a member of this organization"}
 
     target = find_user_by_id(user_id)

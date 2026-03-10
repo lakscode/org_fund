@@ -11,7 +11,17 @@ export interface User {
   id: string;
   email: string;
   name: string;
+  isSuperAdmin?: boolean;
   orgs: Org[];
+}
+
+export interface SAUser {
+  id: string;
+  email: string;
+  name: string;
+  isSuperAdmin: boolean;
+  org_roles: { org_id: string; role: string }[];
+  createdAt: string;
 }
 
 export interface OrgMember {

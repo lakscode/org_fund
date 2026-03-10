@@ -14,6 +14,7 @@ import Profile from "./pages/Profile";
 import Chat from "./pages/Chat";
 import Import from "./pages/Import";
 import Notifications from "./pages/Notifications";
+import SuperAdmin from "./pages/SuperAdmin";
 import "./App.css";
 
 function App() {
@@ -40,6 +41,7 @@ function App() {
             <Route path="/chat" element={<Chat />} />
             <Route path="/import" element={<Import />} />
             <Route path="/notifications" element={<Notifications />} />
+            <Route path="/super-admin" element={<SuperAdmin />} />
           </Route>
         </Routes>
       </AuthProvider>

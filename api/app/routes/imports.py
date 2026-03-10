@@ -107,9 +107,8 @@ def handle_import(handler, current_user):
     if not file_item:
         return 400, {"detail": "Missing CSV file"}
 
-    # Check user belongs to this org
-    user_orgs = current_user.get("org_ids", [])
-    if org_id not in user_orgs:
+    # Check user belongs to this org (super admin bypasses)
+    if not current_user.get("isSuperAdmin") and org_id not in current_user.get("org_ids", []):
         return 403, {"detail": "Not a member of this organization"}
 
     # Check admin role

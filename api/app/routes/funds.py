@@ -6,9 +6,15 @@ from app.logger import get_logger
 logger = get_logger("routes.funds")
 
 
+def _has_org_access(user, org_id):
+    if user.get("isSuperAdmin"):
+        return True
+    return org_id in user.get("org_ids", [])
+
+
 def list_funds(org_id, current_user):
     logger.info("Listing funds for org %s by user %s", org_id, current_user["id"])
-    if org_id not in current_user.get("org_ids", []):
+    if not _has_org_access(current_user, org_id):
         logger.info("Access denied: user %s not in org %s", current_user["id"], org_id)
         return 403, {"detail": "Not a member of this organization"}
     try:
@@ -27,7 +33,7 @@ def get_fund(fund_id, current_user):
         if not fund:
             logger.info("Fund not found: %s", fund_id)
             return 404, {"detail": "Fund not found"}
-        if fund["orgId"] not in current_user.get("org_ids", []):
+        if not _has_org_access(current_user, fund["orgId"]):
             logger.info("Access denied: user %s not in org %s", current_user["id"], fund["orgId"])
             return 403, {"detail": "Not a member of this organization"}
         logger.info("Fund fetched: %s", fund_id)
@@ -38,7 +44,7 @@ def get_fund(fund_id, current_user):
 
 def create(org_id, body, current_user):
     logger.info("Creating fund in org %s by user %s", org_id, current_user["id"])
-    if org_id not in current_user.get("org_ids", []):
+    if not _has_org_access(current_user, org_id):
         logger.info("Access denied: user %s not in org %s", current_user["id"], org_id)
         return 403, {"detail": "Not a member of this organization"}
 
@@ -64,7 +70,7 @@ def update(fund_id, body, current_user):
         if not fund:
             logger.info("Fund not found: %s", fund_id)
             return 404, {"detail": "Fund not found"}
-        if fund["orgId"] not in current_user.get("org_ids", []):
+        if not _has_org_access(current_user, fund["orgId"]):
             logger.info("Access denied: user %s not in org %s", current_user["id"], fund["orgId"])
             return 403, {"detail": "Not a member of this organization"}
         update_fund(fund_id, body)
@@ -82,7 +88,7 @@ def delete(fund_id, current_user):
         if not fund:
             logger.info("Fund not found: %s", fund_id)
             return 404, {"detail": "Fund not found"}
-        if fund["orgId"] not in current_user.get("org_ids", []):
+        if not _has_org_access(current_user, fund["orgId"]):
             logger.info("Access denied: user %s not in org %s", current_user["id"], fund["orgId"])
             return 403, {"detail": "Not a member of this organization"}
         delete_fund(fund_id)
